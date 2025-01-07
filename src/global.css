@@ -1,0 +1,39 @@
+/* Global variables */
+:root {
+  --body-surface-color: #f4f5f6;
+  --sidebar-surface-color: #20293a;
+  --primary-color: #2f3136;
+  --secondary-color: #5f6a76;
+  --tertiary-color: #9ca5b1;
+  --select-color: #b40950;
+  --select-soft-color: #fff8fc;
+  --surface-hover: #f7f9ff;
+
+  --font-primary: var(--primary-color);
+  --font-secondary: var(--secondary-color);
+  --font-tertiary: var(--tertiary-color);
+  --font-placeholder: #a6aaae;
+  --font-disable: #d5d6d7;
+  --font-inverse: #fff;
+
+  --input-border-normal: #dcdce0;
+  --input-border-hover: #9ca5b1;
+  --input-border-active: #546475;
+  --input-border-disable: #dfe0e2;
+
+  --checkbox-border-normal: #cbd1d7;
+  --checkbox-surface-checked: #546475;
+}
+
+/* Reset some default browser style */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: Pretendard, Arial, serif;
+  font-weight: 400;
+  font-size: 14px;
+}

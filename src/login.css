@@ -1,0 +1,44 @@
+body {
+  height: 100vh;
+  background: url("../public/login-bg.png") no-repeat center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
+  height: 606px;
+  width: 1254px;
+  display: flex;
+  flex-direction: row;
+}
+
+h1.login-ci {
+  padding-top: 207px;
+  width: 616px;
+  height: 414px;
+}
+
+h1.login-ci > img {
+}
+
+h1.login-ci > .login-slogan {
+  margin-top: 24px;
+  color: rgba(255,255,255,0.8);
+  display: block;
+  font-size: 14px;
+  font-family: Pretendard, serif;
+  font-weight: 400;
+}
+
+.login-form-wrapper {
+  width: 480px;
+}
+
+.login-form-wrapper footer {
+  margin-top: 12px;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+}
