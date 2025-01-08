@@ -2,14 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <link rel="icon" type="image/svg+xml" href="public/favicon.svg"/>
+  <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AA Archigroup</title>
   <link rel="stylesheet" href="src/normalize.css"/>
   <link rel="stylesheet" href="src/global.css"/>
   <link rel="stylesheet" href="src/main.css"/>
+  <script type="module" src="src/components/global-header.ts"></script>
+  <script type="module" src="src/components/global-nav-bar.ts"></script>
+  <script type="module" src="src/components/user-info.ts"></script>
 </head>
 <body>
-<h1>Index</h1>
+<global-header logo="public/images/main-ci.svg" logoAlt="AA Archigroup">
+  <user-info id="userInfo" name="변승환 상무"></user-info>
+</global-header>
+<global-nav-bar />
+<div>
+  <script type="module">
+    const userInfo = document.getElementById('userInfo');
+    const navBar = document.querySelector('global-nav-bar');
+
+    userInfo.addEventListener('logout', () => {
+      console.log('logout button clicked');
+    });
+
+    navBar.addEventListener('menu-select', (e) => {
+      console.log('menu selected:', e.detail);
+    });
+    navBar.addEventListener('menu-search',() => {
+      console.log('menu search button clicked');
+    })
+  </script>
+</div>
 </body>
 </html>
