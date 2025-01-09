@@ -7,9 +7,12 @@ import './menu-extender.js';
 export class GlobalHeader extends LitElement {
   @property() logo: string = '';
   @property() logoAlt: string = '';
+  @property() rootUrl: string = '/';
 
   protected render() {
-    return html`<h1><img src=${this.logo} alt=${this.logoAlt} /></h1>
+    return html`<h1>
+        <a href="${this.rootUrl}"><img src=${this.logo} alt=${this.logoAlt} /></a>
+      </h1>
       <slot></slot>`;
   }
 
