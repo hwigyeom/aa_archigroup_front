@@ -26,6 +26,7 @@ export class GlobalHeader extends LitElement {
       left: 0;
       right: 0;
       z-index: 1;
+      background-color: var(--body-surface-color);
     }
 
     h1 {

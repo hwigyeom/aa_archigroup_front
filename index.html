@@ -5,22 +5,30 @@
   <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AA Archigroup</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="stylesheet" href="src/normalize.css"/>
   <link rel="stylesheet" href="src/global.css"/>
   <link rel="stylesheet" href="src/main.css"/>
   <script type="module" src="src/components/global-header.ts"></script>
   <script type="module" src="src/components/global-nav-bar.ts"></script>
   <script type="module" src="src/components/user-info.ts"></script>
+  <script type="module" src="src/components/global-menu-tree.ts"></script>
+  <script type="module" src="src/components/page-container.ts"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="menu-opened">
 <global-header logo="public/images/main-ci.svg" logoAlt="AA Archigroup">
   <user-info id="userInfo" name="변승환 상무"></user-info>
 </global-header>
-<global-nav-bar />
-<div>
-  <script type="module">
+<global-nav-bar></global-nav-bar>
+<global-menu-tree></global-menu-tree>
+<page-container title="실적명세서 조회"
+                search="show" add="show" delete="show" excel="hide" save="show" print="disabled">
+  <div style="height: 200vh">content</div>
+  <script type="text/javascript">
     const userInfo = document.getElementById('userInfo');
     const navBar = document.querySelector('global-nav-bar');
+    const page = document.querySelector('page-container');
 
     userInfo.addEventListener('logout', () => {
       console.log('logout button clicked');
@@ -31,8 +39,28 @@
     });
     navBar.addEventListener('menu-search',() => {
       console.log('menu search button clicked');
-    })
+    });
+
+    page.addEventListener('search', () => {
+      console.log('search button clicked.');
+    });
+    page.addEventListener('add', () => {
+      console.log('add button clicked.');
+    });
+    page.addEventListener('delete', ()=> {
+      console.log('delete button clicked.');
+    });
+    page.addEventListener('excel', () => {
+      console.log('excel button clicked.');
+    });
+    page.addEventListener('save', () => {
+      console.log('save button clicked.');
+    });
+    page.addEventListener('print', () => {
+      console.log('print button clicked.');
+    });
+
   </script>
-</div>
+</page-container>
 </body>
 </html>

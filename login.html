@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="src/normalize.css"/>
   <link rel="stylesheet" href="src/global.css"/>
   <link rel="stylesheet" href="src/login.css"/>
-  <script type="module" src="src/login/aa-login.ts"></script>
+  <script type="module" src="src/components/login-form.ts"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -18,18 +19,54 @@
     <div class="login-slogan">탄탄한 기술력으로 쌓아온 신뢰의 기반 위에<br>한 차원 높은 디자인 경쟁력으로 시장을 선도하는 혁신의 글로벌 디자인 名家</div>
   </h1>
   <section class="login-form-wrapper">
-    <aa-login id="login"></aa-login>
+    <login-form id="login"></login-form>
     <footer>COPYRIGHT &copy; 2024 AA Archigroup Inc. ALL RIGHTS RESERVED</footer>
   </section>
+  <script type="module">
+    /*
+    // modern javascript standard fetch api
+    const loginForm = document.querySelector('login-form');
+
+    loginForm.setLoginInfo({
+      userid: 'aaarchigroup',
+      password: 'p@ssw0rd',
+      saved: true
+    });
+
+    loginForm.addEventListener('login', async (e) => {
+      console.log('login button clicked:', e.detail);
+
+      const { userid, password, saved } = e.detail;
+
+      // try {
+      //   // TODO: implement login ajax call with fetch api
+      //   const response = await fetch('url', {
+      //     method: 'POST',
+      //     body: JSON.stringify({ userid, password })
+      //   });
+      // } catch (err) {
+      //   console.error(err);
+      // }
+    });*/
+
+    // jquery usage
+    $('#login').get(0).setLoginInfo({
+      userid: 'aarchigroup',
+      password: 'p@ssw0rd',
+      saved: true
+    });
+
+    $('#login').on('login', function (e) {
+      console.log('login button clicked:', e.detail);
+
+      const { userid, password, saved } = e.detail;
+
+      // TODO: implement login ajax call with jquery
+      $.ajax({ url: 'url' })
+        .done(function (data) {})
+        .fail(function (err) {});
+    });
+  </script>
 </div>
-<script type="module">
-  // const loginForm = document.getElementById('login-form');
-  // // 저장된 로그인 정보 설정
-  // loginForm.setLoginInfo({
-  //   userid: 'aaarchigroup',
-  //   password: '12345',
-  //   saved: true
-  // });
-</script>
 </body>
 </html>

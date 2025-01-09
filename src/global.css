@@ -20,9 +20,17 @@
   --input-border-hover: #9ca5b1;
   --input-border-active: #546475;
   --input-border-disable: #dfe0e2;
+  --input-surface-normal: #fff;
+  --input-surface-disabled: #fafafa;
+
+  --btn-font-size-large: 14px;
+  --btn-font-size-medium: 12px;
+  --btn-font-size-small: 11px;
 
   --checkbox-border-normal: #cbd1d7;
   --checkbox-surface-checked: #546475;
+
+  --divider-color: #eaeaea;
 }
 
 /* Reset some default browser style */

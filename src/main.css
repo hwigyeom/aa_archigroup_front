@@ -1,4 +1,30 @@
 body {
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--body-surface-color);
+  padding: 48px 0 0 66px;
+}
+
+body.menu-opened {
+  padding-left: 276px;
+}
+
+div.round-header-issue {
+  display: block;
+  position: fixed;
+  top: 48px;
+  left: 276px;
+  bottom: 0;
+  width: 16px;
+  background-color: var(--body-surface-color);
+}
+div.round-header-issue::before {
+  display: block;
+  content: '';
+  position: fixed;
+  top: 66px;
+  left: 276px;
+  bottom: 0;
+  width: 16px;
+  background-color: #fff;
+  border-top-left-radius: 16px;
 }
