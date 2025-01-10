@@ -81,7 +81,6 @@ export class PageContainer extends LitElement {
             <slot name="buttons"></slot>
           </div>
         </section>
-        <div class="round-header-issue"></div>
       </header>
       <div class="content"><slot></slot></div>`;
   }
@@ -142,7 +141,7 @@ export class PageContainer extends LitElement {
       border-top-left-radius: 16px;
       align-items: stretch;
       background-color: #fff;
-      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--divider-color);
     }
 
     header {
@@ -156,7 +155,7 @@ export class PageContainer extends LitElement {
       font-size: 18px;
       font-weight: 700;
       position: sticky;
-      top: 48px;
+      top: 49px;
       background-color: #fff;
       border-top-left-radius: 16px;
     }
@@ -199,23 +198,27 @@ export class PageContainer extends LitElement {
       padding: 16px 24px 24px 24px;
     }
 
-    div.round-header-issue {
-      position: absolute;
-      top: 0;
-      left: -10px;
-      width: 26px;
-      height: 16px;
-      background-color: var(--body-surface-color);
-    }
-    div.round-header-issue:before {
+    header:before {
       position: absolute;
       display: block;
       content: '';
-      top: 0;
-      left: 10px;
-      width: 16px;
+      top: -1px;
+      right: 0;
+      left: -1px;
+      height: 16px;
+      background-color: var(--body-surface-color);
+    }
+    header:after {
+      position: absolute;
+      display: block;
+      content: '';
+      top: -1px;
+      left: -1px;
+      right: 0;
       height: 16px;
       background-color: #fff;
+      border: 1px solid var(--divider-color);
+      border-bottom: none;
       border-top-left-radius: 16px;
     }
   `;
