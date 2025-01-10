@@ -1,8 +1,6 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import './menu-extender.js';
-
 @customElement('global-header')
 export class GlobalHeader extends LitElement {
   @property() logo: string = '';

@@ -25,10 +25,19 @@
 <page-container title="실적명세서 조회"
                 search="show" add="show" delete="show" excel="hide" save="show" print="disabled">
   <div style="height: 200vh">content</div>
-  <script type="text/javascript">
+  <script type="module">
     const userInfo = document.getElementById('userInfo');
     const navBar = document.querySelector('global-nav-bar');
     const page = document.querySelector('page-container');
+
+    const rootMenus = [
+      { id: 'menu-01', name: '실적보고', icon: 'public/images/icon-menu-01.svg', selected: true },
+      { id: 'menu-02', name: '프로젝트 관리', icon: 'public/images/icon-menu-02.svg' },
+      { id: 'menu-03', name: '자원관리', icon: 'public/images/icon-menu-03.svg' },
+      { id: 'menu-04', name: '시스템 관리', icon: 'public/images/icon-menu-04.svg' },
+    ];
+    navBar.setMenus(rootMenus);
+    navBar.selectMenu(rootMenus[0]?.id || '');
 
     userInfo.addEventListener('logout', () => {
       console.log('logout button clicked');
@@ -62,5 +71,7 @@
 
   </script>
 </page-container>
+<script type="module">
+</script>
 </body>
 </html>

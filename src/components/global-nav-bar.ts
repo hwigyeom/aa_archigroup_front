@@ -1,8 +1,8 @@
-import { css, html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, PropertyValues, unsafeCSS } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import icons from './icons.js';
 
-export type TopMenu = {
+export type RootMenu = {
   id: string;
   name: string;
   icon: string;
@@ -10,20 +10,58 @@ export type TopMenu = {
 
 @customElement('global-nav-bar')
 export class GlobalNavigationBar extends LitElement {
-  @property({ type: Boolean }) extended: boolean = false;
-
-  @property({ type: String, reflect: true }) selected: string = 'menu-01';
+  @property({ type: Boolean }) extended: boolean = true;
+  @property({ type: String, reflect: true }) selected: string = '';
 
   @state()
-  private menus: TopMenu[] = [
-    { id: 'menu-01', name: '실적보고', icon: 'public/images/icon-menu-01.svg' },
-    { id: 'menu-02', name: '프로젝트 관리', icon: 'public/images/icon-menu-02.svg' },
-    { id: 'menu-03', name: '자원관리', icon: 'public/images/icon-menu-03.svg' },
-    { id: 'menu-04', name: '시스템 관리', icon: 'public/images/icon-menu-04.svg' },
-  ];
+  private menus: RootMenu[] = [];
+
+  setMenus(menus: RootMenu[]) {
+    this.menus = menus;
+  }
+
+  selectMenu(menuId: string) {
+    this.selected = menuId;
+  }
 
   protected render() {
-    return html`<menu-extender ?extened=${this.extended}></menu-extender>${this.renderTopMenus()}`;
+    return html`${this.renderExtender()}${this.renderTopMenus()}`;
+  }
+
+  protected renderExtender() {
+    const icon = this.extended
+      ? html`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#a)">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M1.75 2a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5zm10.78 8.22a.75.75 0 0 1 0 1.06l-.72.72h2.44a.75.75 0 0 1 0 1.5h-2.44l.72.72a.75.75 0 1 1-1.06 1.06l-2-2a.75.75 0 0 1 0-1.06l2-2a.75.75 0 0 1 1.06 0M1 12.75a.75.75 0 0 1 .75-.75H6.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1-.75-.75M1.75 7a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5z"
+              fill="#20293A"
+            />
+          </g>
+          <defs>
+            <clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z" /></clipPath>
+          </defs>
+        </svg>`
+      : html`<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#a)">
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M1.75 2a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5zm9.97 8.22a.75.75 0 0 0 0 1.06l.72.72H10a.75.75 0 0 0 0 1.5h2.44l-.72.72a.75.75 0 1 0 1.06 1.06l2-2a.75.75 0 0 0 0-1.06l-2-2a.75.75 0 0 0-1.06 0M1 12.75a.75.75 0 0 1 .75-.75H6.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1-.75-.75M1.75 7a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5z"
+              fill="#20293A"
+            />
+          </g>
+          <defs>
+            <clipPath id="a"><path fill="#fff" d="M0 0h16v16H0z" /></clipPath>
+          </defs>
+        </svg>`;
+    return html`<a class="extender" href="#" @click=${this.extenderClickHandler}>${icon}</a>`;
+  }
+
+  protected firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+    this.manageBodyMenuOpenedClass();
   }
 
   private renderTopMenus() {
@@ -64,6 +102,31 @@ export class GlobalNavigationBar extends LitElement {
         this.dispatchEvent(new CustomEvent('menu-select', { detail: menuId, bubbles: false, composed: false }));
       }
     }
+    if (!this.extended) {
+      console.log('extend');
+      this.extended = true;
+    }
+  }
+
+  private extenderClickHandler() {
+    this.extended = !this.extended;
+    this.requestUpdate();
+  }
+
+  private manageBodyMenuOpenedClass() {
+    if (this.extended) {
+      document.body.classList.add('menu-opened');
+    } else {
+      document.body.classList.remove('menu-opened');
+    }
+  }
+
+  protected updated(changes: PropertyValues) {
+    super.updated(changes);
+    if (changes.has('extended')) {
+      this.manageBodyMenuOpenedClass();
+      this.requestUpdate();
+    }
   }
 
   static styles = css`
@@ -76,6 +139,14 @@ export class GlobalNavigationBar extends LitElement {
       width: 58px;
       overflow: hidden;
       z-index: 2;
+    }
+
+    a.extender {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 58px;
+      height: 48px;
     }
 
     nav {
