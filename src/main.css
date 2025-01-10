@@ -7,3 +7,11 @@ body {
 body.menu-opened {
   padding-left: 276px;
 }
+
+body global-menu-tree {
+  display: none;
+}
+
+body.menu-opened global-menu-tree {
+  display: flex;
+}

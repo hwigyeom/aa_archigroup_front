@@ -94,16 +94,18 @@ export class GlobalNavigationBar extends LitElement {
     e.preventDefault();
     const anchor = e.currentTarget as HTMLAnchorElement;
     const menuId = anchor.dataset.menuId as string;
+    const menuName = this.menus.find((item) => item.id === menuId)?.name;
     if (menuId === 'search') {
       this.dispatchEvent(new CustomEvent('menu-search', { bubbles: false, composed: false }));
     } else {
       if (this.selected !== menuId) {
         this.selected = menuId;
-        this.dispatchEvent(new CustomEvent('menu-select', { detail: menuId, bubbles: false, composed: false }));
+        this.dispatchEvent(
+          new CustomEvent('menu-select', { detail: { id: menuId, name: menuName }, bubbles: false, composed: false })
+        );
       }
     }
     if (!this.extended) {
-      console.log('extend');
       this.extended = true;
     }
   }
@@ -156,6 +158,11 @@ export class GlobalNavigationBar extends LitElement {
       width: 58px;
       bottom: 0;
       border-top-right-radius: 16px;
+      scrollbar-width: none;
+      overflow-y: auto;
+    }
+    nav::-webkit-scrollbar {
+      display: none;
     }
 
     ul {

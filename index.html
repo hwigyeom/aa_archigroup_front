@@ -28,6 +28,7 @@
   <script type="module">
     const userInfo = document.getElementById('userInfo');
     const navBar = document.querySelector('global-nav-bar');
+    const menuTree = document.querySelector('global-menu-tree');
     const page = document.querySelector('page-container');
 
     const rootMenus = [
@@ -36,8 +37,46 @@
       { id: 'menu-03', name: '자원관리', icon: 'public/images/icon-menu-03.svg' },
       { id: 'menu-04', name: '시스템 관리', icon: 'public/images/icon-menu-04.svg' },
     ];
+    const subMenus = [
+      {
+        id: 'menu-1-1',
+        name: '기초정보',
+        url: '#',
+        open: true,
+        children: [
+          { id: 'menu-1-1-1', name: '프로젝트 정보', url: '#' },
+          { id: 'menu-1-1-2', name: '해외 프로젝트', url: '#' },
+          { id: 'menu-1-1-3', name: '분할 프로젝트', url: '#' },
+        ],
+      },
+      {
+        id: 'menu-1-2',
+        name: '실적명세서',
+        url: '#',
+        open: true,
+        children: [
+          { id: 'menu-1-2-1', name: '실적명세서 작성', url: '#' },
+          { id: 'menu-1-2-2', name: '실적명세서 조회', url: '#', selected: true },
+        ],
+      },
+      {
+        id: 'menu-1-3',
+        name: '월별진행표',
+        url: '#',
+        open: false,
+        children: [
+          { id: 'menu-1-3-1', name: '월별진행표 작성', url: '#' },
+          { id: 'menu-1-3-2', name: '월별진행표 조회', url: '#' },
+          { id: 'menu-1-3-3', name: '월별진행표 취합', url: '#' },
+        ],
+      },
+    ];
+
     navBar.setMenus(rootMenus);
     navBar.selectMenu(rootMenus[0]?.id || '');
+
+    menuTree.title = rootMenus[0]?.name || '';
+    menuTree.menus = subMenus;
 
     userInfo.addEventListener('logout', () => {
       console.log('logout button clicked');
@@ -45,9 +84,14 @@
 
     navBar.addEventListener('menu-select', (e) => {
       console.log('menu selected:', e.detail);
+      // 메뉴 트리 설정
+      const {name} = e.detail;
+      menuTree.title = name;
+      menuTree.menus = [...subMenus];
     });
     navBar.addEventListener('menu-search',() => {
       console.log('menu search button clicked');
+      menuTree.setSearchFocus();
     });
 
     page.addEventListener('search', () => {
