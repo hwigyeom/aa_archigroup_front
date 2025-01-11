@@ -1,4 +1,4 @@
-import { css, html, LitElement, TemplateResult } from 'lit';
+import { css, html, LitElement, PropertyValues, TemplateResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { MenuSearch } from './menu-search.ts';
 import './menu-search.ts';
@@ -40,7 +40,7 @@ export class GlobalMenuTree extends LitElement {
                 href="${node.url || '#'}"
                 @click=${this.menuClickHandler}
               >
-                ${node.name}
+                <span class="menu-name">${node.name}</span>
               </a>
               ${node.children ? this.menuTreeRender(node.children) : ''}
             </li>
@@ -69,6 +69,20 @@ export class GlobalMenuTree extends LitElement {
         target.classList.remove('closed');
         target.classList.add('opened');
       }
+    }
+  }
+
+  protected updated(changes: PropertyValues) {
+    super.update(changes);
+    if (changes.has('menus')) {
+      this.getUpdateComplete().then(() => {
+        this.shadowRoot?.querySelectorAll('span.menu-name').forEach((el) => {
+          const span = el as HTMLSpanElement;
+          if (span.offsetWidth < span.scrollWidth) {
+            span.title = span.textContent || '';
+          }
+        });
+      });
     }
   }
 
@@ -128,13 +142,25 @@ export class GlobalMenuTree extends LitElement {
       display: flex;
       flex-direction: row;
       align-items: center;
+      width: 188px;
       justify-content: flex-start;
-      padding: 7px 7px 7px 0;
+      padding: 7px 7px 7px 14px;
       text-decoration: none;
       color: var(--font-primary);
       font-size: 13px;
       font-family: Pretenard, Arial, sans-serif;
       font-weight: 400;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    a > span.menu-name {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     a.selected {
@@ -146,6 +172,7 @@ export class GlobalMenuTree extends LitElement {
       display: flex;
       width: 14px;
       height: 16px;
+      margin-left: -14px;
       align-items: center;
       justify-content: center;
       margin-right: 6px;
