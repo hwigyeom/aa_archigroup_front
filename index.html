@@ -38,7 +38,7 @@
   <!-- page content:start -->
   <div id="gridContainer"></div>
 
-  <script type="module">
+  <script type="text/javascript">
     const userInfo = document.querySelector('user-info');
     const navBar = document.querySelector('global-nav-bar');
     const menuTree = document.querySelector('global-menu-tree');
@@ -88,16 +88,20 @@
       },
     ];
 
-    // nav bar 초기화
-    navBar.setMenus(rootMenus);
-    navBar.selectMenu(rootMenus[0]?.id || '');
+    window.onload = () => {
+      // nav bar 초기화
+      navBar.setMenus(rootMenus);
+      navBar.selectMenu(rootMenus[0]?.id || '');
 
-    // menu tree 초기화
-    menuTree.title = rootMenus[0]?.name || '';
-    menuTree.menus = subMenus;
+      // menu tree 초기화
+      menuTree.title = rootMenus[0]?.name || '';
+      menuTree.menus = subMenus;
 
-    // 사용자 정보 설정 / 로그아웃 처리
-    userInfo.name = '변승환 상무';
+      // 사용자 정보 설정
+      userInfo.name = '변승환 상무';
+    }
+
+    // 로그아웃 처리
     userInfo.addEventListener('logout', () => {
       console.log('logout button clicked');
     });

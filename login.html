@@ -22,51 +22,53 @@
     <login-form id="login"></login-form>
     <footer>COPYRIGHT &copy; 2024 AA Archigroup Inc. ALL RIGHTS RESERVED</footer>
   </section>
-  <script type="module">
-    // modern javascript standard fetch api
-    const loginForm = document.querySelector('login-form');
+  <script type="text/javascript">
+    window.onload = () => {
+      // modern javascript standard fetch api
+      const loginForm = document.querySelector('login-form');
 
-    loginForm.setLoginInfo({
-      userid: 'aaarchigroup',
-      password: 'p@ssw0rd',
-      saved: true
-    });
+      loginForm.setLoginInfo({
+        userid: 'aaarchigroup',
+        password: 'p@ssw0rd',
+        saved: true
+      });
 
-    loginForm.addEventListener('login', async (e) => {
-      console.log('login button clicked:', e.detail);
+      loginForm.addEventListener('login', async (e) => {
+        console.log('login button clicked:', e.detail);
 
-      const { userid, password, saved } = e.detail;
+        const { userid, password, saved } = e.detail;
 
-      // try {
-      //   // TODO: implement login ajax call with fetch api
-      //   const response = await fetch('url', {
-      //     method: 'POST',
-      //     body: JSON.stringify({ userid, password })
-      //   });
-      // } catch (err) {
-      //   console.error(err);
-      // }
-    });
+        // try {
+        //   // TODO: implement login ajax call with fetch api
+        //   const response = await fetch('url', {
+        //     method: 'POST',
+        //     body: JSON.stringify({ userid, password })
+        //   });
+        // } catch (err) {
+        //   console.error(err);
+        // }
+      });
 
-    /*
-    // jquery usage
-    $('#login').get(0).setLoginInfo({
-      userid: 'aarchigroup',
-      password: 'p@ssw0rd',
-      saved: true
-    });
+      /*
+      // jquery usage
+      $('#login').get(0).setLoginInfo({
+        userid: 'aarchigroup',
+        password: 'p@ssw0rd',
+        saved: true
+      });
 
-    $('#login').on('login', function (e) {
-      console.log('login button clicked:', e.detail);
+      $('#login').on('login', function (e) {
+        console.log('login button clicked:', e.detail);
 
-      const { userid, password, saved } = e.detail;
+        const { userid, password, saved } = e.detail;
 
-      // TODO: implement login ajax call with jquery
-      $.ajax({ url: 'url' })
-        .done(function (data) {})
-        .fail(function (err) {});
-    });
-     */
+        // TODO: implement login ajax call with jquery
+        $.ajax({ url: 'url' })
+          .done(function (data) {})
+          .fail(function (err) {});
+      });
+       */
+    };
   </script>
 </div>
 </body>
