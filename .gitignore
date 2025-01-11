@@ -27,3 +27,7 @@ dist-ssr
 .pnp.cjs
 .pnp.loader.mjs
 *.lock
+
+# Commerial licensed libaries
+public/IBSheet8/*
+

@@ -1,5 +1,6 @@
 body {
   min-height: 100vh;
+  display: flex;
   background-color: var(--body-surface-color);
   padding: 48px 0 0 66px;
 }

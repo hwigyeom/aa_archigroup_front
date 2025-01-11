@@ -140,6 +140,7 @@ export class PageContainer extends LitElement {
       flex-direction: column;
       border-top-left-radius: 16px;
       align-items: stretch;
+      width: 100%;
       background-color: #fff;
       border: 1px solid var(--divider-color);
     }

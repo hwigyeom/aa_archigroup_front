@@ -9,34 +9,50 @@
   <link rel="stylesheet" href="src/normalize.css"/>
   <link rel="stylesheet" href="src/global.css"/>
   <link rel="stylesheet" href="src/main.css"/>
+  <link rel="stylesheet" href="/IBSheet8/css/gray/main.css">
   <script type="module" src="src/components/global-header.ts"></script>
   <script type="module" src="src/components/global-nav-bar.ts"></script>
   <script type="module" src="src/components/user-info.ts"></script>
   <script type="module" src="src/components/global-menu-tree.ts"></script>
   <script type="module" src="src/components/page-container.ts"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="/IBSheet8/ibsheet.js" type="text/javascript"></script>
+  <script src="/IBSheet8/ibleaders.js"></script>
+  <script src="/IBSheet8/locale/ko.js"></script>
+  <script src="/IBSheet8/plugins/ibsheet-common.js"></script>
+  <script src="/IBSheet8/plugins/ibsheet-excel.js"></script>
+  <script src="/IBSheet8/plugins/ibsheet-dialog.js"></script>
 </head>
-<body class="menu-opened">
+<body>
+<!-- global header -->
 <global-header logo="public/images/main-ci.svg" logoAlt="AA Archigroup">
-  <user-info id="userInfo" name="변승환 상무"></user-info>
+  <user-info id="userInfo"></user-info>
 </global-header>
+<!-- lnb - module -->
 <global-nav-bar></global-nav-bar>
+<!-- lnb - menu tree -->
 <global-menu-tree></global-menu-tree>
+<!-- page content container:start -->
 <page-container title="실적명세서 조회"
                 search="show" add="show" delete="show" excel="hide" save="show" print="disabled">
-  <div style="height: 200vh">content</div>
+  <!-- page content:start -->
+  <div id="gridContainer"></div>
+
   <script type="module">
-    const userInfo = document.getElementById('userInfo');
+    const userInfo = document.querySelector('user-info');
     const navBar = document.querySelector('global-nav-bar');
     const menuTree = document.querySelector('global-menu-tree');
     const page = document.querySelector('page-container');
 
+    // nav bar 용 - 모듈(Root level) 메뉴 (Sample)
     const rootMenus = [
       { id: 'menu-01', name: '실적보고', icon: 'public/images/icon-menu-01.svg', selected: true },
       { id: 'menu-02', name: '프로젝트 관리', icon: 'public/images/icon-menu-02.svg' },
       { id: 'menu-03', name: '자원관리', icon: 'public/images/icon-menu-03.svg' },
       { id: 'menu-04', name: '시스템 관리', icon: 'public/images/icon-menu-04.svg' },
     ];
+
+    // menu tree 용 - 모듈 메뉴 (Sample)
     const subMenus = [
       {
         id: 'menu-1-1',
@@ -72,17 +88,23 @@
       },
     ];
 
+    // nav bar 초기화
     navBar.setMenus(rootMenus);
     navBar.selectMenu(rootMenus[0]?.id || '');
 
+    // menu tree 초기화
     menuTree.title = rootMenus[0]?.name || '';
     menuTree.menus = subMenus;
 
+    // 사용자 정보 설정 / 로그아웃 처리
+    userInfo.name = '변승환 상무';
     userInfo.addEventListener('logout', () => {
       console.log('logout button clicked');
     });
 
+    // nav bar 이벤트 핸들러
     navBar.addEventListener('menu-select', (e) => {
+      // 모듈 메뉴 선택
       console.log('menu selected:', e.detail);
       // 메뉴 트리 설정
       const {name} = e.detail;
@@ -90,32 +112,41 @@
       menuTree.menus = [...subMenus];
     });
     navBar.addEventListener('menu-search',() => {
+      // 메뉴검색 클릭
       console.log('menu search button clicked');
       menuTree.setSearchFocus();
     });
 
+    // menu tree 이벤트 핸들러
     page.addEventListener('search', () => {
+      // 조회 버튼 클릭
       console.log('search button clicked.');
     });
     page.addEventListener('add', () => {
+      // 추가 버튼 클릭
       console.log('add button clicked.');
     });
     page.addEventListener('delete', ()=> {
+      // 삭제 버튼 클릭
       console.log('delete button clicked.');
     });
     page.addEventListener('excel', () => {
+      // 엑셀 버튼 클릭
       console.log('excel button clicked.');
     });
     page.addEventListener('save', () => {
+      // 저장 버튼 클릭
       console.log('save button clicked.');
     });
     page.addEventListener('print', () => {
+      // 인쇄 버튼 클릭
       console.log('print button clicked.');
     });
 
+    /* REQUIRED: IBSheet8 runnable sample code */
   </script>
+  <!-- page content:end -->
 </page-container>
-<script type="module">
-</script>
+<!-- page content container:end -->
 </body>
 </html>
