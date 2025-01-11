@@ -1,8 +1,10 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import icons from './icons.js';
+import { AddSVG, DeleteSVG, ExcelSVG, PrintSVG, SaveSVG, SearchSVG } from './icons.js';
+
 import './button-generic.ts';
 import './button-primary.ts';
+import { ICON_INVERSE_COLOR } from './constants.ts';
 
 @customElement('page-container')
 export class PageContainer extends LitElement {
@@ -26,7 +28,7 @@ export class PageContainer extends LitElement {
                   ?disabled=${this.buttonDisabled('excel')}
                   @click=${(e: Event) => this.buttonClickHandler('excel', e)}
                 >
-                  ${icons.excel(icons.color.inverse)}엑셀다운
+                  ${ExcelSVG(ICON_INVERSE_COLOR)}엑셀다운
                 </button-primary>`
               : ''}
             ${this.buttonShow('save')
@@ -35,7 +37,7 @@ export class PageContainer extends LitElement {
                   ?disabled=${this.buttonDisabled('save')}
                   @click=${(e: Event) => this.buttonClickHandler('save', e)}
                 >
-                  ${icons.save(icons.color.inverse)}저장
+                  ${SaveSVG(ICON_INVERSE_COLOR)}저장
                 </button-primary>`
               : ''}
             ${this.buttonShow('print')
@@ -44,7 +46,7 @@ export class PageContainer extends LitElement {
                   ?disabled=${this.buttonDisabled('print')}
                   @click=${(e: Event) => this.buttonClickHandler('print', e)}
                 >
-                  ${icons.print(icons.color.inverse)}인쇄
+                  ${PrintSVG(ICON_INVERSE_COLOR)}인쇄
                 </button-primary>`
               : ''}
           </div>
@@ -55,7 +57,7 @@ export class PageContainer extends LitElement {
                   ?disabled=${this.buttonDisabled('search')}
                   @click=${(e: Event) => this.buttonClickHandler('search', e)}
                 >
-                  ${icons.search()}조회
+                  ${SearchSVG()}조회
                 </button-generic>`
               : ''}
             ${this.buttonShow('add')
@@ -64,7 +66,7 @@ export class PageContainer extends LitElement {
                   ?disabled=${this.buttonDisabled('add')}
                   @click=${(e: Event) => this.buttonClickHandler('add', e)}
                 >
-                  ${icons.add()}추가
+                  ${AddSVG()}추가
                 </button-generic>`
               : ''}
             ${this.buttonShow('delete')
@@ -73,7 +75,7 @@ export class PageContainer extends LitElement {
                   ?disabled=${this.buttonDisabled('delete')}
                   @click=${(e: Event) => this.buttonClickHandler('delete', e)}
                 >
-                  ${icons.delete()}삭제
+                  ${DeleteSVG()}삭제
                 </button-generic>`
               : ''}
           </div>

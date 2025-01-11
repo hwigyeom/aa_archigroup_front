@@ -1,6 +1,7 @@
 import { css, html, LitElement, PropertyValues, unsafeCSS } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import icons from './icons.js';
+import { SearchSVG } from './icons.js';
+import { ICON_DEFAULT_COLOR } from './constants.ts';
 
 export type RootMenu = {
   id: string;
@@ -70,7 +71,7 @@ export class GlobalNavigationBar extends LitElement {
         <ul>
           <li>
             <a href="#" @click=${this.menuSelectHandler} data-menu-id="search"
-              ><span>${icons.search(icons.color.normal)}</span><label>메뉴검색</label></a
+              ><span>${SearchSVG()}</span><label>메뉴검색</label></a
             >
           </li>
           ${this.menus.map(
@@ -184,7 +185,7 @@ export class GlobalNavigationBar extends LitElement {
       justify-content: center;
       align-items: center;
       text-decoration: none;
-      color: ${unsafeCSS(icons.color.normal)};
+      color: ${unsafeCSS(ICON_DEFAULT_COLOR)};
     }
     li > a > span {
       display: flex;

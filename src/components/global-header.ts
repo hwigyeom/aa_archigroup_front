@@ -38,6 +38,11 @@ export class GlobalHeader extends LitElement {
       margin: 0;
       flex-grow: 2;
     }
+
+    a {
+      display: flex;
+      align-items: center;
+    }
   `;
 }
 

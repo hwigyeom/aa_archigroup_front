@@ -1,11 +1,11 @@
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import icons from './icons.js';
+import { SearchSVG } from './icons.js';
 
 @customElement('menu-search')
 export class MenuSearch extends LitElement {
   protected render() {
-    return html`<input type="text" placeholder="메뉴검색" /><button>${icons.search()}</button>`;
+    return html`<input type="text" placeholder="메뉴검색" /><button>${SearchSVG()}</button>`;
   }
 
   public setFocus() {

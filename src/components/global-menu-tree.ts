@@ -1,6 +1,8 @@
-import { css, html, LitElement, PropertyValues, TemplateResult } from 'lit';
+import { css, html, unsafeCSS, LitElement, PropertyValues, TemplateResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { MenuSearch } from './menu-search.ts';
+import { ICON_DEFAULT_COLOR } from './constants.js';
+
 import './menu-search.ts';
 
 export type MenuTreeNode = {
@@ -11,6 +13,48 @@ export type MenuTreeNode = {
   selected?: boolean;
   children?: MenuTreeNode[];
 };
+
+const closedBullet = (
+  color: string = ICON_DEFAULT_COLOR
+) => `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill="${color}">
+    <path opacity=".2" d="M0 1.938a2 2 0 0 1 2-2h9.9a2 2 0 0 1 2 2V12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8 8v2a1 1 0 1 1-2 0V8H4a1 1 0 0 1 0-2h2V4a1 1 0 0 1 2 0v2h2a1 1 0 1 1 0 2z"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h14v14H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+
+const openedBullet = (
+  color: string = ICON_DEFAULT_COLOR
+) => `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill="${color}">
+    <path opacity=".2" d="M.1 1.938a2 2 0 0 1 2-2H12a2 2 0 0 1 2 2V12a2 2 0 0 1-2 2H2.1a2 2 0 0 1-2-2z"/>
+    <path d="M10.1 6h-6a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h14v14H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+
+const leafBullet = (
+  color: string = ICON_DEFAULT_COLOR
+) => `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M5 9V4a1 1 0 0 1 2 0v4h4a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h14v14H0z"/>
+    </clipPath>
+  </defs>
+</svg>
+`;
 
 @customElement('global-menu-tree')
 export class GlobalMenuTree extends LitElement {
@@ -179,19 +223,19 @@ export class GlobalMenuTree extends LitElement {
     }
 
     a.closed:before {
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNSAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiIGZpbGw9IiM5Q0E1QjEiPjxwYXRoIG9wYWNpdHk9Ii4yIiBkPSJNLjggMS45MzhhMiAyIDAgMCAxIDItMmg5LjlhMiAyIDAgMCAxIDIgMlYxMmEyIDIgMCAwIDEtMiAySDIuOGEyIDIgMCAwIDEtMi0yeiIvPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOC44IDh2MmExIDEgMCAxIDEtMiAwVjhoLTJhMSAxIDAgMSAxIDAtMmgyVjRhMSAxIDAgMSAxIDIgMHYyaDJhMSAxIDAgMSAxIDAgMnoiLz48L2c+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNLjggMGgxNHYxNEguOHoiLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=');
+      background-image: url('${unsafeCSS(`data:image/svg+xml;base64,${btoa(closedBullet())}`)}');
     }
 
     a.opened:before {
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNSAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiIGZpbGw9IiM5Q0E1QjEiPjxwYXRoIG9wYWNpdHk9Ii4yIiBkPSJNLjkwMSAxLjkzOGEyIDIgMCAwIDEgMi0yaDkuOWEyIDIgMCAwIDEgMiAyVjEyYTIgMiAwIDAgMS0yIDJIMi45YTIgMiAwIDAgMS0yLTJ6Ii8+PHBhdGggZD0iTTEwLjkwMSA2aC02YTEgMSAwIDAgMCAwIDJoNmExIDEgMCAxIDAgMC0yIi8+PC9nPjxkZWZzPjxjbGlwUGF0aCBpZD0iYSI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTS44IDBoMTR2MTRILjh6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+');
+      background-image: url('${unsafeCSS(`data:image/svg+xml;base64,${btoa(openedBullet())}`)}');
     }
 
     a.leaf:before {
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNSAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNS44IDlWNGExIDEgMCAxIDEgMiAwdjRoNGExIDEgMCAxIDEgMCAyaC01YTEgMSAwIDAgMS0xLTEiIGZpbGw9IiM5Q0E1QjEiLz48L2c+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNLjggMGgxNHYxNEguOHoiLz48L2NsaXBQYXRoPjwvZGVmcz48L3N2Zz4=');
+      background-image: url('${unsafeCSS(`data:image/svg+xml;base64,${btoa(leafBullet())}`)}');
     }
 
     a.leaf.selected:before {
-      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNNSA5VjRhMSAxIDAgMCAxIDIgMHY0aDRhMSAxIDAgMSAxIDAgMkg2YTEgMSAwIDAgMS0xLTEiIGZpbGw9IiNCNDA5NTAiLz48L2c+PGRlZnM+PGNsaXBQYXRoIGlkPSJhIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwaDE0djE0SDB6Ii8+PC9jbGlwUGF0aD48L2RlZnM+PC9zdmc+');
+      background-image: url('${unsafeCSS(`data:image/svg+xml;base64,${btoa(leafBullet('#b40950'))}`)}');
     }
 
     a.closed + ul {
