@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg"/>
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AA Archigroup</title>
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -25,7 +25,7 @@
 </head>
 <body>
 <!-- global header -->
-<global-header logo="public/images/main-ci.svg" logoAlt="AA Archigroup">
+<global-header logo="/images/main-ci.svg" logoAlt="AA Archigroup">
   <user-info id="userInfo"></user-info>
 </global-header>
 <!-- lnb - module -->
@@ -34,7 +34,7 @@
 <global-menu-tree></global-menu-tree>
 <!-- page content container:start -->
 <page-container title="실적명세서 조회"
-                search="show" add="show" delete="show" excel="show" save="show" print="show">
+                search="show" add="show" delete="show" excel="hide" save="show" print="disabled">
   <!-- page content:start -->
   <div id="gridContainer"></div>
 
@@ -46,10 +46,10 @@
 
     // nav bar 용 - 모듈(Root level) 메뉴 (Sample)
     const rootMenus = [
-      { id: 'menu-01', name: '실적보고', icon: 'public/images/icon-menu-01.svg', selected: true },
-      { id: 'menu-02', name: '프로젝트 관리', icon: 'public/images/icon-menu-02.svg' },
-      { id: 'menu-03', name: '자원관리', icon: 'public/images/icon-menu-03.svg' },
-      { id: 'menu-04', name: '시스템 관리', icon: 'public/images/icon-menu-04.svg' },
+      { id: 'menu-01', name: '실적보고', icon: '/images/icon-menu-01.svg', selected: true },
+      { id: 'menu-02', name: '프로젝트 관리', icon: '/images/icon-menu-02.svg' },
+      { id: 'menu-03', name: '자원관리', icon: '/images/icon-menu-03.svg' },
+      { id: 'menu-04', name: '시스템 관리', icon: '/images/icon-menu-04.svg' },
     ];
 
     // menu tree 용 - 모듈 메뉴 (Sample)

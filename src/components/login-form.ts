@@ -1,5 +1,7 @@
-import { LitElement, css, html } from 'lit';
+import { LitElement, css, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { CheckboxCheckedDataUri, CheckboxDataUri } from './icons.ts';
+import { CHECKBOX_HOVER_BORDER_COLOR } from './constants.ts';
 
 export type LoginInfo = {
   userid: string;
@@ -135,24 +137,35 @@ export class LoginForm extends LitElement {
 
     span.save-id {
       margin: 24px 0 70px 0;
-      display: block;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
       color: var(--font-secondary);
     }
 
+    input[type='checkbox'] {
+      margin: 0;
+      padding: 0;
+    }
     input[type='checkbox']:before {
       position: relative;
       display: block;
       width: 16px;
       height: 16px;
       content: '';
-      background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTciIHZpZXdCb3g9IjAgMCAxNiAxNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB4PSIxLjUiIHk9IjIuMTc3NzMiIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgcng9IjIuNSIgZmlsbD0id2hpdGUiLz4KICA8cmVjdCB4PSIxLjUiIHk9IjIuMTc3NzMiIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgcng9IjIuNSIgc3Ryb2tlPSIjQ0JEMUQ3Ii8+Cjwvc3ZnPgo=)
-        no-repeat center center #fff;
+      background: url('${unsafeCSS(CheckboxDataUri())}') no-repeat center center #fff;
     }
     input[type='checkbox']:hover:before {
-      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB4PSIwLjUiIHk9IjEuMTc3NzMiIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgcng9IjIuNSIgZmlsbD0id2hpdGUiLz4KICA8cmVjdCB4PSIwLjUiIHk9IjEuMTc3NzMiIHdpZHRoPSIxMyIgaGVpZ2h0PSIxMyIgcng9IjIuNSIgc3Ryb2tlPSIjOUNBNUIxIi8+Cjwvc3ZnPgo=);
+      background-image: url('${unsafeCSS(CheckboxDataUri(CHECKBOX_HOVER_BORDER_COLOR))}');
     }
     input[type='checkbox']:checked:before {
-      background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNCAxNSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB5PSIwLjY3NzczNCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiByeD0iMyIgZmlsbD0iIzU0NjQ3NSIvPgogIDxwYXRoIGQ9Ik0zLjUgNy43NTcwNEw2LjIwNjY3IDEwLjE3NzdMMTAuNSA1LjY3NzczIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=);
+      background-image: url('${unsafeCSS(CheckboxCheckedDataUri())}');
+    }
+
+    label[for='save'] {
+      display: inline-block;
+      margin-left: 8px;
     }
 
     button#submit {

@@ -1,4 +1,10 @@
-import { ICON_DEFAULT_COLOR } from './constants.js';
+import {
+  CHECKBOX_CHECKED_BG_COLOR,
+  CHECKBOX_CHECKED_CHECK_COLOR,
+  CHECKBOX_NORMAL_BG_COLOR,
+  CHECKBOX_NORMAL_BORDER_COLOR,
+  ICON_DEFAULT_COLOR,
+} from './constants.js';
 import { svg } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
@@ -202,4 +208,84 @@ export function DeleteSVG(color: string = ICON_DEFAULT_COLOR) {
 }
 export function DeleteDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(del(color));
+}
+
+const checkbox = (
+  borderColor: string = CHECKBOX_NORMAL_BORDER_COLOR,
+  backgroundColor: string = CHECKBOX_NORMAL_BG_COLOR
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1.5" y="1.5" width="13" height="13" rx="2.5" fill="${backgroundColor}"/>
+  <rect x="1.5" y="1.5" width="13" height="13" rx="2.5" stroke="${borderColor}"/>
+</svg>`;
+export function CheckboxSVG(
+  borderColor: string = CHECKBOX_NORMAL_BORDER_COLOR,
+  backgroundColor: string = CHECKBOX_NORMAL_BG_COLOR
+) {
+  return svg`${unsafeHTML(checkbox(borderColor, backgroundColor))}`;
+}
+export function CheckboxDataUri(
+  borderColor: string = CHECKBOX_NORMAL_BORDER_COLOR,
+  backgroundColor: string = CHECKBOX_NORMAL_BG_COLOR
+) {
+  return toDataUri(checkbox(borderColor, backgroundColor));
+}
+
+const checkboxChecked = (
+  borderColor: string = CHECKBOX_CHECKED_BG_COLOR,
+  backgroundColor: string = CHECKBOX_CHECKED_BG_COLOR,
+  checkColor: string = CHECKBOX_CHECKED_CHECK_COLOR
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1.5" y="1.5" width="13" height="13" rx="2.5" fill="${backgroundColor}"/>
+  <rect x="1.5" y="1.5" width="13" height="13" rx="2.5" stroke="${borderColor}"/>
+  <path d="m4.5 8.08 2.707 2.42L11.5 6" stroke="${checkColor}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
+export function CheckboxCheckedSVG(
+  borderColor: string = CHECKBOX_CHECKED_BG_COLOR,
+  backgroundColor: string = CHECKBOX_CHECKED_BG_COLOR,
+  checkColor: string = CHECKBOX_CHECKED_CHECK_COLOR
+) {
+  return svg`${unsafeHTML(checkboxChecked(borderColor, backgroundColor, checkColor))}`;
+}
+export function CheckboxCheckedDataUri(
+  borderColor: string = CHECKBOX_CHECKED_BG_COLOR,
+  backgroundColor: string = CHECKBOX_CHECKED_BG_COLOR,
+  checkColor: string = CHECKBOX_CHECKED_CHECK_COLOR
+) {
+  return toDataUri(checkboxChecked(borderColor, backgroundColor, checkColor));
+}
+
+const hamburgerExtended =
+  () => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 2a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5zm10.78 8.22a.75.75 0 0 1 0 1.06l-.72.72h2.44a.75.75 0 0 1 0 1.5h-2.44l.72.72a.75.75 0 1 1-1.06 1.06l-2-2a.75.75 0 0 1 0-1.06l2-2a.75.75 0 0 1 1.06 0M1 12.75a.75.75 0 0 1 .75-.75H6.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1-.75-.75M1.75 7a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5z" fill="#20293A"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function HamburgerExtendedSVG() {
+  return svg`${unsafeHTML(hamburgerExtended())}`;
+}
+export function HamburgerExtendedDataUri() {
+  return toDataUri(hamburgerExtended());
+}
+
+const hamburgerCollapsed =
+  () => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 2a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5zm9.97 8.22a.75.75 0 0 0 0 1.06l.72.72H10a.75.75 0 0 0 0 1.5h2.44l-.72.72a.75.75 0 1 0 1.06 1.06l2-2a.75.75 0 0 0 0-1.06l-2-2a.75.75 0 0 0-1.06 0M1 12.75a.75.75 0 0 1 .75-.75H6.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1-.75-.75M1.75 7a.75.75 0 0 0 0 1.5h12.5a.75.75 0 0 0 0-1.5z" fill="#20293A"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function HamburgerCollapsedSVG() {
+  return svg`${unsafeHTML(hamburgerCollapsed())}`;
+}
+export function HamburgerCollapsedDataUri() {
+  return toDataUri(hamburgerCollapsed());
 }
