@@ -29,5 +29,6 @@ dist-ssr
 *.lock
 
 # Commerial licensed libaries
-public/IBSheet8/*
+public/IBSheet8
+!public/IBSheet8/.gitkeep
 
