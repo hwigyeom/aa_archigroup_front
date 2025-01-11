@@ -112,7 +112,6 @@ export class GlobalNavigationBar extends LitElement {
 
   private extenderClickHandler() {
     this.extended = !this.extended;
-    this.requestUpdate();
   }
 
   private manageBodyMenuOpenedClass() {
@@ -127,7 +126,6 @@ export class GlobalNavigationBar extends LitElement {
     super.updated(changes);
     if (changes.has('extended')) {
       this.manageBodyMenuOpenedClass();
-      this.requestUpdate();
     }
   }
 
