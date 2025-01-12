@@ -215,7 +215,7 @@ export class GlobalMenuTree extends LitElement {
       content: '';
       display: flex;
       width: 14px;
-      height: 16px;
+      height: 14px;
       margin-left: -14px;
       align-items: center;
       justify-content: center;
