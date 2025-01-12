@@ -7,7 +7,7 @@ export class ButtonGeneric extends LitElement {
 
   @property({ type: String }) size: 'large' | 'medium' | 'small' = 'medium';
 
-  @property({ type: Boolean, reflect: true }) disabled: boolean = false;
+  @property({ type: Boolean }) disabled: boolean = false;
 
   @state() protected color: 'primary' | 'generic' = 'generic';
 
@@ -47,7 +47,6 @@ export class ButtonGeneric extends LitElement {
       height: 32px;
       font-size: var(--btn-font-size-large);
       padding: 0 10px;
-      width: 100%;
     }
 
     button.medium {
