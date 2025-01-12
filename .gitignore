@@ -27,8 +27,12 @@ dist-ssr
 .pnp.cjs
 .pnp.loader.mjs
 *.lock
+package-lock.json
 
 # Commerial licensed libaries
 public/IBSheet8
 !public/IBSheet8/.gitkeep
 
+# Storybook
+*storybook.log
+storybook-static
