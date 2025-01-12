@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/global.css"/>
   <link rel="stylesheet" href="/IBSheet8/css/gray/main.css">
   <link rel="stylesheet" href="src/main.css"/>
+  <script type="module" src="src/components/components.ts"></script>
   <script type="module" src="src/components/global-header.ts"></script>
   <script type="module" src="src/components/global-nav-bar.ts"></script>
   <script type="module" src="src/components/user-info.ts"></script>
@@ -102,8 +103,31 @@
     }
 
     // 로그아웃 처리
-    userInfo.addEventListener('logout', () => {
+    userInfo.addEventListener('logout', async () => {
       console.log('logout button clicked');
+
+      // 메시지박스 출력 샘플
+      var msg = await MessageBox.show({
+        icon: 'question',
+        message: '로그아웃 하시겠습니까?',
+        buttons: 'yesno'
+      });
+
+      if (msg.state === 'yes') {
+         MessageBox.show({
+           icon: 'none',
+           title: '로그아웃',
+           message: '로그아웃 되었습니다.',
+           buttons: 'ok'
+         });
+      } else if (msg.state === 'no') {
+        MessageBox.show({
+          icon: 'warning',
+          title: '로그아웃',
+          message: '로그아웃이 취소되었습니다.',
+          buttons: 'ok'
+        })
+      }
     });
 
     // nav bar 이벤트 핸들러

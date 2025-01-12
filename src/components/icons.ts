@@ -289,3 +289,92 @@ export function HamburgerCollapsedSVG() {
 export function HamburgerCollapsedDataUri() {
   return toDataUri(hamburgerCollapsed());
 }
+
+const messageBoxIconOk = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#0EBA1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M24.591 14.295a1 1 0 0 1-.004 1.414l-7.04 7a1 1 0 0 1-1.41 0l-3.96-3.937a1 1 0 0 1 1.41-1.418l3.255 3.236 6.335-6.3a1 1 0 0 1 1.414.005" fill="#0EBA1D"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h36v36H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function MessageBoxIconOKSVG() {
+  return svg`${unsafeHTML(messageBoxIconOk)}`;
+}
+export function MessageBoxIconOKDataUri() {
+  return toDataUri(messageBoxIconOk);
+}
+
+const messageBoxIconError = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#F0491B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M14.546 13.131a1 1 0 0 0-1.414 1.414L16.586 18l-3.454 3.454a1 1 0 0 0 1.414 1.414L18 19.414l3.454 3.454a1 1 0 1 0 1.414-1.414L19.414 18l3.454-3.455a1 1 0 1 0-1.414-1.414L18 16.586z" fill="#F0491B"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h36v36H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function MessageBoxIconErrorSVG() {
+  return svg`${unsafeHTML(messageBoxIconError)}`;
+}
+export function MessageBoxIconErrorDataUri() {
+  return toDataUri(messageBoxIconError);
+}
+
+const messageBoxIconInfo = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#366DD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M17.94 12.551a1.317 1.317 0 1 0 1.317-1.326 1.286 1.286 0 0 0-1.317 1.326m-2.928 4.6q-.024.39 0 .78l1.149-1.4c.238-.263.513-.448.654-.4a.3.3 0 0 1 .172.373l-1.9 6.375a1.283 1.283 0 0 0 1.2 1.644c1.478 0 2.357-1.012 3.22-2.324q.036-.4.02-.8l-1.148 1.4c-.238.264-.534.448-.674.4a.3.3 0 0 1-.18-.338l1.915-6.406a1.31 1.31 0 0 0-1.188-1.648c-.958.003-2.377 1.035-3.241 2.347z" fill="#366DD6"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h36v36H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function MessageBoxIconInfoSVG() {
+  return svg`${unsafeHTML(messageBoxIconInfo)}`;
+}
+export function MessageBoxIconInfoDataUri() {
+  return toDataUri(messageBoxIconInfo);
+}
+
+const messageBoxIconQuestion = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#366DD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.099 12.863a1.8 1.8 0 0 1 .725-.115h.087a1.81 1.81 0 0 1 1.873 1.844 2.72 2.72 0 0 1-1.046 1.872l-.015.01c-.569.456-1.093.894-1.424 1.488-.349.625-.424 1.304-.424 2.102a1 1 0 1 0 2 0c0-.702.076-.96.17-1.128.113-.201.323-.416.92-.893a4.72 4.72 0 0 0 1.817-3.351 3.81 3.81 0 0 0-3.899-3.944 3.77 3.77 0 0 0-3.913 3.96 1 1 0 1 0 1.997-.104 1.77 1.77 0 0 1 1.132-1.741m.777 9.917a1 1 0 1 0 0 2h.015a1 1 0 1 0 0-2z" fill="#366DD6"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h36v36H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function MessageBoxIconQuestionSVG() {
+  return svg`${unsafeHTML(messageBoxIconQuestion)}`;
+}
+export function MessageBoxIconQuestionDataUri() {
+  return toDataUri(messageBoxIconQuestion);
+}
+
+const messageBoxIconWarning = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" stroke="#FCB504" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13m-13-6.005v7m0 5.043h.015"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h36v36H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function MessageBoxIconWarningSVG() {
+  return svg`${unsafeHTML(messageBoxIconWarning)}`;
+}
+export function MessageBoxIconWarningDataUri() {
+  return toDataUri(messageBoxIconWarning);
+}
