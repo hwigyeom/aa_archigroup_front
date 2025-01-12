@@ -118,7 +118,11 @@ export class MessageBox extends LitElement {
             @click=${(e: Event) => this.buttonClickHandler(e, 'cancel')}
             >취소</button-generic
           >
-          <button-primary class="button" size="large" @click=${(e: Event) => this.buttonClickHandler(e, 'ok')}
+          <button-primary
+            class="button"
+            size="large"
+            style="width: 60px"
+            @click=${(e: Event) => this.buttonClickHandler(e, 'ok')}
             >확인</button-primary
           >`;
         break;
