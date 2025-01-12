@@ -85,7 +85,8 @@ export class GlobalNavigationBar extends LitElement {
     }
   }
 
-  private extenderClickHandler() {
+  private extenderClickHandler(e: Event) {
+    e.preventDefault();
     this.extended = !this.extended;
   }
 
