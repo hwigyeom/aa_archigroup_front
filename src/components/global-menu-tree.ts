@@ -207,8 +207,13 @@ export class GlobalMenuTree extends LitElement {
       text-overflow: ellipsis;
     }
 
+    a:hover {
+      font-weight: var(--font-weight-semi-bold);
+    }
+
     a.selected {
       color: var(--select-color);
+      font-weight: var(--font-weight-semi-bold);
     }
 
     a:before {
