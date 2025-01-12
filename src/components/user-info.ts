@@ -39,7 +39,7 @@ export class UserInfo extends LitElement {
       margin-right: 24px;
     }
     span {
-      margin: 0 8px;
+      margin: 0 16px 0 8px;
       color: var(--font-secondary);
     }
     button {
