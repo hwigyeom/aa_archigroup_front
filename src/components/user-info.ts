@@ -48,6 +48,9 @@ export class UserInfo extends LitElement {
       border-radius: 4px;
       height: 24px;
       align-items: center;
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-normal);
+      font-size: var(--font-size-default);
       color: var(--font-secondary);
       cursor: pointer;
     }

@@ -178,6 +178,8 @@ export class GlobalNavigationBar extends LitElement {
     li > a > label {
       display: block;
       word-break: break-all;
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-normal);
       font-size: 11px;
       text-align: center;
     }

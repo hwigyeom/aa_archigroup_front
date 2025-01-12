@@ -144,9 +144,9 @@ export class GlobalMenuTree extends LitElement {
 
     h2 {
       margin: 24px 0 16px 0;
-      font-family: Pretenard, Arial, sans-serif;
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-bold);
       font-size: 16px;
-      font-weight: 700;
       color: var(--font-primary);
     }
 
@@ -190,10 +190,10 @@ export class GlobalMenuTree extends LitElement {
       justify-content: flex-start;
       padding: 7px 7px 7px 14px;
       text-decoration: none;
+      font-family: var(--font-fmaily), serif;
       color: var(--font-primary);
-      font-size: 13px;
-      font-family: Pretenard, Arial, sans-serif;
-      font-weight: 400;
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-normal);
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;

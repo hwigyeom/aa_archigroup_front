@@ -28,8 +28,8 @@ h1.login-ci > .login-slogan {
   color: rgba(255,255,255,0.8);
   display: block;
   font-size: 14px;
-  font-family: Pretendard, serif;
-  font-weight: 400;
+  font-family: var(--font-fmaily), serif;
+  font-weight: var(--font-weight-normal);
 }
 
 .login-form-wrapper {

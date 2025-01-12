@@ -34,6 +34,8 @@ export class ButtonGeneric extends LitElement {
       justify-content: center;
       border-radius: 4px;
       cursor: pointer;
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-normal);
     }
 
     ::slotted(svg) {

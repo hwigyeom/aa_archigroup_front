@@ -90,13 +90,17 @@ export class LoginForm extends LitElement {
       height: 580px;
       padding: 112px 60px 0 60px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-normal);
     }
 
     .title {
       padding: 0;
       margin: 0;
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-bold);
       font-size: 40px;
-      font-weight: 600;
+
       color: var(--font-primary);
     }
 
@@ -172,9 +176,11 @@ export class LoginForm extends LitElement {
       border: none;
       border-radius: 8px;
       background-color: var(--select-color);
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-semi-bold);
+      font-size: 16px;
       color: var(--font-inverse);
       height: 46px;
-      font-size: 16px;
       padding-top: 2px;
       cursor: pointer;
     }

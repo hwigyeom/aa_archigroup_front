@@ -155,8 +155,6 @@ export class PageContainer extends LitElement {
       height: 72px;
       padding: 0 24px;
       border-bottom: 1px solid var(--divider-color);
-      font-size: 18px;
-      font-weight: 700;
       position: sticky;
       top: 49px;
       background-color: #fff;
@@ -168,6 +166,9 @@ export class PageContainer extends LitElement {
       flex-direction: row;
       justify-content: flex-start;
       align-items: center;
+      font-family: var(--font-fmaily), serif;
+      font-weight: var(--font-weight-bold);
+      font-size: 18px;
       color: var(--primary-color);
       flex-grow: 2;
     }

@@ -26,7 +26,9 @@ export class MenuSearch extends LitElement {
       background-color: var(--input-surface-normal);
       border-radius: 4px;
       padding: 0 28px 0 8px;
-      font-family: Pretenard, Arial, sans-serif;
+      font-family: var(--font-fmaily), serif;
+      font-size: var(--font-size-default);
+      font-weight: var(--font-weight-normal);
     }
 
     input[type='text']::placeholder {
