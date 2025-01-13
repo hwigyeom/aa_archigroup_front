@@ -69,15 +69,11 @@ export class GlobalNavigationBar extends LitElement {
     e.preventDefault();
     const anchor = e.currentTarget as HTMLAnchorElement;
     const menuId = anchor.dataset.menuId as string;
-    const menuName = this.menus.find((item) => item.id === menuId)?.name;
     if (menuId === 'search') {
       this.dispatchEvent(new CustomEvent('menu-search', { bubbles: false, composed: false }));
     } else {
       if (this.selected !== menuId) {
         this.selected = menuId;
-        this.dispatchEvent(
-          new CustomEvent('menu-select', { detail: { id: menuId, name: menuName }, bubbles: false, composed: false })
-        );
       }
     }
     if (!this.extended) {
@@ -88,6 +84,16 @@ export class GlobalNavigationBar extends LitElement {
   private extenderClickHandler(e: Event) {
     e.preventDefault();
     this.extended = !this.extended;
+  }
+
+  private menuSelectTrigger() {
+    const name = this.menus.find((item) => item.id === this.selected)?.name;
+
+    if (!name) return;
+
+    this.dispatchEvent(
+      new CustomEvent('menu-select', { detail: { id: this.selected, name }, bubbles: false, composed: false })
+    );
   }
 
   private manageBodyMenuOpenedClass() {
@@ -102,6 +108,8 @@ export class GlobalNavigationBar extends LitElement {
     super.updated(changes);
     if (changes.has('extended')) {
       this.manageBodyMenuOpenedClass();
+    } else if (changes.has('selected')) {
+      this.menuSelectTrigger();
     }
   }
 
