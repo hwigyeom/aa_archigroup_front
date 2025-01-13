@@ -73,6 +73,28 @@ export class GlobalMenuTree extends LitElement {
     setTimeout(() => this.menuSearch.setFocus());
   }
 
+  public extendParents(menuId: string) {
+    this.menus = this.getMenuOpenedData(menuId, false);
+  }
+
+  public selectMenu(menuId: string) {
+    this.menus = this.getMenuOpenedData(menuId, true);
+  }
+
+  protected updated(changes: PropertyValues) {
+    super.update(changes);
+    if (changes.has('menus')) {
+      this.getUpdateComplete().then(() => {
+        this.shadowRoot?.querySelectorAll('span.menu-name').forEach((el) => {
+          const span = el as HTMLSpanElement;
+          if (span.offsetWidth < span.scrollWidth) {
+            span.title = span.textContent || '';
+          }
+        });
+      });
+    }
+  }
+
   private menuTreeRender(nodes: MenuTreeNode[]) {
     return html`
       <ul>
@@ -94,6 +116,60 @@ export class GlobalMenuTree extends LitElement {
     `;
   }
 
+  private pathTo(menuId: string): string[] {
+    const path: string[] = [];
+    const findPath = (nodes: MenuTreeNode[]) => {
+      for (const node of nodes) {
+        if (node.id === menuId) {
+          path.push(node.id);
+          return true;
+        }
+        if (node.children && findPath(node.children)) {
+          path.push(node.id);
+          return true;
+        }
+      }
+      return false;
+    };
+    findPath(this.menus);
+    return path.reverse();
+  }
+
+  private getMenuOpenedData(menuId: string, toLeaf: boolean = true): MenuTreeNode[] {
+    if (!this.menus || this.menus.length === 0) return this.menus;
+
+    const path = this.pathTo(menuId);
+
+    if (path.length === 0) return this.menus;
+
+    const newMenus = JSON.parse(JSON.stringify(this.menus));
+    this.removeSelected(newMenus);
+
+    let currentMenus: MenuTreeNode[] = newMenus;
+
+    for (const [index, id] of path.entries()) {
+      const menu = currentMenus.find((item) => item.id === id);
+      if (!menu) break;
+      if (toLeaf && index === path.length - 1) {
+        menu.selected = true;
+      } else {
+        menu.open = true;
+      }
+      currentMenus = menu.children ?? [];
+    }
+
+    return newMenus;
+  }
+
+  private removeSelected(menus: MenuTreeNode[]) {
+    menus.forEach((menu) => {
+      if (menu.selected) menu.selected = false;
+      if (menu.children) {
+        this.removeSelected(menu.children);
+      }
+    });
+  }
+
   private getTreeNodeTypeClassNames(node: MenuTreeNode) {
     if (node.children) {
       return node.open ? 'opened' : 'closed';
@@ -113,20 +189,8 @@ export class GlobalMenuTree extends LitElement {
         target.classList.remove('closed');
         target.classList.add('opened');
       }
-    }
-  }
-
-  protected updated(changes: PropertyValues) {
-    super.update(changes);
-    if (changes.has('menus')) {
-      this.getUpdateComplete().then(() => {
-        this.shadowRoot?.querySelectorAll('span.menu-name').forEach((el) => {
-          const span = el as HTMLSpanElement;
-          if (span.offsetWidth < span.scrollWidth) {
-            span.title = span.textContent || '';
-          }
-        });
-      });
+    } else if (target.classList.contains('selected')) {
+      e.preventDefault();
     }
   }
 
