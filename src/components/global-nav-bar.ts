@@ -45,7 +45,7 @@ export class GlobalNavigationBar extends LitElement {
         <ul>
           <li>
             <a href="#" @click=${this.menuSelectHandler} data-menu-id="search"
-              ><span>${SearchSVG()}</span><label>메뉴검색</label></a
+              ><span>${SearchSVG('#fff')}</span><label>메뉴검색</label></a
             >
           </li>
           ${this.menus.map(
@@ -178,9 +178,15 @@ export class GlobalNavigationBar extends LitElement {
       height: 32px;
       width: 32px;
     }
+
+    li > a img,
+    li > a svg {
+      opacity: 0.6;
+    }
     li > a > span {
       border-radius: 6px;
     }
+    li > a:hover > span,
     li > a.selected > span {
       background-color: rgba(255, 255, 255, 0.1);
     }
@@ -191,12 +197,14 @@ export class GlobalNavigationBar extends LitElement {
       font-weight: var(--font-weight-normal);
       font-size: 11px;
       text-align: center;
-    }
-    li > a:hover label {
-      color: #fff;
+      cursor: pointer;
     }
     li > a.selected label {
       color: #fff;
+    }
+    li > a.selected > span img,
+    li > a.selected > span svg {
+      opacity: 1;
     }
   `;
 }
