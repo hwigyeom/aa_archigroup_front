@@ -10,8 +10,7 @@ import {
   MessageBoxIconWarningSVG,
 } from './icons.js';
 
-import './button-generic.js';
-import './button-primary.js';
+import './button.ts';
 import './dimmed-overlay.js';
 
 export type MessageBoxIcon = 'none' | 'ok' | 'error' | 'info' | 'question' | 'warning';
@@ -102,44 +101,47 @@ export class MessageBox extends LitElement {
     let buttons: TemplateResult = html``;
     switch (this.buttons) {
       case 'ok':
-        buttons = html`<button-primary
+        buttons = html`<aa-button
           class="button"
           size="large"
+          color="primary"
           style="width: 60px"
           @click=${(e: Event) => this.buttonClickHandler(e, 'ok')}
-          >확인</button-primary
+          >확인</aa-button
         >`;
         break;
       case 'okcancel':
-        buttons = html`<button-generic
+        buttons = html`<aa-button
             class="button"
             size="large"
             style="width: 60px"
             @click=${(e: Event) => this.buttonClickHandler(e, 'cancel')}
-            >취소</button-generic
+            >취소</aa-button
           >
-          <button-primary
+          <aa-button
             class="button"
             size="large"
+            color="primary"
             style="width: 60px"
             @click=${(e: Event) => this.buttonClickHandler(e, 'ok')}
-            >확인</button-primary
+            >확인</aa-button
           >`;
         break;
       case 'yesno':
-        buttons = html`<button-generic
+        buttons = html`<aa-button
             class="button"
             size="large"
             style="width: 60px"
             @click=${(e: Event) => this.buttonClickHandler(e, 'no')}
-            >아니오</button-generic
+            >아니오</aa-button
           >
-          <button-primary
+          <aa-button
             class="button"
             size="large"
+            color="primary"
             style="width: 60px"
             @click=${(e: Event) => this.buttonClickHandler(e, 'yes')}
-            >예</button-primary
+            >예</aa-button
           >`;
         break;
     }

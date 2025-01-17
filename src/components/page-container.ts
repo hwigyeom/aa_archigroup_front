@@ -2,9 +2,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { AddSVG, DeleteSVG, ExcelSVG, PrintSVG, SaveSVG, SearchSVG } from './icons.js';
 
-import './button-generic.ts';
-import './button-primary.ts';
-import { ICON_INVERSE_COLOR } from './constants.ts';
+import './button.ts';
 
 @customElement('page-container')
 export class PageContainer extends LitElement {
@@ -21,66 +19,57 @@ export class PageContainer extends LitElement {
     return html`<header>
         <h3>${this.bullet()}${this.title}</h3>
         <section class="button-group">
-          <div class="button-primary">
-            ${this.buttonShow('excel')
-              ? html`<button-primary
-                  class="buttons"
-                  ?disabled=${this.buttonDisabled('excel')}
-                  @click=${(e: Event) => this.buttonClickHandler('excel', e)}
-                >
-                  ${ExcelSVG(ICON_INVERSE_COLOR)}엑셀다운
-                </button-primary>`
-              : ''}
-            ${this.buttonShow('save')
-              ? html`<button-primary
-                  class="buttons"
-                  ?disabled=${this.buttonDisabled('save')}
-                  @click=${(e: Event) => this.buttonClickHandler('save', e)}
-                >
-                  ${SaveSVG(ICON_INVERSE_COLOR)}저장
-                </button-primary>`
-              : ''}
-            ${this.buttonShow('print')
-              ? html`<button-primary
-                  class="buttons"
-                  ?disabled=${this.buttonDisabled('print')}
-                  @click=${(e: Event) => this.buttonClickHandler('print', e)}
-                >
-                  ${PrintSVG(ICON_INVERSE_COLOR)}인쇄
-                </button-primary>`
-              : ''}
-          </div>
+          <slot name="buttons"></slot>
           <div class="button-secondary">
             ${this.buttonShow('search')
-              ? html`<button-generic
+              ? html`<aa-button
                   class="buttons"
                   ?disabled=${this.buttonDisabled('search')}
                   @click=${(e: Event) => this.buttonClickHandler('search', e)}
                 >
                   ${SearchSVG()}조회
-                </button-generic>`
+                </aa-button>`
               : ''}
             ${this.buttonShow('add')
-              ? html`<button-generic
-                  class="buttons"
+              ? html`<aa-button
                   ?disabled=${this.buttonDisabled('add')}
                   @click=${(e: Event) => this.buttonClickHandler('add', e)}
                 >
                   ${AddSVG()}추가
-                </button-generic>`
+                </aa-button>`
               : ''}
             ${this.buttonShow('delete')
-              ? html`<button-generic
-                  class="buttons"
+              ? html`<aa-button
                   ?disabled=${this.buttonDisabled('delete')}
                   @click=${(e: Event) => this.buttonClickHandler('delete', e)}
                 >
                   ${DeleteSVG()}삭제
-                </button-generic>`
+                </aa-button>`
               : ''}
-          </div>
-          <div class="button-additional">
-            <slot name="buttons"></slot>
+            ${this.buttonShow('excel')
+              ? html`<aa-button
+                  ?disabled=${this.buttonDisabled('excel')}
+                  @click=${(e: Event) => this.buttonClickHandler('excel', e)}
+                >
+                  ${ExcelSVG()}엑셀다운
+                </aa-button>`
+              : ''}
+            ${this.buttonShow('save')
+              ? html`<aa-button
+                  ?disabled=${this.buttonDisabled('save')}
+                  @click=${(e: Event) => this.buttonClickHandler('save', e)}
+                >
+                  ${SaveSVG()}저장
+                </aa-button>`
+              : ''}
+            ${this.buttonShow('print')
+              ? html`<aa-button
+                  ?disabled=${this.buttonDisabled('print')}
+                  @click=${(e: Event) => this.buttonClickHandler('print', e)}
+                >
+                  ${PrintSVG()}인쇄
+                </aa-button>`
+              : ''}
           </div>
         </section>
       </header>
@@ -175,22 +164,21 @@ export class PageContainer extends LitElement {
 
     section.button-group {
       display: flex;
-      flex-direction: row-reverse;
     }
 
     section.button-group > div {
       display: flex;
       flex-direction: row;
-      margin-right: 10px;
-    }
-    section.button-group > div:first-child {
-      margin-right: 0;
-    }
-
-    section.button-group > div > .buttons {
       margin-left: 4px;
     }
-    section.button-group > div > .buttons:first-child {
+    section.button-group > div:first-child {
+      margin-left: 0;
+    }
+
+    section.button-group > div > aa-button {
+      margin-left: 4px;
+    }
+    section.button-group > div > aa-button:first-child {
       margin-left: 0;
     }
 

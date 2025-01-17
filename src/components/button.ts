@@ -1,15 +1,15 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
-@customElement('button-generic')
-export class ButtonGeneric extends LitElement {
+@customElement('aa-button')
+export class Button extends LitElement {
   @property({ type: String }) type: 'button' | 'submit' | 'reset' = 'button';
 
   @property({ type: String }) size: 'large' | 'medium' | 'small' = 'medium';
 
   @property({ type: Boolean }) disabled: boolean = false;
 
-  @state() protected color: 'primary' | 'generic' = 'generic';
+  @property({ type: String }) color: 'primary' | 'generic' = 'generic';
 
   protected render() {
     return html`<button
@@ -28,8 +28,14 @@ export class ButtonGeneric extends LitElement {
   }
 
   static styles = css`
-    button {
+    :host {
       display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    button {
+      display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 4px;
@@ -92,11 +98,17 @@ export class ButtonGeneric extends LitElement {
       opacity: 0.6;
       cursor: not-allowed;
     }
+    button.generic:disabled:hover {
+      border-color: var(--input-border-normal);
+    }
+    button.generic:disabled:active {
+      border-color: var(--input-border-normal);
+    }
   `;
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'button-generic': ButtonGeneric;
+    'aa-button': Button;
   }
 }

@@ -1,6 +1,5 @@
-import { ButtonGeneric } from './button-generic.js';
-import { ButtonPrimary } from './button-primary.js';
+import { Button } from './button.ts';
 import { MessageBox } from './message-box.js';
 import { DimmedOverlay } from './dimmed-overlay.ts';
 
-export { ButtonGeneric, ButtonPrimary, MessageBox, DimmedOverlay };
+export { Button, MessageBox, DimmedOverlay };
