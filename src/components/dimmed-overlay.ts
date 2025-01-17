@@ -15,9 +15,8 @@ export class DimmedOverlay extends LitElement {
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(255, 255, 255, 0.05);
+      background-color: rgba(0, 0, 0, 0.4);
       z-index: 900;
-      backdrop-filter: blur(1px);
     }
   `;
 }
