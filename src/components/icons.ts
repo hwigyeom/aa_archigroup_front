@@ -4,6 +4,10 @@ import {
   CHECKBOX_NORMAL_BG_COLOR,
   CHECKBOX_NORMAL_BORDER_COLOR,
   ICON_DEFAULT_COLOR,
+  RADIO_CHECKED_BG_COLOR,
+  RADIO_CHECKED_BORDER_COLOR,
+  RADIO_NORMAL_BG_COLOR,
+  RADIO_NORMAL_BORDER_COLOR,
 } from './constants.js';
 import { svg } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -252,6 +256,49 @@ export function CheckboxCheckedDataUri(
   checkColor: string = CHECKBOX_CHECKED_CHECK_COLOR
 ) {
   return toDataUri(checkboxChecked(borderColor, backgroundColor, checkColor));
+}
+
+const radio = (
+  borderColor: string = RADIO_NORMAL_BORDER_COLOR,
+  backgroundColor: string = RADIO_NORMAL_BG_COLOR
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1.5" y="1.5" width="13" height="13" rx="6.5" fill="${backgroundColor}"/>
+  <rect x="1.5" y="1.5" width="13" height="13" rx="6.5" stroke="${borderColor}"/>
+</svg>
+`;
+export function RadioSVG(
+  borderColor: string = RADIO_NORMAL_BORDER_COLOR,
+  backgroundColor: string = RADIO_NORMAL_BG_COLOR
+) {
+  return svg`${unsafeHTML(radio(borderColor, backgroundColor))}`;
+}
+export function RadioDataUri(
+  borderColor: string = RADIO_NORMAL_BORDER_COLOR,
+  backgroundColor: string = RADIO_NORMAL_BG_COLOR
+) {
+  return toDataUri(radio(borderColor, backgroundColor));
+}
+
+const radioChecked = (
+  borderColor: string = RADIO_CHECKED_BORDER_COLOR,
+  backgroundColor: string = RADIO_CHECKED_BG_COLOR
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1.5" y="1.5" width="13" height="13" rx="6.5" fill="${backgroundColor}"/>
+  <rect x="1.5" y="1.5" width="13" height="13" rx="6.5" stroke="${borderColor}"/>
+  <circle cx="8" cy="8" r="3" fill="${borderColor}"/>
+</svg>
+`;
+export function RadioCheckedSVG(
+  borderColor: string = RADIO_CHECKED_BORDER_COLOR,
+  backgroundColor: string = RADIO_CHECKED_BG_COLOR
+) {
+  return svg`${unsafeHTML(radioChecked(borderColor, backgroundColor))}`;
+}
+export function RadioCheckedDataUri(
+  borderColor: string = RADIO_CHECKED_BORDER_COLOR,
+  backgroundColor: string = RADIO_CHECKED_BG_COLOR
+) {
+  return toDataUri(radioChecked(borderColor, backgroundColor));
 }
 
 const hamburgerExtended =

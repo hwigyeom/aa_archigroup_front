@@ -148,6 +148,7 @@ export class PageContainer extends LitElement {
       top: 49px;
       background-color: #fff;
       border-top-left-radius: 16px;
+      z-index: 300;
     }
 
     h3 {
