@@ -1,4 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import type { Preview } from '@storybook/web-components';
+
+// @ts-ignore
+import '../public/css/global.css';
+// @ts-ignore
+import '../public/css/normalize.css';
 
 const preview: Preview = {
   parameters: {
