@@ -1,0 +1,43 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as ButtonStories from '../components/button.stories.ts';
+
+<Meta of={ButtonStories} />
+
+# Button
+<br />
+<br />
+
+## Usage
+
+```html
+<aa-button type="button(default)|submit|reset"
+           size="medium(default)|large|small"
+           color="generic(default)|primary" disabled>Button</aa-button>
+```
+
+<br />
+<br />
+
+## Default
+
+<Canvas of={ButtonStories.Default} />
+
+
+## Color
+
+<Canvas of={ButtonStories.Primary} />
+
+## Size
+
+<Canvas of={ButtonStories.Large} />
+
+<Canvas of={ButtonStories.Small} />
+
+## Disabled
+
+<Canvas of={ButtonStories.Disabled} />
+
+## Icon
+
+Coming soon...

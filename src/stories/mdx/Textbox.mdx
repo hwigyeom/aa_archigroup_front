@@ -1,0 +1,36 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as TextboxStories from '../components/textbox.stories.ts';
+
+<Meta of={TextboxStories} />
+
+# Textbox
+<br />
+<br />
+
+## Usage
+
+```html
+<aa-textbox name="textboxName"
+            placeholder="placeholder"
+            value="value"
+            disabled readonly></aa-textbox>
+```
+
+## Default
+<Canvas of={TextboxStories.Default} />
+
+
+## Disabled
+<Canvas of={TextboxStories.Disabled} />
+
+
+## Readonly
+<Canvas of={TextboxStories.Readonly} />
+
+
+## Placeholder
+<Canvas of={TextboxStories.Placeholder} />
+
+
+## Custom width
+<Canvas of={TextboxStories.CustomWidth} />

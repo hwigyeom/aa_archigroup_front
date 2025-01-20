@@ -1,0 +1,34 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as RadioGroupStories from '../components/radio-group.stories.ts';
+
+<Meta of={RadioGroupStories} />
+
+# RadioGroup
+<br />
+<br />
+
+## Usage
+
+```html
+<aa-radio-group name="radioGroupName"
+                value="value1"
+                disabled>
+  <aa-radio value="value1">Radio 1</aa-radio>
+  <aa-radio value="value2">Radio 2</aa-radio>
+  <aa-radio value="value3">Radio 3</aa-radio>
+</aa-radio-group>
+```
+
+`value` 속성으로 내부에 선택된 `aa-radio` 컴포넌트를 `value` 값을 가져오거나 설정할 수 있습니다.
+
+<br/>
+<br/>
+
+## Default
+
+<Canvas of={RadioGroupStories.Default} />
+
+
+## Disabled
+
+<Canvas of={RadioGroupStories.Disabled} />

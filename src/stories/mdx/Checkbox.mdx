@@ -1,0 +1,32 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as CheckboxStories from '../components/checkbox.stories.ts';
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+<br/>
+<br/>
+
+## Usage
+
+```html
+<aa-checkbox name="checkboxName"
+             value="value"
+             checked
+             disabled></aa-checkbox>
+```
+
+## Default
+
+<Canvas of={CheckboxStories.Default} />
+
+
+## Checked
+
+<Canvas of={CheckboxStories.Checked} />
+
+
+## Disabled
+
+<Canvas of={CheckboxStories.Disabled} />

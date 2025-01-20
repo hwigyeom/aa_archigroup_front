@@ -17,6 +17,12 @@ export class RadioGroup extends LitElement {
 
   protected firstUpdated() {
     this.shadowRoot!.querySelector('slot')!.addEventListener('slotchange', this.handleSlotChange.bind(this));
+
+    if (this.value) {
+      this.radios.forEach((radio) => {
+        radio.checked = radio.value === this.value;
+      });
+    }
   }
 
   private handleSlotChange(e: Event) {

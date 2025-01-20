@@ -32,7 +32,6 @@ export class Checkbox extends LitElement {
     :host {
       display: inline-flex;
       justify-content: flex-start;
-      align-items: center;
       font-family: var(--font-fmaily), serif;
       font-weight: var(--font-weight-normal);
     }
