@@ -1,0 +1,107 @@
+{
+  "Status": "Success",
+  "ErrorCode": 0,
+  "Message": "",
+  "Data": [
+    {
+      "id": "PI010000",
+      "name": "프로젝트정보관리",
+      "children": [
+        {
+          "id": "PI010100",
+          "name": "프로젝트조회",
+          "url": "/view/pi/sample01.html"
+        },
+        {
+          "id": "PI010200",
+          "name": "해외프로젝트 실적입력",
+          "url": "/view/pi/sample02.html"
+        },
+        {
+          "id": "PI010300",
+          "name": "수주비 프로젝트 등록",
+          "url": "/view/pi/sample03.html"
+        },
+        {
+          "id": "PI010400",
+          "name": "투입프로젝트현황",
+          "url": "/view/pi/sample04.html"
+        },
+        {
+          "id": "PI010500",
+          "name": "분할프로젝트 등록",
+          "url": "/view/pi/sample05.html"
+        }
+      ]
+    },
+    {
+      "id": "PI020000",
+      "name": "투입인원관리",
+      "children": [
+        {
+          "id": "PI020100",
+          "name": "부문 공통 인원 등록",
+          "url": null
+        },
+        {
+          "id": "PI020200",
+          "name": "인건비 계획 등록",
+          "url": null
+        },
+        {
+          "id": "PI020300",
+          "name": "간접인건비 등록",
+          "url": null
+        },
+        {
+          "id": "PI020400",
+          "name": "간접경비등록",
+          "url": null
+        },
+        {
+          "id": "PI020500",
+          "name": "일반관리비등록",
+          "url": null
+        }
+      ]
+    },
+    {
+      "id": "PI030000",
+      "name": "실적명세서",
+      "children": [
+        {
+          "id": "PI030100",
+          "name": "실적명세서 작성",
+          "url": null
+        },
+        {
+          "id": "PI030200",
+          "name": "실적명세서 조회",
+          "url": null
+        }
+      ]
+    },
+    {
+      "id": "PI040000",
+      "name": "월별진행표",
+      "children": [
+        {
+          "id": "PI040100",
+          "name": "월별진행표 작성",
+          "url": null
+        },
+        {
+          "id": "PI040200",
+          "name": "월별진행표 조회",
+          "url": null
+        },
+        {
+          "id": "PI040300",
+          "name": "월별진행표 취합",
+          "url": null
+        }
+      ]
+    }
+  ],
+  "AccessDateTime": "20250120152614860"
+}

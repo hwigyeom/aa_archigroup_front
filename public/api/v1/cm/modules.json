@@ -1,0 +1,28 @@
+{
+  "Status": "Success",
+  "ErrorCode": 0,
+  "Message": "",
+  "Data": [
+    {
+      "id": "PI",
+      "name": "실적정보관리",
+      "icon": "/images/icon-menu-01.svg"
+    },
+    {
+      "id": "PS",
+      "name": "프로젝트관리",
+      "icon": "/images/icon-menu-02.svg"
+    },
+    {
+      "id": "BA",
+      "name": "기초정보관리",
+      "icon": "/images/icon-menu-04.svg"
+    },
+    {
+      "id": "BC",
+      "name": "시스템관리",
+      "icon": "/images/icon-menu-03.svg"
+    }
+  ],
+  "AccessDateTime": "20250120152614816"
+}
