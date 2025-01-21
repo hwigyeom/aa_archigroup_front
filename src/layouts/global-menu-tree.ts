@@ -76,7 +76,6 @@ export class GlobalMenuTree extends LitElement {
 
   protected render() {
     const empty = !this.menus || this.menus.length === 0;
-    console.log(empty);
     return html`<menu-search></menu-search>
       <h2>${this.title}</h2>
       <nav class=${ifDefined(empty ? 'empty' : undefined)}>
