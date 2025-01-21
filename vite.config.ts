@@ -8,6 +8,10 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         login: resolve(__dirname, 'login.html'),
+        error400: resolve(__dirname, '400.html'),
+        error404: resolve(__dirname, '404.html'),
+        error500: resolve(__dirname, '500.html'),
+        error: resolve(__dirname, 'error.html'),
         layout01: resolve(__dirname, 'view/pi/layout01.html'),
       },
     },
