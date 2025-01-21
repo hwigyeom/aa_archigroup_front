@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { SearchSVG } from './icons.js';
+import { SearchSVG } from '../components/icons.ts';
 
 @customElement('menu-search')
 export class MenuSearch extends LitElement {

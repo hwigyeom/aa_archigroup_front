@@ -1,6 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { LogoutSVG, UserInfoSVG } from './icons.js';
+import { LogoutSVG, UserInfoSVG } from '../components/icons.ts';
 
 @customElement('user-info')
 export class UserInfo extends LitElement {

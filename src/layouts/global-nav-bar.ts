@@ -1,7 +1,7 @@
 import { css, html, LitElement, PropertyValues, unsafeCSS } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { HamburgerCollapsedSVG, HamburgerExtendedSVG, SearchSVG } from './icons.js';
-import { ICON_DEFAULT_COLOR } from './constants.ts';
+import { HamburgerCollapsedSVG, HamburgerExtendedSVG, SearchSVG } from '../components/icons.ts';
+import { ICON_DEFAULT_COLOR } from '../components/constants.ts';
 
 export type RootMenu = {
   id: string;

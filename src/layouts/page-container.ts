@@ -1,8 +1,8 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { AddSVG, DeleteSVG, ExcelSVG, PrintSVG, SaveSVG, SearchSVG } from './icons.js';
+import { AddSVG, DeleteSVG, ExcelSVG, PrintSVG, SaveSVG, SearchSVG } from '../components/icons.ts';
 
-import './button.ts';
+import '../components/button.ts';
 
 @customElement('page-container')
 export class PageContainer extends LitElement {

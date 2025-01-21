@@ -1,7 +1,7 @@
 import { css, html, unsafeCSS, LitElement, PropertyValues, TemplateResult } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { MenuSearch } from './menu-search.ts';
-import { ICON_DEFAULT_COLOR } from './constants.js';
+import { ICON_DEFAULT_COLOR } from '../components/constants.ts';
 
 import './menu-search.ts';
 
