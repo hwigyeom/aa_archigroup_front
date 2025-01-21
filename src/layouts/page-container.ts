@@ -31,6 +31,12 @@ export class PageContainer extends LitElement {
                     excel=${this.excel}
                     save=${this.save}
                     print=${this.print}
+                    @search=${(e: Event) => this.dispatchEvent(new CustomEvent('search', e))}
+                    @add=${(e: Event) => this.dispatchEvent(new CustomEvent('add', e))}
+                    @delete=${(e: Event) => this.dispatchEvent(new CustomEvent('delete', e))}
+                    @excel=${(e: Event) => this.dispatchEvent(new CustomEvent('excel', e))}
+                    @save=${(e: Event) => this.dispatchEvent(new CustomEvent('save', e))}
+                    @print=${(e: Event) => this.dispatchEvent(new CustomEvent('print', e))}
                   >
                     <slot name="buttons"></slot>
                   </main-buttons>
