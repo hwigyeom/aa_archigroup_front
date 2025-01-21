@@ -5,7 +5,7 @@
   <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AA Archigroup</title>
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="preload" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <link rel="stylesheet" href="/css/normalize.css"/>
   <link rel="stylesheet" href="/css/global.css"/>
   <link rel="stylesheet" href="/IBSheet8/css/gray/main.css">
@@ -32,10 +32,17 @@
 <!-- lnb - menu tree -->
 <global-menu-tree></global-menu-tree>
 <!-- page content container:start -->
-<page-container title="실적명세서 조회"
-                search="show" add="show" delete="show" excel="hide" save="show" print="disabled">
+<page-container title="Home" hide-main-buttons>
   <!-- page content:start -->
-  <div id="gridContainer"></div>
+  <section class="main-slogan-container">
+    <div class="main-slogan-box">
+      <div class="main-slogan">
+        <h2>No.1 Total Solution Company</h2>
+        <p>AA아키그룹은 설계에서 CM/감리, 디벨로퍼까지의 Value Chian을 구축하여<br/>
+          No.1 Total Solution Company로서  건축의 새로운 패러다임을 만들어 가겠습니다.</p>
+      </div>
+    </div>
+  </section>
   <!-- page content:end -->
 </page-container>
 <!-- page content container:end -->

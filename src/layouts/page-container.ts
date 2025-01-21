@@ -1,8 +1,8 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { AddSVG, DeleteSVG, ExcelSVG, PrintSVG, SaveSVG, SearchSVG } from '../components/icons.ts';
 
-import '../components/button.ts';
+import '../components/button.js';
+import './main-buttons.js';
 
 @customElement('page-container')
 export class PageContainer extends LitElement {
@@ -15,107 +15,30 @@ export class PageContainer extends LitElement {
   @property({ type: String }) save: 'show' | 'hide' | 'disabled' = 'show';
   @property({ type: String }) print: 'show' | 'hide' | 'disabled' = 'show';
 
+  @property({ type: Boolean, attribute: 'hide-main-buttons' }) hideMainButtons: boolean = false;
+  @property({ type: Boolean, attribute: 'hide-header' }) hideHeader: boolean = false;
+
   protected render() {
-    return html`<header>
-        <h3>${this.bullet()}${this.title}</h3>
-        <section class="button-group">
-          <slot name="buttons"></slot>
-          <div class="button-secondary">
-            ${this.buttonShow('search')
-              ? html`<aa-button
-                  class="buttons"
-                  ?disabled=${this.buttonDisabled('search')}
-                  @click=${(e: Event) => this.buttonClickHandler('search', e)}
-                >
-                  ${SearchSVG()}조회
-                </aa-button>`
+    return html`${!this.hideHeader
+        ? html`<header>
+            <h3>${this.bullet()}${this.title}</h3>
+            ${!this.hideMainButtons
+              ? html`
+                  <main-buttons
+                    search=${this.search}
+                    add=${this.add}
+                    delete=${this.delete}
+                    excel=${this.excel}
+                    save=${this.save}
+                    print=${this.print}
+                  >
+                    <slot name="buttons"></slot>
+                  </main-buttons>
+                `
               : ''}
-            ${this.buttonShow('add')
-              ? html`<aa-button
-                  ?disabled=${this.buttonDisabled('add')}
-                  @click=${(e: Event) => this.buttonClickHandler('add', e)}
-                >
-                  ${AddSVG()}추가
-                </aa-button>`
-              : ''}
-            ${this.buttonShow('delete')
-              ? html`<aa-button
-                  ?disabled=${this.buttonDisabled('delete')}
-                  @click=${(e: Event) => this.buttonClickHandler('delete', e)}
-                >
-                  ${DeleteSVG()}삭제
-                </aa-button>`
-              : ''}
-            ${this.buttonShow('excel')
-              ? html`<aa-button
-                  ?disabled=${this.buttonDisabled('excel')}
-                  @click=${(e: Event) => this.buttonClickHandler('excel', e)}
-                >
-                  ${ExcelSVG()}엑셀다운
-                </aa-button>`
-              : ''}
-            ${this.buttonShow('save')
-              ? html`<aa-button
-                  ?disabled=${this.buttonDisabled('save')}
-                  @click=${(e: Event) => this.buttonClickHandler('save', e)}
-                >
-                  ${SaveSVG()}저장
-                </aa-button>`
-              : ''}
-            ${this.buttonShow('print')
-              ? html`<aa-button
-                  ?disabled=${this.buttonDisabled('print')}
-                  @click=${(e: Event) => this.buttonClickHandler('print', e)}
-                >
-                  ${PrintSVG()}인쇄
-                </aa-button>`
-              : ''}
-          </div>
-        </section>
-      </header>
+          </header>`
+        : ''}
       <div class="content"><slot></slot></div>`;
-  }
-
-  private buttonDisabled(name: string): boolean {
-    switch (name) {
-      case 'search':
-        return this.search === 'disabled';
-      case 'add':
-        return this.add === 'disabled';
-      case 'delete':
-        return this.delete === 'disabled';
-      case 'excel':
-        return this.excel === 'disabled';
-      case 'save':
-        return this.save === 'disabled';
-      case 'print':
-        return this.print === 'disabled';
-      default:
-        return false;
-    }
-  }
-
-  private buttonShow(name: string): boolean {
-    switch (name) {
-      case 'search':
-        return this.search !== 'hide';
-      case 'add':
-        return this.add !== 'hide';
-      case 'delete':
-        return this.delete !== 'hide';
-      case 'excel':
-        return this.excel !== 'hide';
-      case 'save':
-        return this.save !== 'hide';
-      case 'print':
-        return this.print !== 'hide';
-      default:
-        return false;
-    }
-  }
-
-  private buttonClickHandler(name: string, e: Event) {
-    this.dispatchEvent(new CustomEvent(name, e));
   }
 
   private bullet() {
@@ -127,6 +50,7 @@ export class PageContainer extends LitElement {
 
   static styles = css`
     :host {
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       border-top-left-radius: 16px;
@@ -137,6 +61,7 @@ export class PageContainer extends LitElement {
     }
 
     header {
+      box-sizing: border-box;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -163,31 +88,13 @@ export class PageContainer extends LitElement {
       flex-grow: 2;
     }
 
-    section.button-group {
-      display: flex;
-    }
-
-    section.button-group > div {
-      display: flex;
-      flex-direction: row;
-      margin-left: 4px;
-    }
-    section.button-group > div:first-child {
-      margin-left: 0;
-    }
-
-    section.button-group > div > aa-button {
-      margin-left: 4px;
-    }
-    section.button-group > div > aa-button:first-child {
-      margin-left: 0;
-    }
-
     h3 svg {
       margin-right: 10px;
     }
 
     div.content {
+      display: flex;
+      flex-grow: 1;
       padding: 16px 24px 24px 24px;
     }
 

@@ -1,7 +1,7 @@
 import { LitElement, css, html, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { CheckboxCheckedDataUri, CheckboxDataUri } from '../components/icons.ts';
-import { CHECKBOX_HOVER_BORDER_COLOR } from '../components/constants.ts';
+import { CheckboxCheckedDataUri, CheckboxDataUri } from '../components/icons.js';
+import { CHECKBOX_HOVER_BORDER_COLOR } from '../components/constants.js';
 
 export type LoginInfo = {
   userid: string;

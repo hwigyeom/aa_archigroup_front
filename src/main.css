@@ -16,3 +16,40 @@ body global-menu-tree {
 body.menu-opened global-menu-tree {
   display: flex;
 }
+
+.main-slogan-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  margin: 24px 16px;
+  flex-grow: 1;
+}
+
+.main-slogan-box {
+  background: url('/images/main-slogan-bg.png') no-repeat center;
+  background-size: cover;
+  border-radius: 12px;
+  max-width: 1564px;
+  max-height: 750px;
+  min-width: 720px;
+  min-height: 330px;
+  flex-grow: 1;
+}
+
+.main-slogan {
+  margin: 219px 0 0 98px;
+}
+
+.main-slogan > h2 {
+  font-size: 40px;
+  font-weight: var(--font-weight-bold);
+  color: var(--font-inverse);
+  margin: 0 0 16px 0;
+}
+
+.main-slogan > p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--font-inverse);
+  line-height: 20px;
+}

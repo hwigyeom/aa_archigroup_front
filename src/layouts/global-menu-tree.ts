@@ -1,9 +1,11 @@
-import { css, html, unsafeCSS, LitElement, PropertyValues, TemplateResult } from 'lit';
+import { css, html, unsafeCSS, LitElement, PropertyValues, TemplateResult, svg } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
-import { MenuSearch } from './menu-search.ts';
-import { ICON_DEFAULT_COLOR } from '../components/constants.ts';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { MenuSearch } from './menu-search.js';
+import { ICON_DEFAULT_COLOR } from '../components/constants.js';
 
-import './menu-search.ts';
+import './menu-search.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 export type MenuTreeNode = {
   id: string;
@@ -56,6 +58,15 @@ const leafBullet = (
 </svg>
 `;
 
+const emptyImage = `<svg width="65" height="64" viewBox="0 0 65 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="6" y="8.5" width="53" height="47" rx="2.5" fill="#E5E6EF" stroke="#E5E6EF" stroke-width="3"/>
+  <rect x="7.5" y="18" width="50" height="36" rx="2" fill="#fff"/>
+  <path d="M16.5 29h31m-31 10h15.196" stroke="#E5E6EF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M51.166 64C58.53 64 64.5 58.03 64.5 50.666s-5.97-13.333-13.334-13.333-13.333 5.97-13.333 13.333S43.803 64 51.166 64" fill="#E5E6EF"/>
+  <path d="M45.833 56 56.5 45.333M56.5 56 45.833 45.333" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
+`;
+
 @customElement('global-menu-tree')
 export class GlobalMenuTree extends LitElement {
   @property({ type: String }) title: string = '';
@@ -64,9 +75,13 @@ export class GlobalMenuTree extends LitElement {
   @query('menu-search') private menuSearch!: MenuSearch;
 
   protected render() {
+    const empty = !this.menus || this.menus.length === 0;
+    console.log(empty);
     return html`<menu-search></menu-search>
       <h2>${this.title}</h2>
-      <nav>${this.menuTreeRender(this.menus)}</nav>`;
+      <nav class=${ifDefined(empty ? 'empty' : undefined)}>
+        ${!empty ? html`${this.menuTreeRender(this.menus)}` : html`${this.emptyMessageRender()}`}
+      </nav>`;
   }
 
   public setSearchFocus() {
@@ -114,6 +129,10 @@ export class GlobalMenuTree extends LitElement {
         )}
       </ul>
     `;
+  }
+
+  private emptyMessageRender() {
+    return html`<div>${svg`${unsafeHTML(emptyImage)}`}<span>선택된 메뉴가 없습니다.</span></div>`;
   }
 
   private pathTo(menuId: string): string[] {
@@ -218,6 +237,34 @@ export class GlobalMenuTree extends LitElement {
       flex-grow: 2;
       overflow-y: auto;
       overflow-x: hidden;
+    }
+
+    nav.empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    nav.empty > div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: -80px;
+      margin-left: -8px;
+      color: var(--font-secondary);
+    }
+
+    nav.empty > div > svg {
+      display: block;
+    }
+
+    nav.empty > div > span {
+      display: block;
+      color: var(--font-tertiary);
+      font-weight: 200;
+      margin-top: 8px;
     }
 
     nav::-webkit-scrollbar {
