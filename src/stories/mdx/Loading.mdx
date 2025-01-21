@@ -1,0 +1,35 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as LoadingStories from '../components/loading.stories.ts';
+
+<Meta of={LoadingStories} />
+
+# Loading
+<br/>
+<br/>
+
+## Default
+
+<Canvas of={LoadingStories.Default} />
+
+## Use function
+
+<Canvas of={LoadingStories.UseFunction} />
+
+```html
+<script type="text/javascript">
+  const button = document.querySelector('#showButton');
+
+  button.addEventListener('click', () => {
+    // 로딩 출력
+    Loading.show('로딩중입니다.');
+
+    setTimeout(() => {
+      // 로딩 제거
+      Loading.hide();
+    }, 1000);
+
+  });
+
+</script>
+```

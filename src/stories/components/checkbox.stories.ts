@@ -1,6 +1,6 @@
 import type { ArgTypes, Meta, StoryObj } from '@storybook/web-components';
-import { Checkbox } from '../../components/checkbox.ts';
 import { html } from 'lit';
+import { Checkbox } from '../../components/checkbox.ts';
 
 import '../../components/checkbox.ts';
 
