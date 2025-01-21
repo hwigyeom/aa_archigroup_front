@@ -5,12 +5,12 @@
   "Data": [
     {
       "id": "PI010000",
-      "name": "프로젝트정보관리",
+      "name": "화면레이아웃",
       "children": [
         {
           "id": "PI010100",
-          "name": "프로젝트조회",
-          "url": "/view/pi/sample01.html"
+          "name": "기본레이아웃",
+          "url": "/view/pi/layout01.html"
         },
         {
           "id": "PI010200",
