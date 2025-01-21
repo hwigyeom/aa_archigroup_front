@@ -14,6 +14,14 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 <body>
+<script type="text/javascript">
+  const min = 1;
+  const max = 3;
+  const bgNum = Math.floor(Math.random() * (max - min + 1) + min);
+  if (bgNum !== 1) {
+    document.body.className = `bg-${bgNum}`;
+  }
+</script>
 <div class="wrapper">
   <h1 class="login-ci">
     <img src="/images/login-ci.svg" alt="AA Archigroup">

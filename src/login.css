@@ -7,6 +7,14 @@ body {
   align-items: center;
 }
 
+body.bg-2 {
+  background-image: url("/images/login-bg-2.png");
+}
+
+body.bg-3 {
+  background-image: url("/images/login-bg-3.png");
+}
+
 .wrapper {
   height: 606px;
   width: 1254px;
