@@ -74,24 +74,34 @@
   // for grid
   (() => {
     window.gridUtil = {
-      fitHeight: (gridId, containerId) => {
+      fitSize: (gridId, containerId, heightOnly = false) => {
         const container = document.getElementById(containerId);
 
         if (!container) return;
 
         const initScreenHeight = window.innerHeight;
+        const initScreenWidth = window.innerWidth;
         const initOffsetTop = container.offsetTop;
-        const { width, height } = window.getComputedStyle(container);
-        const marginHorizontal = initScreenHeight - initOffsetTop - parseInt(height, 10);
-        container.style.height = height;
+        const initOffsetLeft = container.offsetLeft;
+        const styles = window.getComputedStyle(container);
+        const originalHeight = styles.height;
+        const originalWidth = styles.width;
+        const marginVertical = initScreenHeight - initOffsetTop - parseInt(originalHeight, 10);
+        const marginHorizontal = initScreenWidth - initOffsetLeft - parseInt(originalWidth, 10);
+
+        container.style.height = originalHeight;
+        container.style.width = originalWidth;
 
         window.addEventListener('resize', () => {
           const screenHeight = window.innerHeight;
-          const height = screenHeight - initOffsetTop - marginHorizontal;
+          const screenWidth = window.innerWidth;
+          const height = screenHeight - initOffsetTop - marginVertical;
+          const width = screenWidth - initOffsetLeft - marginHorizontal;
           const grid = window[gridId];
           container.style.height = height;
+          if (!heightOnly) container.style.width = width;
           if (grid) {
-            grid.setSheetSize(parseInt(width, 10), parseInt(height, 10));
+            setTimeout(grid.setSheetSize(parseInt(heightOnly ? originalWidth : width, 10), parseInt(height, 10)), 0);
           }
         });
       },
