@@ -1,5 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { getIcon, Icons } from './icons.ts';
+import { ICON_DEFAULT_COLOR, ICON_INVERSE_COLOR } from './constants.ts';
 
 @customElement('aa-button')
 export class Button extends LitElement {
@@ -11,6 +13,8 @@ export class Button extends LitElement {
 
   @property({ type: String }) color: 'primary' | 'generic' = 'generic';
 
+  @property({ type: String }) icon: Icons | 'none' = 'none';
+
   protected render() {
     return html`<button
       type="${this.type}"
@@ -18,6 +22,9 @@ export class Button extends LitElement {
       ?disabled=${this.disabled}
       @click=${this.clickHandler}
     >
+      ${this.icon !== 'none'
+        ? getIcon('svg', this.icon)(this.color === 'generic' ? ICON_DEFAULT_COLOR : ICON_INVERSE_COLOR)
+        : ''}
       <slot></slot>
     </button>`;
   }
@@ -45,6 +52,7 @@ export class Button extends LitElement {
       width: 100%;
     }
 
+    svg,
     ::slotted(svg) {
       display: inline-block;
       margin-right: 4px;

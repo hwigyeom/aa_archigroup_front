@@ -1,6 +1,5 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { AddSVG, DeleteSVG, ExcelSVG, PrintSVG, SaveSVG, SearchSVG } from '../components/icons.ts';
 
 @customElement('main-buttons')
 export class MainButtons extends LitElement {
@@ -16,52 +15,51 @@ export class MainButtons extends LitElement {
       <div class="button-secondary">
         ${this.buttonShow('search')
           ? html`<aa-button
-              class="buttons"
+              icon="search"
               ?disabled=${this.buttonDisabled('search')}
               @click=${(e: Event) => this.buttonClickHandler('search', e)}
-            >
-              ${SearchSVG()}조회
-            </aa-button>`
+              >조회</aa-button
+            >`
           : ''}
         ${this.buttonShow('add')
           ? html`<aa-button
+              icon="add"
               ?disabled=${this.buttonDisabled('add')}
               @click=${(e: Event) => this.buttonClickHandler('add', e)}
-            >
-              ${AddSVG()}추가
-            </aa-button>`
+              >추가</aa-button
+            >`
           : ''}
         ${this.buttonShow('delete')
           ? html`<aa-button
+              icon="delete"
               ?disabled=${this.buttonDisabled('delete')}
               @click=${(e: Event) => this.buttonClickHandler('delete', e)}
-            >
-              ${DeleteSVG()}삭제
-            </aa-button>`
+              >삭제</aa-button
+            >`
           : ''}
         ${this.buttonShow('excel')
           ? html`<aa-button
+              icon="excel"
               ?disabled=${this.buttonDisabled('excel')}
               @click=${(e: Event) => this.buttonClickHandler('excel', e)}
-            >
-              ${ExcelSVG()}엑셀다운
-            </aa-button>`
+              >엑셀다운</aa-button
+            >`
           : ''}
         ${this.buttonShow('save')
           ? html`<aa-button
+              icon="save"
               ?disabled=${this.buttonDisabled('save')}
               @click=${(e: Event) => this.buttonClickHandler('save', e)}
-            >
-              ${SaveSVG()}저장
-            </aa-button>`
+              >저장</aa-button
+            >`
           : ''}
         ${this.buttonShow('print')
           ? html`<aa-button
+              icon="print"
               ?disabled=${this.buttonDisabled('print')}
               @click=${(e: Event) => this.buttonClickHandler('print', e)}
-            >
-              ${PrintSVG()}인쇄
-            </aa-button>`
+              >인쇄</aa-button
+            >`
           : ''}
       </div>`;
   }

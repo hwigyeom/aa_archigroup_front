@@ -13,7 +13,8 @@ import * as ButtonStories from '../components/button.stories.ts';
 ```html
 <aa-button type="button(default)|submit|reset"
            size="medium(default)|large|small"
-           color="generic(default)|primary" disabled>Button</aa-button>
+           color="generic(default)|primary"
+           icon="none(default)|지원 아이콘 참고" disabled>Button</aa-button>
 ```
 
 <br />
@@ -40,4 +41,8 @@ import * as ButtonStories from '../components/button.stories.ts';
 
 ## Icon
 
-Coming soon...
+<Canvas of={ButtonStories.WithIcon} />
+
+### 지원 아이콘
+
+<Canvas of={ButtonStories.ButtonIcons} />

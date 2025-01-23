@@ -9,10 +9,61 @@ import {
   RADIO_NORMAL_BG_COLOR,
   RADIO_NORMAL_BORDER_COLOR,
 } from './constants.js';
-import { svg } from 'lit';
+import { svg, SVGTemplateResult } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
-const toDataUri = (svg: string): string => `data:image/svg+xml;base64,${btoa(svg)}`;
+export const icons = [
+  'user-info',
+  'logout',
+  'search',
+  'excel',
+  'powerpoint',
+  'save',
+  'print',
+  'add',
+  'delete',
+  'edit',
+  'calendar',
+  'clipboard',
+  'rotate',
+  'download',
+  'copy',
+  'configure',
+  'clip',
+  'book',
+  'link',
+  'new-window',
+  'close',
+  'caret-up',
+  'caret-down',
+  'caret-up=small',
+  'caret-down-small',
+  'chevron-up',
+  'chevron-down',
+  'chevron-left',
+  'chevron-right',
+  'chevron-up-down',
+  'angles-left',
+  'angles-right',
+  'arrow-up',
+  'arrow-down',
+  'drag-dot',
+  'ellipsis-vertical',
+  'ellipsis-horizontal',
+  'checkbox',
+  'checkbox-checked',
+  'radio',
+  'radio-checked',
+  'hamburger',
+  'hamburger-collapsed',
+  'message-box-icon-ok',
+  'message-box-icon-error',
+  'message-box-icon-info',
+  'message-box-icon-question',
+] as const;
+export type Icons = (typeof icons)[number];
+
+//#region icons
 
 //#region user-info
 const userInfo = (
@@ -985,3 +1036,112 @@ export function MessageBoxIconWarningDataUri() {
   return toDataUri(messageBoxIconWarning);
 }
 //#endregion message-box-icon-warning
+
+//#endregion icons
+
+const toDataUri = (svg: string): string => `data:image/svg+xml;base64,${btoa(svg)}`;
+
+export function getIcon(
+  type: 'svg' | 'data-uri',
+  icon: Icons
+): (...colors: string[]) => SVGTemplateResult | string | undefined {
+  // Icon type 별 케이스문
+  switch (icon) {
+    case 'user-info':
+      return type === 'svg' ? UserInfoSVG : UserInfoDataUri;
+    case 'logout':
+      return type === 'svg' ? LogoutSVG : LogoutDataUri;
+    case 'search':
+      return type === 'svg' ? SearchSVG : SearchDataUri;
+    case 'excel':
+      return type === 'svg' ? ExcelSVG : ExcelDataUri;
+    case 'powerpoint':
+      return type === 'svg' ? PowerPointSVG : PowerPointDataUri;
+    case 'save':
+      return type === 'svg' ? SaveSVG : SaveDataUri;
+    case 'print':
+      return type === 'svg' ? PrintSVG : PrintDataUri;
+    case 'add':
+      return type === 'svg' ? AddSVG : AddDataUri;
+    case 'delete':
+      return type === 'svg' ? DeleteSVG : DeleteDataUri;
+    case 'edit':
+      return type === 'svg' ? EditSVG : EditDataUri;
+    case 'calendar':
+      return type === 'svg' ? CalendarSVG : CalendarDataUri;
+    case 'clipboard':
+      return type === 'svg' ? ClipboardSVG : ClipboardDataUri;
+    case 'rotate':
+      return type === 'svg' ? RotateSVG : RotateDataUri;
+    case 'download':
+      return type === 'svg' ? DownloadSVG : DownloadDataUri;
+    case 'copy':
+      return type === 'svg' ? CopySVG : CopyDataUri;
+    case 'configure':
+      return type === 'svg' ? ConfigureSVG : ConfigureDataUri;
+    case 'clip':
+      return type === 'svg' ? ClipSVG : ClipDataUri;
+    case 'book':
+      return type === 'svg' ? BookSVG : BookDataUri;
+    case 'link':
+      return type === 'svg' ? LinkSVG : LinkDataUri;
+    case 'new-window':
+      return type === 'svg' ? NewWindowSVG : NewWindowDataUri;
+    case 'close':
+      return type === 'svg' ? CloseSVG : CloseDataUri;
+    case 'caret-up':
+      return type === 'svg' ? CaretUpSVG : CaretUpDataUri;
+    case 'caret-down':
+      return type === 'svg' ? CaretDownSVG : CaretDownDataUri;
+    case 'caret-up=small':
+      return type === 'svg' ? CaretUpSmallSVG : CaretUpSmallDataUri;
+    case 'caret-down-small':
+      return type === 'svg' ? CaretDownSmallSVG : CaretDownSmallDataUri;
+    case 'chevron-up':
+      return type === 'svg' ? ChevronUpSVG : ChevronUpDataUri;
+    case 'chevron-down':
+      return type === 'svg' ? ChevronDownSVG : ChevronDownDataUri;
+    case 'chevron-left':
+      return type === 'svg' ? ChevronLeftSVG : ChevronLeftDataUri;
+    case 'chevron-right':
+      return type === 'svg' ? ChevronRightSVG : ChevronRightDataUri;
+    case 'chevron-up-down':
+      return type === 'svg' ? ChevronUpDownSVG : ChevronUpDownDataUri;
+    case 'angles-left':
+      return type === 'svg' ? AnglesLeftSVG : AnglesLeftDataUri;
+    case 'angles-right':
+      return type === 'svg' ? AnglesRightSVG : AnglesRightDataUri;
+    case 'arrow-up':
+      return type === 'svg' ? ArrowUpSVG : ArrowUpDataUri;
+    case 'arrow-down':
+      return type === 'svg' ? ArrowDownSVG : ArrowDownDataUri;
+    case 'drag-dot':
+      return type === 'svg' ? DragDotsSVG : DragDotsDataUri;
+    case 'ellipsis-vertical':
+      return type === 'svg' ? EllipsisVerticalSVG : EllipsisVerticalDataUri;
+    case 'ellipsis-horizontal':
+      return type === 'svg' ? EllipsisHorizontalSVG : EllipsisHorizontalDataUri;
+    case 'checkbox':
+      return type === 'svg' ? CheckboxSVG : CheckboxDataUri;
+    case 'checkbox-checked':
+      return type === 'svg' ? CheckboxCheckedSVG : CheckboxCheckedDataUri;
+    case 'radio':
+      return type === 'svg' ? RadioSVG : RadioDataUri;
+    case 'radio-checked':
+      return type === 'svg' ? RadioCheckedSVG : RadioCheckedDataUri;
+    case 'hamburger':
+      return type === 'svg' ? HamburgerExtendedSVG : HamburgerExtendedDataUri;
+    case 'hamburger-collapsed':
+      return type === 'svg' ? HamburgerCollapsedSVG : HamburgerCollapsedDataUri;
+    case 'message-box-icon-ok':
+      return type === 'svg' ? MessageBoxIconOKSVG : MessageBoxIconOKDataUri;
+    case 'message-box-icon-error':
+      return type === 'svg' ? MessageBoxIconErrorSVG : MessageBoxIconErrorDataUri;
+    case 'message-box-icon-info':
+      return type === 'svg' ? MessageBoxIconInfoSVG : MessageBoxIconInfoDataUri;
+    case 'message-box-icon-question':
+      return type === 'svg' ? MessageBoxIconQuestionSVG : MessageBoxIconQuestionDataUri;
+    default:
+      return () => undefined;
+  }
+}
