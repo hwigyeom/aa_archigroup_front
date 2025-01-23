@@ -122,7 +122,7 @@ export class GlobalNavigationBar extends LitElement {
       bottom: 0;
       width: 58px;
       overflow: hidden;
-      z-index: 2;
+      z-index: 302;
     }
 
     a.extender {

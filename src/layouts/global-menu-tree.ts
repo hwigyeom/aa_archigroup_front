@@ -222,6 +222,8 @@ export class GlobalMenuTree extends LitElement {
       bottom: 0;
       width: 218px;
       padding: 24px 4px 16px 16px;
+      z-index: 301;
+      background-color: var(--body-surface-color);
     }
 
     h2 {
