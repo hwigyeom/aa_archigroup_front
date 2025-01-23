@@ -35,8 +35,103 @@
 <page-container title="기본레이아웃"
                 search="show" add="show" delete="show" excel="show" save="show" print="show">
   <!-- page content:start -->
+  <div id="gridDiv" class="grid-container">
+  </div>
   <script type="text/javascript">
     const pageContainer = document.querySelector('page-container');
+
+    function initGrid() {
+      const options = {
+        Cfg: {
+          Style: "IBGY",
+          Size: "Small",
+          SearchMode: 2,//0, // FastLoad
+          HeaderMerge: 3, //헤더 영역 머지 모드 선택
+          EnterMode: {
+            mode: 4,
+            option: 0
+          },
+          FitWidth: true,
+          AutoSelectFirstEnum: 1, //행 추가시 Enum 컬럼의 첫번째 리스트 아이템이 자동 선택되도록 설정
+          RequiredPosition: "Right",
+          CanColMove: 0,
+          CanColResize: true,
+          CanSort: false,
+
+          //상단 또는 하단 전체카운터 표시부분 설정
+          InfoRowConfig: {
+            Visible: 0,
+            "Space": "Bottom"
+          },
+          FocusWholeRow: true,
+          CustomScroll: 3
+        },
+        Def: {
+          Row: {
+            Height: 25
+            //    AlternateColor : "FFFF00"
+          },
+          Header: {
+            Height: 30
+          },
+        },
+        LeftCols: [
+          {
+            Header: "NO",
+            Type: "Int",
+            Name: "SEQ",
+            Width: 50,
+            CanFocus: 0,
+          },
+        ],
+        //각 열(Column)에 대한 정의 (이름, 유형(Type), 포맷(Format)등을 설정)
+        //열(Color)의 "Type"과 "Name" 속성은 반드시 설정되어야 합니다.
+        Cols: [
+          {
+            Header: {
+              Value: "",
+              HeaderCheck: 1,        //헤더에 체크박스 생성
+              IconAlign: "Center"    //체크박스 가운데 정렬
+            },
+            Type: "Bool",
+            Name: "CheckData",
+            Width: 30,
+            Align: "Center",
+            CanEdit: 1,
+            CanFocus: 0
+          },
+
+          {Header: "아이디", Name: "userid", Type: "Text", Align: "left", CanEdit: 1, Required: 1, Width: 120},
+          {Header: "이름", Name: "username", Type: "Text", Align: "left", Required: 1, Width: 120},
+          {Header: "비밀번호", Name: "password", Type: "Pass", Align: "left", Required: 1, Width: 120},
+          {Header: "사원번호", Name: "employeeno", Type: "Text", Width: 120, CanEdit: 0, CanFocus: 1},
+          {Header: "부서명", Name: "deptname", Type: "Text", Width: 130, CanEdit: 0, CanFocus:1},
+          {Header: "직급명  ", Name: "positionname", Type: "Text", Width: 130, CanEdit: 0, CanFocus: 1},
+        ],
+
+        Events: {
+          onRenderFirstFinish: function (param) {
+          }
+        }
+      };
+
+      var gridData = [];
+
+      // 그리드 높이 창에 맞게 조정
+      gridUtil.fitHeight('grid', 'gridDiv');
+
+      // IBSheet8 객체 생성, 비동기
+      IBSheet.create({
+        id: "grid",             // 시트 객체 ID
+        el: "gridDiv",             // 시트를 생성할 DIV객체 ID
+        options: options,        // 초기화 구문 변수
+        sync: 1              // 동기로 시트 생성
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initGrid();
+    });
 
     pageContainer.addEventListener('search', () => {
       console.log('search button clicked:');

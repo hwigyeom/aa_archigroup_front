@@ -70,4 +70,31 @@
 
     window.menus = menus;
   })();
+
+  // for grid
+  (() => {
+    window.gridUtil = {
+      fitHeight: (gridId, containerId) => {
+        const container = document.getElementById(containerId);
+
+        if (!container) return;
+
+        const initScreenHeight = window.innerHeight;
+        const initOffsetTop = container.offsetTop;
+        const { width, height } = window.getComputedStyle(container);
+        const marginHorizontal = initScreenHeight - initOffsetTop - parseInt(height, 10);
+        container.style.height = height;
+
+        window.addEventListener('resize', () => {
+          const screenHeight = window.innerHeight;
+          const height = screenHeight - initOffsetTop - marginHorizontal;
+          const grid = window[gridId];
+          container.style.height = height;
+          if (grid) {
+            grid.setSheetSize(parseInt(width, 10), parseInt(height, 10));
+          }
+        });
+      },
+    };
+  })();
 })(window);

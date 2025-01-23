@@ -1,5 +1,6 @@
 body {
   min-height: 100vh;
+  min-width: 1250px;
   display: flex;
   background-color: var(--body-surface-color);
   padding: 48px 0 0 66px;
@@ -84,4 +85,9 @@ body.menu-opened global-menu-tree {
   font-weight: 300;
   line-height: 18px;
   color: var(--tertiary-color);
+}
+
+.grid-container {
+  display: flex;
+  flex-grow: 1;
 }
