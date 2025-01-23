@@ -13,6 +13,7 @@ export default defineConfig({
         error500: resolve(__dirname, '500.html'),
         error: resolve(__dirname, 'error.html'),
         layout01: resolve(__dirname, 'view/pi/layout01.html'),
+        layout02: resolve(__dirname, 'view/pi/layout02.html'),
       },
     },
   },
