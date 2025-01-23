@@ -292,6 +292,10 @@ export class GlobalMenuTree extends LitElement {
       margin-left: 0;
     }
 
+    nav > ul ul {
+      margin-bottom: 4px;
+    }
+
     a {
       display: flex;
       flex-direction: row;

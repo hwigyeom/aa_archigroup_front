@@ -41,6 +41,7 @@ export class UserInfo extends LitElement {
     span {
       margin: 0 16px 0 8px;
       color: var(--font-secondary);
+      font-size: 12px;
     }
     button {
       display: inline-flex;
@@ -50,7 +51,7 @@ export class UserInfo extends LitElement {
       align-items: center;
       font-family: var(--font-fmaily), serif;
       font-weight: var(--font-weight-normal);
-      font-size: var(--font-size-default);
+      font-size: 12px;
       color: var(--font-secondary);
       cursor: pointer;
     }

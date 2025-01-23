@@ -38,6 +38,7 @@ h1.login-ci > .login-slogan {
   font-size: 14px;
   font-family: var(--font-fmaily), serif;
   font-weight: var(--font-weight-normal);
+  line-height: 22px;
 }
 
 .login-form-wrapper {
