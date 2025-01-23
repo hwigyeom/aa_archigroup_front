@@ -10,10 +10,11 @@ import {
   RADIO_NORMAL_BORDER_COLOR,
 } from './constants.js';
 import { svg } from 'lit';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
 
 const toDataUri = (svg: string): string => `data:image/svg+xml;base64,${btoa(svg)}`;
 
+//#region user-info
 const userInfo = (
   color = ICON_DEFAULT_COLOR
 ) => `<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,12 +42,14 @@ const userInfo = (
   </defs>
 </svg>`;
 export function UserInfoSVG(color = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(userInfo(color))}`;
+  return svg`${unsafeSVG(userInfo(color))}`;
 }
 export function UserInfoDataUri(color = ICON_DEFAULT_COLOR) {
   return toDataUri(userInfo(color));
 }
+//#endregion user-info
 
+//#region logout
 const logout = (
   color: string
 ) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -66,12 +69,14 @@ const logout = (
   </defs>
 </svg>`;
 export function LogoutSVG(color: string = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(logout(color))}`;
+  return svg`${unsafeSVG(logout(color))}`;
 }
 export function LogoutDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(logout(color));
 }
+//#endregion logout
 
+//#region search
 const search = (
   color: string = ICON_DEFAULT_COLOR
 ) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,12 +95,14 @@ const search = (
   </defs>
 </svg>`;
 export function SearchSVG(color: string = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(search(color))}`;
+  return svg`${unsafeSVG(search(color))}`;
 }
 export function SearchDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(search(color));
 }
+//#endregion search
 
+//#region excel
 const excel = (
   color: string
 ) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,12 +121,36 @@ const excel = (
   />
 </svg>`;
 export function ExcelSVG(color: string = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(excel(color))}`;
+  return svg`${unsafeSVG(excel(color))}`;
 }
 export function ExcelDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(excel(color));
 }
+//#endregion excel
 
+//#region powerpoint
+const powerpoint = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path opacity=".6" d="M6.75 6.498a.75.75 0 0 1 .75-.75H10a.75.75 0 0 1 0 1.5H7.5a.75.75 0 0 1-.75-.75m0 3a.75.75 0 0 1 .75-.75H10a.75.75 0 0 1 0 1.5H7.5a.75.75 0 0 1-.75-.75"/>
+    <path d="M4.646 3.646A.5.5 0 0 1 5 3.5h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5v-1H7a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4.5V4a.5.5 0 0 1 .146-.354M3 5V4a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm2.018 1.25H3.5v3.5h.657V8.518H4.9A1.15 1.15 0 0 0 6 7.329v-.02a1.02 1.02 0 0 0-.982-1.059m.291 1.171a.526.526 0 0 1-.505.545h-.646V6.802H4.8a.526.526 0 0 1 .505.545z"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function PowerPointSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(powerpoint(color))}`;
+}
+export function PowerPointDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(powerpoint(color));
+}
+//#endregion powerpoint
+
+//#region save
 const save = (
   color: string
 ) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -138,12 +169,14 @@ const save = (
   </defs>
 </svg>`;
 export function SaveSVG(color: string = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(save(color))}`;
+  return svg`${unsafeSVG(save(color))}`;
 }
 export function SaveDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(save(color));
 }
+//#endregion save
 
+//#region print
 const print = (
   color: string = ICON_DEFAULT_COLOR
 ) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,11 +193,14 @@ const print = (
   </defs>
 </svg>`;
 export function PrintSVG(color: string = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(print(color))}`;
+  return svg`${unsafeSVG(print(color))}`;
 }
 export function PrintDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(print(color));
 }
+//#endregion print
+
+//#region add
 const add = (
   color: string
 ) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -183,12 +219,14 @@ const add = (
   </defs>
 </svg>`;
 export function AddSVG(color: string = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(add(color))}`;
+  return svg`${unsafeSVG(add(color))}`;
 }
 export function AddDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(add(color));
 }
+//#endregion add
 
+//#region delete
 const del = (
   color: string
 ) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -208,12 +246,513 @@ const del = (
   </defs>
 </svg>`;
 export function DeleteSVG(color: string = ICON_DEFAULT_COLOR) {
-  return svg`${unsafeHTML(del(color))}`;
+  return svg`${unsafeSVG(del(color))}`;
 }
 export function DeleteDataUri(color: string = ICON_DEFAULT_COLOR) {
   return toDataUri(del(color));
 }
+//#endregion delete
 
+//#region edit
+const edit = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill="${color}">
+    <path opacity=".6" fill-rule="evenodd" clip-rule="evenodd" d="M8.036 3.91a.75.75 0 0 0-.925 1.18l3.262 2.558a.75.75 0 0 0 .925-1.181zM9.5 12.75a.75.75 0 0 0 0 1.5h4.031a.75.75 0 1 0 0-1.5z"/>
+    <path d="M9.583 1.925a2.4 2.4 0 0 1 1.46.536l.945.742a2.065 2.065 0 0 1 .492 2.972l-5.64 7.2a1.75 1.75 0 0 1-1.368.67l-2.17.03a.75.75 0 0 1-.74-.58l-.49-2.12a1.75 1.75 0 0 1 .324-1.485l5.641-7.198a1.94 1.94 0 0 1 1.546-.767m-5.698 10.64 1.572-.02a.26.26 0 0 0 .2-.1l5.641-7.2c.306-.391-.1-.762-.237-.867l-.945-.737a.9.9 0 0 0-.533-.216.44.44 0 0 0-.366.193l-5.64 7.2a.26.26 0 0 0-.048.22z"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function EditSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(edit(color))}`;
+}
+export function EditDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(edit(color));
+}
+//#endregion edit
+
+//#region calendar
+const calendar = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill="${color}">
+    <path d="M12.667 14H3.333A1.3 1.3 0 0 1 2 12.737v-8.21a1.3 1.3 0 0 1 1.333-1.264H4v-.947A.326.326 0 0 1 4.334 2H5a.326.326 0 0 1 .334.316v.947h5.332v-.947A.326.326 0 0 1 11 2h.666a.326.326 0 0 1 .334.316v.947h.667A1.3 1.3 0 0 1 14 4.526v8.211A1.3 1.3 0 0 1 12.667 14M3.333 6.333v6.32h9.334v-6.32z"/>
+    <path opacity=".6" d="M7 8H5v2h2z"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function CalendarSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(calendar(color))}`;
+}
+export function CalendarDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(calendar(color));
+}
+//#endregion calendar
+
+//#region clipboard
+const clipboard = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path d="M6 1a1 1 0 0 0-1 1H4a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-1a1 1 0 0 0-1-1zm-.866 2.5A1 1 0 0 0 6 4h4a1 1 0 0 0 .866-.5H12a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5H4a.5.5 0 0 1-.5-.5V4a.5.5 0 0 1 .5-.5z"/>
+    <path opacity=".6" d="M6 6a.75.75 0 0 0 0 1.5h4A.75.75 0 0 0 10 6zm0 3a.75.75 0 0 0 0 1.5h4A.75.75 0 0 0 10 9z"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function ClipboardSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(clipboard(color))}`;
+}
+export function ClipboardDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(clipboard(color));
+}
+//#endregion clipboard
+
+//#region rotate
+const rotate = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M13.105 3.75a.75.75 0 0 0-1.5 0v.41A5.46 5.46 0 0 0 8.28 3a5.32 5.32 0 0 0-5.263 4.226.75.75 0 0 0 1.468.308A3.82 3.82 0 0 1 8.264 4.5h.003a3.97 3.97 0 0 1 2.588.985h-.98a.75.75 0 1 0 0 1.5h2.48a.75.75 0 0 0 .75-.75zm.275 5.655a.75.75 0 1 0-1.457-.356 3.826 3.826 0 0 1-3.756 2.918h-.003a3.97 3.97 0 0 1-2.583-.979h.969a.75.75 0 1 0 0-1.5H4.069a.75.75 0 0 0-.75.75v2.481a.75.75 0 1 0 1.5 0v-.415a5.47 5.47 0 0 0 3.334 1.163 5.33 5.33 0 0 0 5.227-4.062" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>
+`;
+export function RotateSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(rotate(color))}`;
+}
+export function RotateDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(rotate(color));
+}
+//#endregion rotate
+
+//#region download
+const download = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path d="M8.75 2.746a.75.75 0 0 0-1.5 0v5.416L5.413 6.326a.75.75 0 1 0-1.06 1.06l3.138 3.138a.75.75 0 0 0 1.06 0l3.14-3.138a.75.75 0 0 0-1.061-1.06L8.75 8.205z"/>
+    <path opacity=".6" d="M2.499 9.746a.75.75 0 0 1 .75.75v1.75h9.5v-1.75a.75.75 0 0 1 1.5 0v2.5a.75.75 0 0 1-.75.75h-11a.75.75 0 0 1-.75-.75v-2.5a.75.75 0 0 1 .75-.75"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function DownloadSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(download(color))}`;
+}
+export function DownloadDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(download(color));
+}
+//#endregion download
+
+//#region copy
+const copy = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path opacity=".6" d="M5 4H3a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1H9.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V6a.5.5 0 0 1 .5-.5h2zm2.75 1a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5h-3A.75.75 0 0 1 7.75 5m.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5z"/>
+    <path d="M13 2.5H7a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5M7 1h6a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function CopySVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(copy(color))}`;
+}
+export function CopyDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(copy(color));
+}
+//#endregion copy
+
+//#region configure
+const configure = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path opacity=".6" d="M8 8.707a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1m2-.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0"/>
+    <path d="M13.253 12.393a1.5 1.5 0 0 1-1.785.642l-.764-.27-.057.033-.132.793a1.5 1.5 0 0 1-1.48 1.253H6.966a1.5 1.5 0 0 1-1.464-1.174l-.193-.867-.062-.036-.685.258a1.5 1.5 0 0 1-1.813-.632l-1.034-1.72a1.5 1.5 0 0 1 .31-1.912l.619-.53v-.11l-.62-.53a1.5 1.5 0 0 1-.31-1.91L2.75 3.955a1.5 1.5 0 0 1 1.786-.642l.728.257.097-.056.126-.758a1.5 1.5 0 0 1 1.48-1.253h2.069A1.5 1.5 0 0 1 10.5 2.677l.193.868.062.035.684-.257a1.5 1.5 0 0 1 1.814.632l1.035 1.724a1.5 1.5 0 0 1-.31 1.91l-.619.532v.109l.619.53a1.5 1.5 0 0 1 .31 1.912zm-1.459-3.527a3.7 3.7 0 0 0 0-1.379l1.207-1.035-1.035-1.724-1.379.518a8.6 8.6 0 0 0-1.207-.69l-.345-1.552H6.966l-.259 1.552a3.4 3.4 0 0 0-1.207.69l-1.465-.518-1.034 1.724 1.207 1.035a3.7 3.7 0 0 0 0 1.379L3.001 9.9l1.034 1.72 1.379-.517a8.6 8.6 0 0 0 1.207.689l.345 1.552h2.069l.259-1.552a5.5 5.5 0 0 0 1.207-.689l1.466.517 1.034-1.72z"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function ConfigureSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(configure(color))}`;
+}
+export function ConfigureDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(configure(color));
+}
+//#endregion configure
+
+//#region clip
+const clip = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.024 1h.023a3.556 3.556 0 0 1 3.447 3.65v4.753A4.93 4.93 0 0 1 7.778 14.5l-.031.002-.031-.002A4.92 4.92 0 0 1 3 9.403V3.917a.75.75 0 1 1 1.499 0v5.529a3.43 3.43 0 0 0 3.248 3.553 3.424 3.424 0 0 0 3.248-3.553V4.618A2.06 2.06 0 0 0 9.025 2.5a2.057 2.057 0 0 0-1.972 2.116v.974l.001.034v3.852a.694.694 0 1 0 1.387 0V5.603a.75.75 0 1 1 1.5 0v3.874a2.195 2.195 0 0 1-2.193 2.194 2.19 2.19 0 0 1-2.193-2.194V4.649A3.56 3.56 0 0 1 9 1z" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function ClipSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(clip(color))}`;
+}
+export function ClipDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(clip(color));
+}
+//#endregion clip
+
+//#region book
+const book = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path opacity=".6" d="M5 3h1v10H5zm3 2.75a.75.75 0 0 0 0 1.5h2.5a.75.75 0 0 0 0-1.5z"/>
+    <path d="M12 3.5H4a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5V4a.5.5 0 0 0-.5-.5M4 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function BookSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(book(color))}`;
+}
+export function BookDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(book(color));
+}
+//#endregion book
+
+//#region link
+const link = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.344 1.609a3.02 3.02 0 0 0-2.187.709l-.016.013-1.353 1.42-.007.007a.8.8 0 0 0 1.13 1.13l.011-.01 1.326-1.39a1.44 1.44 0 0 1 1.97.238l.024.03.03.024a1.437 1.437 0 0 1 .236 1.973l-2.79 2.792a1.44 1.44 0 0 1-1.974-.236l-.019-.022-.022-.02A.8.8 0 0 0 6.57 9.394a3.02 3.02 0 0 0 4.238.323l.012-.01 2.853-2.852.01-.012a3.02 3.02 0 0 0-.305-4.22 3.02 3.02 0 0 0-2.033-1.014m-3.96 3.96a3.02 3.02 0 0 0-2.188.709l-.012.01L2.33 9.142l-.01.012a3.02 3.02 0 0 0 .303 4.225 3.02 3.02 0 0 0 4.22.304l.007-.005 1.502-1.381.005-.006a.801.801 0 0 0-1.123-1.144L5.764 12.5a1.44 1.44 0 0 1-1.98-.231l-.025-.03-.03-.025a1.437 1.437 0 0 1-.236-1.973L6.285 7.45a1.44 1.44 0 0 1 1.974.236l.019.022.021.02a.8.8 0 0 0 1.134-1.127 3.02 3.02 0 0 0-2.05-1.032" fill="${color}"/>
+</svg>`;
+export function LinkSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(link(color))}`;
+}
+export function LinkDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(link(color));
+}
+//#endregion link
+
+//#region new-window
+const newWindow = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path opacity=".6" d="M2.998 5h2v1H5v2H2.498v5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-2h1.5v2a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2"/>
+    <path d="M6.498 4v5a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5V4zm6.5-3h-6a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function NewWindowSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(newWindow(color))}`;
+}
+export function NewWindowDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(newWindow(color));
+}
+//#endregion new-window
+
+//#region close
+const close = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path opacity=".6" d="M8 14a6.002 6.002 0 0 1-5.885-7.17A6 6 0 0 1 14 8a6.01 6.01 0 0 1-6 6m0-4.94 1.967 1.968a.75.75 0 0 0 .533.223.76.76 0 0 0 .748-.749.75.75 0 0 0-.22-.535l-1.97-1.968 1.97-1.968a.75.75 0 0 0 .161-.82.7.7 0 0 0-.162-.24.73.73 0 0 0-.529-.221.74.74 0 0 0-.531.221L8 6.94 6.031 4.972a.755.755 0 0 0-1.047.013.753.753 0 0 0-.02 1.047L6.935 8l-1.97 1.968a.757.757 0 0 0 0 1.06.753.753 0 0 0 1.066 0z" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function CloseSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(close(color))}`;
+}
+export function CloseDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(close(color));
+}
+//#endregion close
+
+//#region caret-up
+const caretUp = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="m12.785 9.62-4.27-4.268a.727.727 0 0 0-1.027 0L3.215 9.62a.725.725 0 0 0 .514 1.239h8.545c.646 0 .97-.781.511-1.24" fill="${color}"/>
+</svg>`;
+export function CaretUpSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(caretUp(color))}`;
+}
+export function CaretUpDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(caretUp(color));
+}
+//#endregion caret-up
+
+//#region caret-down
+const caretDown = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="m3.215 6.378 4.272 4.272a.727.727 0 0 0 1.026 0l4.272-4.272a.726.726 0 0 0-.515-1.24H3.73a.726.726 0 0 0-.515 1.24" fill="${color}"/>
+</svg>`;
+export function CaretDownSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(caretDown(color))}`;
+}
+export function CaretDownDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(caretDown(color));
+}
+//#endregion caret-down
+
+//#region caret-up-small
+const caretUpSmall = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.83 9.241 8.41 5.676a.57.57 0 0 0-.822 0L4.17 9.241c-.364.382-.104 1.037.412 1.037h6.837c.515-.005.775-.655.41-1.037" fill="${color}"/>
+</svg>`;
+export function CaretUpSmallSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(caretUpSmall(color))}`;
+}
+export function CaretUpSmallDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(caretUpSmall(color));
+}
+//#endregion caret-up-small
+
+//#region caret-down-small
+const caretDownSmall = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="m4.17 7.258 3.419 3.566a.57.57 0 0 0 .822 0l3.419-3.566c.364-.381.104-1.036-.412-1.036H4.583c-.516.005-.776.655-.412 1.036" fill="${color}"/>
+</svg>`;
+export function CaretDownSmallSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(caretDownSmall(color))}`;
+}
+export function CaretDownSmallDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(caretDownSmall(color));
+}
+//#endregion caret-down-small
+
+//#region chevron-up
+const chevronUp = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.53 10.53a.75.75 0 0 1-1.06 0L8 7.06l-3.47 3.47a.75.75 0 1 1-1.06-1.06l4-4a.75.75 0 0 1 1.06 0l4 4a.75.75 0 0 1 0 1.06" fill="${color}"/>
+</svg>`;
+export function ChevronUpSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(chevronUp(color))}`;
+}
+export function ChevronUpDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(chevronUp(color));
+}
+//#endregion chevron-up
+
+//#region chevron-down
+const chevronDown = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M3.47 6.47a.75.75 0 0 1 1.06 0L8 9.94l3.47-3.47a.75.75 0 1 1 1.06 1.06l-4 4a.75.75 0 0 1-1.06 0l-4-4a.75.75 0 0 1 0-1.06" fill="${color}"/>
+</svg>`;
+export function ChevronDownSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(chevronDown(color))}`;
+}
+export function ChevronDownDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(chevronDown(color));
+}
+//#endregion chevron-down
+
+//#region chevron-left
+const chevronLeft = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.28 3.47a.75.75 0 0 1 0 1.06L6.81 8l3.47 3.47a.75.75 0 1 1-1.06 1.06l-4-4a.75.75 0 0 1 0-1.06l4-4a.75.75 0 0 1 1.06 0" fill="${color}"/>
+</svg>`;
+export function ChevronLeftSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(chevronLeft(color))}`;
+}
+export function ChevronLeftDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(chevronLeft(color));
+}
+//#endregion chevron-left
+
+//#region chevron-right
+const chevronRight = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M6.22 12.53a.75.75 0 0 1 0-1.06L9.69 8 6.22 4.53a.75.75 0 0 1 1.06-1.06l4 4a.75.75 0 0 1 0 1.06l-4 4a.75.75 0 0 1-1.06 0" fill="${color}"/>
+</svg>`;
+export function ChevronRightSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(chevronRight(color))}`;
+}
+export function ChevronRightDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(chevronRight(color));
+}
+//#endregion chevron-right
+
+//#region chevron-up-down
+const chevronUpDown = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.123 5.994a.64.64 0 0 0 .437-.178l2.439-2.357 2.434 2.363a.637.637 0 0 0 .883 0 .59.59 0 0 0 0-.856L8.441 2.178a.637.637 0 0 0-.883 0L4.683 4.966a.59.59 0 0 0 0 .856.64.64 0 0 0 .44.172m0 4.01c.163.002.32.066.437.18L8 12.54l2.434-2.363a.64.64 0 0 1 .883 0 .59.59 0 0 1 0 .856l-2.876 2.788a.64.64 0 0 1-.883 0l-2.875-2.788a.59.59 0 0 1 0-.856.64.64 0 0 1 .44-.172" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function ChevronUpDownSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(chevronUpDown(color))}`;
+}
+export function ChevronUpDownDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(chevronUpDown(color));
+}
+//#endregion chevron-up-down
+
+//#region angles-left
+const anglesLeft = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.28 4.53a.75.75 0 0 0-1.06-1.06l-4 4a.75.75 0 0 0 0 1.06l4 4a.75.75 0 1 0 1.06-1.06L8.81 8zm-4 0a.75.75 0 0 0-1.06-1.06l-4 4a.75.75 0 0 0 0 1.06l4 4a.75.75 0 0 0 1.06-1.06L4.81 8z" fill="${color}"/>
+</svg>`;
+export function AnglesLeftSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(anglesLeft(color))}`;
+}
+export function AnglesLeftDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(anglesLeft(color));
+}
+//#endregion angles-left
+
+//#region angles-right
+const anglesRight = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M3.72 11.47a.75.75 0 1 0 1.06 1.06l4-4a.75.75 0 0 0 0-1.06l-4-4a.75.75 0 0 0-1.06 1.06L7.19 8zm4 0a.75.75 0 1 0 1.06 1.06l4-4a.75.75 0 0 0 0-1.06l-4-4a.75.75 0 0 0-1.06 1.06L11.19 8z" fill="${color}"/>
+</svg>`;
+export function AnglesRightSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(anglesRight(color))}`;
+}
+export function AnglesRightDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(anglesRight(color));
+}
+//#endregion angles-right
+
+//#region arrow-up
+const arrowUp = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.56 6.753a.636.636 0 0 1-.877.006.59.59 0 0 1 0-.856l2.875-2.788a.637.637 0 0 1 .883 0l2.875 2.788a.59.59 0 0 1 0 .856.637.637 0 0 1-.883 0L8.75 5.125v6.563a.75.75 0 0 1-1.5 0V5.12z" fill="${color}"/>
+</svg>`;
+export function ArrowUpSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(arrowUp(color))}`;
+}
+export function ArrowUpDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(arrowUp(color));
+}
+//#endregion arrow-up
+
+//#region arrow-down
+const arrowDown = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.44 8.622a.636.636 0 0 1 .877-.006.59.59 0 0 1 0 .856L8.442 12.26a.637.637 0 0 1-.883 0L4.684 9.472a.59.59 0 0 1 0-.856.637.637 0 0 1 .883 0L7.25 10.25V3.688a.75.75 0 0 1 1.5 0v6.566z" fill="${color}"/>
+</svg>`;
+export function ArrowDownSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(arrowDown(color))}`;
+}
+export function ArrowDownDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(arrowDown(color));
+}
+//#endregion arrow-down
+
+//#region drag-dots
+const dragDots = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M7 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0m0 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2m5-9a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-1 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2m1 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0" fill="${color}"/>
+</svg>`;
+export function DragDotsSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(dragDots(color))}`;
+}
+export function DragDotsDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(dragDots(color));
+}
+//#endregion drag-dots
+
+//#region ellipsis-vertical
+const ellipsisVertical = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path d="M6.751 12.999a1.249 1.249 0 1 1 2.498.002A1.249 1.249 0 0 1 6.75 13m0-5a1.249 1.249 0 1 1 0 .002zm0-5a1.249 1.249 0 1 1 .094.477 1.3 1.3 0 0 1-.094-.479z" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function EllipsisVerticalSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(ellipsisVertical(color))}`;
+}
+export function EllipsisVerticalDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(ellipsisVertical(color));
+}
+//#endregion ellipsis-horizontal
+
+//#region ellipsis-horizontal
+const ellipsisHorizontal = (
+  color: string
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path d="M6.751 12.999a1.249 1.249 0 1 1 2.498.002A1.249 1.249 0 0 1 6.75 13m0-5a1.249 1.249 0 1 1 0 .002zm0-5a1.249 1.249 0 1 1 .094.477 1.3 1.3 0 0 1-.094-.479z" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function EllipsisHorizontalSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(ellipsisHorizontal(color))}`;
+}
+export function EllipsisHorizontalDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(ellipsisHorizontal(color));
+}
+//#endregion ellipsis-horizontal
+
+//#region checkbox
 const checkbox = (
   borderColor: string = CHECKBOX_NORMAL_BORDER_COLOR,
   backgroundColor: string = CHECKBOX_NORMAL_BG_COLOR
@@ -225,7 +764,7 @@ export function CheckboxSVG(
   borderColor: string = CHECKBOX_NORMAL_BORDER_COLOR,
   backgroundColor: string = CHECKBOX_NORMAL_BG_COLOR
 ) {
-  return svg`${unsafeHTML(checkbox(borderColor, backgroundColor))}`;
+  return svg`${unsafeSVG(checkbox(borderColor, backgroundColor))}`;
 }
 export function CheckboxDataUri(
   borderColor: string = CHECKBOX_NORMAL_BORDER_COLOR,
@@ -233,7 +772,9 @@ export function CheckboxDataUri(
 ) {
   return toDataUri(checkbox(borderColor, backgroundColor));
 }
+//#endregion checkbox
 
+//#region checkbox-checked
 const checkboxChecked = (
   borderColor: string = CHECKBOX_CHECKED_BG_COLOR,
   backgroundColor: string = CHECKBOX_CHECKED_BG_COLOR,
@@ -248,7 +789,7 @@ export function CheckboxCheckedSVG(
   backgroundColor: string = CHECKBOX_CHECKED_BG_COLOR,
   checkColor: string = CHECKBOX_CHECKED_CHECK_COLOR
 ) {
-  return svg`${unsafeHTML(checkboxChecked(borderColor, backgroundColor, checkColor))}`;
+  return svg`${unsafeSVG(checkboxChecked(borderColor, backgroundColor, checkColor))}`;
 }
 export function CheckboxCheckedDataUri(
   borderColor: string = CHECKBOX_CHECKED_BG_COLOR,
@@ -257,7 +798,9 @@ export function CheckboxCheckedDataUri(
 ) {
   return toDataUri(checkboxChecked(borderColor, backgroundColor, checkColor));
 }
+//#endregion checkbox-checked
 
+//#region radio
 const radio = (
   borderColor: string = RADIO_NORMAL_BORDER_COLOR,
   backgroundColor: string = RADIO_NORMAL_BG_COLOR
@@ -270,7 +813,7 @@ export function RadioSVG(
   borderColor: string = RADIO_NORMAL_BORDER_COLOR,
   backgroundColor: string = RADIO_NORMAL_BG_COLOR
 ) {
-  return svg`${unsafeHTML(radio(borderColor, backgroundColor))}`;
+  return svg`${unsafeSVG(radio(borderColor, backgroundColor))}`;
 }
 export function RadioDataUri(
   borderColor: string = RADIO_NORMAL_BORDER_COLOR,
@@ -278,7 +821,9 @@ export function RadioDataUri(
 ) {
   return toDataUri(radio(borderColor, backgroundColor));
 }
+//#endregion radio
 
+//#region radio-checked
 const radioChecked = (
   borderColor: string = RADIO_CHECKED_BORDER_COLOR,
   backgroundColor: string = RADIO_CHECKED_BG_COLOR
@@ -292,7 +837,7 @@ export function RadioCheckedSVG(
   borderColor: string = RADIO_CHECKED_BORDER_COLOR,
   backgroundColor: string = RADIO_CHECKED_BG_COLOR
 ) {
-  return svg`${unsafeHTML(radioChecked(borderColor, backgroundColor))}`;
+  return svg`${unsafeSVG(radioChecked(borderColor, backgroundColor))}`;
 }
 export function RadioCheckedDataUri(
   borderColor: string = RADIO_CHECKED_BORDER_COLOR,
@@ -300,7 +845,9 @@ export function RadioCheckedDataUri(
 ) {
   return toDataUri(radioChecked(borderColor, backgroundColor));
 }
+//#endregion radio-checked
 
+//#region hamburger
 const hamburgerExtended =
   () => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#a)">
@@ -313,12 +860,14 @@ const hamburgerExtended =
   </defs>
 </svg>`;
 export function HamburgerExtendedSVG() {
-  return svg`${unsafeHTML(hamburgerExtended())}`;
+  return svg`${unsafeSVG(hamburgerExtended())}`;
 }
 export function HamburgerExtendedDataUri() {
   return toDataUri(hamburgerExtended());
 }
+//#endregion hamburger
 
+//#region hamburger-collapsed
 const hamburgerCollapsed =
   () => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#a)">
@@ -331,12 +880,14 @@ const hamburgerCollapsed =
   </defs>
 </svg>`;
 export function HamburgerCollapsedSVG() {
-  return svg`${unsafeHTML(hamburgerCollapsed())}`;
+  return svg`${unsafeSVG(hamburgerCollapsed())}`;
 }
 export function HamburgerCollapsedDataUri() {
   return toDataUri(hamburgerCollapsed());
 }
+//#endregion hamburger-collapsed
 
+//#region message-box-icon-ok
 const messageBoxIconOk = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#a)">
     <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#0EBA1D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -349,12 +900,14 @@ const messageBoxIconOk = `<svg width="36" height="36" viewBox="0 0 36 36" fill="
   </defs>
 </svg>`;
 export function MessageBoxIconOKSVG() {
-  return svg`${unsafeHTML(messageBoxIconOk)}`;
+  return svg`${unsafeSVG(messageBoxIconOk)}`;
 }
 export function MessageBoxIconOKDataUri() {
   return toDataUri(messageBoxIconOk);
 }
+//#endregion message-box-icon-ok
 
+//#region message-box-icon-error
 const messageBoxIconError = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#a)">
     <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#F0491B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -367,12 +920,14 @@ const messageBoxIconError = `<svg width="36" height="36" viewBox="0 0 36 36" fil
   </defs>
 </svg>`;
 export function MessageBoxIconErrorSVG() {
-  return svg`${unsafeHTML(messageBoxIconError)}`;
+  return svg`${unsafeSVG(messageBoxIconError)}`;
 }
 export function MessageBoxIconErrorDataUri() {
   return toDataUri(messageBoxIconError);
 }
+//#endregion message-box-icon-error
 
+//#region message-box-icon-info
 const messageBoxIconInfo = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#a)">
     <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#366DD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -385,12 +940,14 @@ const messageBoxIconInfo = `<svg width="36" height="36" viewBox="0 0 36 36" fill
   </defs>
 </svg>`;
 export function MessageBoxIconInfoSVG() {
-  return svg`${unsafeHTML(messageBoxIconInfo)}`;
+  return svg`${unsafeSVG(messageBoxIconInfo)}`;
 }
 export function MessageBoxIconInfoDataUri() {
   return toDataUri(messageBoxIconInfo);
 }
+//#endregion message-box-icon-info
 
+//#region message-box-icon-question
 const messageBoxIconQuestion = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#a)">
     <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13" stroke="#366DD6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -403,12 +960,14 @@ const messageBoxIconQuestion = `<svg width="36" height="36" viewBox="0 0 36 36" 
   </defs>
 </svg>`;
 export function MessageBoxIconQuestionSVG() {
-  return svg`${unsafeHTML(messageBoxIconQuestion)}`;
+  return svg`${unsafeSVG(messageBoxIconQuestion)}`;
 }
 export function MessageBoxIconQuestionDataUri() {
   return toDataUri(messageBoxIconQuestion);
 }
+//#endregion message-box-icon-question
 
+//#region message-box-icon-warning
 const messageBoxIconWarning = `<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
   <g clip-path="url(#a)" stroke="#FCB504" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M31 18c0 7.18-5.82 13-13 13S5 25.18 5 18 10.82 5 18 5s13 5.82 13 13m-13-6.005v7m0 5.043h.015"/>
@@ -420,8 +979,9 @@ const messageBoxIconWarning = `<svg width="36" height="36" viewBox="0 0 36 36" f
   </defs>
 </svg>`;
 export function MessageBoxIconWarningSVG() {
-  return svg`${unsafeHTML(messageBoxIconWarning)}`;
+  return svg`${unsafeSVG(messageBoxIconWarning)}`;
 }
 export function MessageBoxIconWarningDataUri() {
   return toDataUri(messageBoxIconWarning);
 }
+//#endregion message-box-icon-warning
