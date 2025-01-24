@@ -38,7 +38,7 @@ export const UseFunction: Story = {
         Loading.show('로딩중입니다.');
         setTimeout(() => {
           Loading.hide();
-        }, 1000);
+        }, 3000);
       }}
       >로딩 시작</aa-button
     >`,
@@ -47,6 +47,9 @@ export const UseFunction: Story = {
       story: {
         inline: false,
         iframeHeight: 400,
+      },
+      canvas: {
+        sourceState: 'none',
       },
     },
   },
