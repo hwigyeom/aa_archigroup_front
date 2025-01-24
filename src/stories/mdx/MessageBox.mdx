@@ -1,0 +1,59 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+import * as MessageBoxStories from '../components/message-box.stories.ts';
+
+<Meta of={MessageBoxStories} />
+
+# MessageBox
+<br />
+<br />
+
+## Usage
+
+```javascript
+const result = await MessageBox.show({
+  icon: 'none(default) | ok | error | info | question | warning',
+  title: 'Title', // optional
+  message: 'Message',
+  buttons: 'ok(default) | okcancel | yesno | yesnocancel',
+});
+
+// result.state: 클릭한 버튼에 따라 결정 ('ok' | 'cancel' | 'yes' | 'no')
+if (result.state === 'ok' || result.state === 'yes') {
+} else if (result.state === 'cancel' || result.state === 'no') {
+}
+```
+
+<br />
+<br />
+
+## Default
+
+<Canvas of={MessageBoxStories.Default} />
+
+## Use Function
+
+<Canvas of={MessageBoxStories.UseFunction} />
+
+```html
+<aa-button id="showMessageBox" color="primary">Show MessageBox</aa-button>
+
+<script>
+  const button = document.querySelector('#showMessageBox');
+
+  button.addEventListener('click', async () => {
+    const result = await MessageBox.show({
+      icon: 'question',
+      title: '저장',
+      message: '저장하시겠습니까?시간이 많이 걸릴 수 있습니다.',
+      buttons: 'yesno',
+    });
+
+    if (result.state === 'yes') {
+      // 아니오 버튼을 클릭했을 때의 로직
+    } else if (result.state === 'no') {
+      // 예 버튼을 클릭했을 때의 로직
+    }
+  });
+</script>
+```
