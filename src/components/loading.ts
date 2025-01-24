@@ -6,26 +6,22 @@ import { DimmedOverlay } from './dimmed-overlay.ts';
 export class Loading extends LitElement {
   static show(message: string) {
     const loading = document.createElement('aa-loading') as Loading;
-    const overlay = document.createElement('dimmed-overlay') as DimmedOverlay;
 
     if (message) {
       loading.message = message;
     }
 
-    document.body.appendChild(overlay);
     document.body.appendChild(loading);
+    DimmedOverlay.show(loading);
   }
 
   static hide() {
     const loading = document.querySelector('aa-loading') as Loading;
-    const overlay = document.querySelector('dimmed-overlay') as DimmedOverlay;
 
     if (loading) {
       document.body.removeChild(loading);
     }
-    if (overlay) {
-      document.body.removeChild(overlay);
-    }
+    DimmedOverlay.hide();
   }
   @property({ type: String }) message: string = '로딩중입니다.';
 

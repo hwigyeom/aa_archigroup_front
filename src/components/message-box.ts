@@ -22,14 +22,13 @@ export type MessageBoxInitOption = {
   buttons?: MessageBoxButton;
 };
 
-@customElement('message-box')
+@customElement('aa-message-box')
 export class MessageBox extends LitElement {
   static async show(
     option: MessageBoxInitOption
   ): Promise<{ state: 'ok' | 'cancel' | 'yes' | 'no'; result?: unknown }> {
     return new Promise((resolve) => {
-      const messageBox = document.createElement('message-box') as MessageBox;
-      const overlay = document.createElement('dimmed-overlay') as DimmedOverlay;
+      const messageBox = document.createElement('aa-message-box') as MessageBox;
 
       const defaultOption: MessageBoxInitOption = {
         icon: 'ok',
@@ -44,13 +43,13 @@ export class MessageBox extends LitElement {
       messageBox.message = message!;
       messageBox.buttons = buttons!;
 
-      document.body.appendChild(overlay);
       document.body.appendChild(messageBox);
+      DimmedOverlay.show(messageBox);
 
       messageBox.addEventListener('close', (e: Event) => {
         const customEvent = e as CustomEvent;
+        DimmedOverlay.hide();
         document.body.removeChild(messageBox);
-        document.body.removeChild(overlay);
         resolve(customEvent?.detail || { state: 'ok' });
       });
     });
@@ -239,7 +238,7 @@ export class MessageBox extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'message-box': MessageBox;
+    'aa-message-box': MessageBox;
   }
   interface Window {
     MessageBox: typeof MessageBox;
