@@ -90,14 +90,14 @@ export class LoginForm extends LitElement {
       height: 580px;
       padding: 112px 60px 0 60px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
     }
 
     .title {
       padding: 0;
       margin: 0;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-bold);
       font-size: 40px;
 
@@ -152,6 +152,7 @@ export class LoginForm extends LitElement {
       margin: 0;
       padding: 0;
     }
+
     input[type='checkbox']:before {
       position: relative;
       display: block;
@@ -160,9 +161,11 @@ export class LoginForm extends LitElement {
       content: '';
       background: url('${unsafeCSS(CheckboxDataUri())}') no-repeat center center #fff;
     }
+
     input[type='checkbox']:hover:before {
       background-image: url('${unsafeCSS(CheckboxDataUri(CHECKBOX_HOVER_BORDER_COLOR))}');
     }
+
     input[type='checkbox']:checked:before {
       background-image: url('${unsafeCSS(CheckboxCheckedDataUri())}');
     }
@@ -176,7 +179,7 @@ export class LoginForm extends LitElement {
       border: none;
       border-radius: 8px;
       background-color: var(--select-color);
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-semi-bold);
       font-size: 16px;
       color: var(--font-inverse);

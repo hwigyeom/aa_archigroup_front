@@ -32,7 +32,7 @@ export class Checkbox extends LitElement {
     :host {
       display: inline-flex;
       justify-content: flex-start;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
     }
 
@@ -40,6 +40,7 @@ export class Checkbox extends LitElement {
       margin: 0;
       padding: 0;
     }
+
     input[type='checkbox']:before {
       position: relative;
       display: block;
@@ -48,18 +49,22 @@ export class Checkbox extends LitElement {
       content: '';
       background: url('${unsafeCSS(CheckboxDataUri())}') no-repeat center center #fff;
     }
+
     input[type='checkbox']:hover:before {
       background-image: url('${unsafeCSS(CheckboxDataUri(CHECKBOX_HOVER_BORDER_COLOR))}');
     }
+
     input[type='checkbox']:disabled:before,
     input[type='checkbox']:disabled:hover:before {
       background-image: url('${unsafeCSS(
         CheckboxDataUri(CHECKBOX_CHECKED_DISABLED_BORDER_COLOR, CHECKBOX_CHECKED_DISABLED_BG_COLOR)
       )}');
     }
+
     input[type='checkbox']:checked:before {
       background-image: url('${unsafeCSS(CheckboxCheckedDataUri())}');
     }
+
     input[type='checkbox']:checked:disabled:before {
       background-image: url('${unsafeCSS(
         CheckboxCheckedDataUri(

@@ -27,12 +27,12 @@ export class Textbox extends LitElement {
       display: inline-flex;
       justify-content: flex-start;
       align-items: center;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
     }
 
     input[type='text'] {
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
       border: 1px solid var(--input-border-normal);
       border-radius: 4px;
@@ -43,16 +43,20 @@ export class Textbox extends LitElement {
       min-height: 24px;
       width: 100%;
     }
+
     input[type='text']::placeholder {
       color: var(--font-placeholder);
     }
+
     input[type='text']:hover {
       border-color: var(--input-border-hover);
     }
+
     input[type='text']:focus {
       border-color: var(--input-border-active);
       outline: none;
     }
+
     input[type='text']:disabled {
       border-color: var(--input-border-disable);
       background-color: var(--input-surface-disabled);

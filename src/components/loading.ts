@@ -33,51 +33,51 @@ export class Loading extends LitElement {
   }
 
   static styles = css`
-    :host {
-      font-family: var(--font-fmaily), serif;
-      font-size: var(--font-size-default);
-      font-weight: var(--font-weight-normal);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 995;
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
-      width: 300px;
-      height: 176px;
-      overflow: hidden;
-      f;
-    }
-
-    .spinner {
-      display: block;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: conic-gradient(#0000 10%, #b40950);
-      -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
-      animation: spinner-rotate 1s infinite linear;
-    }
-
-    @keyframes spinner-rotate {
-      to {
-        transform: rotate(1turn);
+      :host {
+          font-family: var(--font-family), serif;
+          font-size: var(--font-size-default);
+          font-weight: var(--font-weight-normal);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 995;
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+          width: 300px;
+          height: 176px;
+          overflow: hidden;
+          f;
       }
-    }
 
-    .message {
-      margin-top: 16px;
-      display: block;
-      font-size: var(--font-size-default);
-      color: var(--font-primary);
-    }
+      .spinner {
+          display: block;
+          width: 48px;
+          height: 48px;
+          border-radius: 50%;
+          background: conic-gradient(#0000 10%, #b40950);
+          -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+          animation: spinner-rotate 1s infinite linear;
+      }
+
+      @keyframes spinner-rotate {
+          to {
+              transform: rotate(1turn);
+          }
+      }
+
+      .message {
+          margin-top: 16px;
+          display: block;
+          font-size: var(--font-size-default);
+          color: var(--font-primary);
+      }
   `;
 }
 

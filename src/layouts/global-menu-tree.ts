@@ -228,7 +228,7 @@ export class GlobalMenuTree extends LitElement {
 
     h2 {
       margin: 24px 0 16px 0;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-bold);
       font-size: 16px;
       color: var(--font-primary);
@@ -271,13 +271,16 @@ export class GlobalMenuTree extends LitElement {
     nav::-webkit-scrollbar {
       width: 5px;
     }
+
     nav::-webkit-scrollbar-track {
       background: transparent;
     }
+
     nav::-webkit-scrollbar-thumb {
       background: #9ca5b166;
       border-radius: 3px;
     }
+
     nav::-webkit-scrollbar-thumb:hover {
       background-color: #9ca5b1;
     }
@@ -306,7 +309,7 @@ export class GlobalMenuTree extends LitElement {
       justify-content: flex-start;
       padding: 7px 7px 7px 14px;
       text-decoration: none;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       color: var(--font-primary);
       font-size: var(--font-size-small);
       font-weight: var(--font-weight-normal);

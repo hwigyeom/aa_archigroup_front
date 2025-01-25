@@ -26,7 +26,7 @@ export class MenuSearch extends LitElement {
       background-color: var(--input-surface-normal);
       border-radius: 4px;
       padding: 0 28px 0 8px;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-size: var(--font-size-default);
       font-weight: var(--font-weight-normal);
     }
@@ -34,6 +34,7 @@ export class MenuSearch extends LitElement {
     input[type='text']::placeholder {
       color: var(--font-placeholder);
     }
+
     input[type='text']:hover {
       border-color: var(--input-border-hover);
     }

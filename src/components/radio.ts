@@ -44,7 +44,7 @@ export class Radio extends LitElement {
     :host {
       display: inline-flex;
       justify-content: flex-start;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
     }
 
@@ -52,6 +52,7 @@ export class Radio extends LitElement {
       margin: 0;
       padding: 0;
     }
+
     input[type='radio']::before {
       position: relative;
       display: block;
@@ -60,16 +61,20 @@ export class Radio extends LitElement {
       content: '';
       background: url('${unsafeCSS(RadioDataUri())}') no-repeat center center #fff;
     }
+
     :host(:hover) input[type='radio']::before {
       background-image: url('${unsafeCSS(RadioDataUri(RADIO_NORMAL_HOVER_BORDER_COLOR))}');
     }
+
     :host([disabled]) input[type='radio']::before,
     :host([disabled]:hover) input[type='radio']::before {
       background-image: url('${unsafeCSS(RadioDataUri(RADIO_DISABLED_BORDER_COLOR, RADIO_DISABLED_BG_COLOR))}');
     }
+
     :host([checked]) input[type='radio']::before {
       background-image: url('${unsafeCSS(RadioCheckedDataUri(RADIO_CHECKED_BORDER_COLOR, RADIO_DISABLED_BG_COLOR))}');
     }
+
     :host([checked][disabled]) input[type='radio']::before {
       background-image: url('${unsafeCSS(RadioCheckedDataUri(RADIO_DISABLED_BORDER_COLOR, RADIO_DISABLED_BG_COLOR))}');
     }

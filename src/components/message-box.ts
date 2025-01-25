@@ -154,7 +154,7 @@ export class MessageBox extends LitElement {
 
   static styles = css`
     :host {
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-size: var(--font-size-default);
       font-weight: var(--font-weight-normal);
       display: block;
@@ -203,16 +203,20 @@ export class MessageBox extends LitElement {
       overflow-y: auto;
       overflow-x: hidden;
     }
+
     .message::-webkit-scrollbar {
       width: 5px;
     }
+
     .message::-webkit-scrollbar-track {
       background: transparent;
     }
+
     .message::-webkit-scrollbar-thumb {
       background: #9ca5b166;
       border-radius: 3px;
     }
+
     .message::-webkit-scrollbar-thumb:hover {
       background-color: #9ca5b1;
     }
@@ -230,6 +234,7 @@ export class MessageBox extends LitElement {
     .button {
       margin-right: 8px;
     }
+
     .button:last-child {
       margin-right: 0;
     }

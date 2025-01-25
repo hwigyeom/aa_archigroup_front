@@ -38,29 +38,34 @@ export class UserInfo extends LitElement {
       align-items: center;
       margin-right: 24px;
     }
+
     span {
       margin: 0 16px 0 8px;
       color: var(--font-secondary);
       font-size: 12px;
     }
+
     button {
       display: inline-flex;
       border: 1px solid var(--input-border-normal);
       border-radius: 4px;
       height: 24px;
       align-items: center;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
       font-size: 12px;
       color: var(--font-secondary);
       cursor: pointer;
     }
+
     button:hover {
       border-color: var(--input-border-hover);
     }
+
     button:active {
       border-color: var(--input-border-active);
     }
+
     button > svg {
       margin-right: 4px;
     }

@@ -47,7 +47,7 @@ export class Button extends LitElement {
       justify-content: center;
       border-radius: 4px;
       cursor: pointer;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
       width: 100%;
     }
@@ -82,9 +82,11 @@ export class Button extends LitElement {
       border: none;
       background-color: var(--primary-color);
     }
+
     button.primary:hover {
       background-color: var(--secondary-color);
     }
+
     button.primary:disabled {
       background-color: var(--primary-color);
       opacity: 0.2;
@@ -96,19 +98,24 @@ export class Button extends LitElement {
       border: 1px solid var(--input-border-normal);
       color: var(--font-secondary);
     }
+
     button.generic:hover {
       border-color: var(--input-border-hover);
     }
+
     button.generic:active {
       border-color: var(--input-border-active);
     }
+
     button.generic:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
+
     button.generic:disabled:hover {
       border-color: var(--input-border-normal);
     }
+
     button.generic:disabled:active {
       border-color: var(--input-border-normal);
     }

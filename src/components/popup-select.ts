@@ -69,12 +69,12 @@ export class PopupSelect extends LitElement {
       display: inline-flex;
       justify-content: flex-start;
       align-items: center;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
     }
 
     input[type='text'] {
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
       border: 1px solid var(--input-border-normal);
       border-radius: 4px;
@@ -105,14 +105,17 @@ export class PopupSelect extends LitElement {
     :host(:hover) input[type='text'] {
       border-color: var(--input-border-hover);
     }
+
     :host(:hover) button {
       border-color: var(--input-border-hover);
     }
+
     :host([disabled]) input[type='text'] {
       border-color: var(--input-border-disable);
       background-color: var(--input-surface-disabled);
       color: var(--font-disable);
     }
+
     :host([disabled]) button {
       border-color: var(--input-border-disable);
     }
@@ -121,6 +124,7 @@ export class PopupSelect extends LitElement {
       border-color: var(--input-border-active);
       outline: none;
     }
+
     input[type='text']:focus + button {
       border-color: var(--input-border-active);
     }

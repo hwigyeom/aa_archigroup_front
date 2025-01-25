@@ -143,6 +143,7 @@ export class GlobalNavigationBar extends LitElement {
       scrollbar-width: none;
       overflow-y: auto;
     }
+
     nav::-webkit-scrollbar {
       display: none;
     }
@@ -170,6 +171,7 @@ export class GlobalNavigationBar extends LitElement {
       text-decoration: none;
       color: ${unsafeCSS(ICON_DEFAULT_COLOR)};
     }
+
     li > a > span {
       display: flex;
       justify-content: center;
@@ -183,25 +185,30 @@ export class GlobalNavigationBar extends LitElement {
     li > a svg {
       opacity: 0.6;
     }
+
     li > a > span {
       border-radius: 6px;
     }
+
     li > a:hover > span,
     li > a.selected > span {
       background-color: rgba(255, 255, 255, 0.1);
     }
+
     li > a > label {
       display: block;
       word-break: break-all;
-      font-family: var(--font-fmaily), serif;
+      font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
       font-size: 11px;
       text-align: center;
       cursor: pointer;
     }
+
     li > a.selected label {
       color: #fff;
     }
+
     li > a.selected > span img,
     li > a.selected > span svg {
       opacity: 1;
