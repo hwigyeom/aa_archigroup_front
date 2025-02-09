@@ -60,6 +60,7 @@ export const icons = [
   'message-box-icon-error',
   'message-box-icon-info',
   'message-box-icon-question',
+  'stopwatch',
 ] as const;
 export type Icons = (typeof icons)[number];
 
@@ -1037,6 +1038,28 @@ export function MessageBoxIconWarningDataUri() {
 }
 //#endregion message-box-icon-warning
 
+//#region stopwatch
+const stopwatch = (
+  color: string = ICON_DEFAULT_COLOR
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)" fill-rule="evenodd" clip-rule="evenodd" fill="${color}">
+    <path d="M5.75 1.75A.75.75 0 0 1 6.5 1h3a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1-.75-.75M8 5.5a.75.75 0 0 1 .75.75v2.5a.75.75 0 0 1-1.5 0v-2.5A.75.75 0 0 1 8 5.5"/>
+    <path opacity=".6" d="M12.5 9a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0M14 9a6 6 0 1 1-2.32-4.74l.79-.79a.75.75 0 1 1 1.06 1.06l-.79.79A5.97 5.97 0 0 1 14 9"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h16v16H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function StopwatchSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(stopwatch(color))}`;
+}
+export function StopwatchDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(stopwatch(color));
+}
+//#endregion stopwatch
+
 //#endregion icons
 
 const toDataUri = (svg: string): string => `data:image/svg+xml;base64,${btoa(svg)}`;
@@ -1141,6 +1164,8 @@ export function getIcon(
       return type === 'svg' ? MessageBoxIconInfoSVG : MessageBoxIconInfoDataUri;
     case 'message-box-icon-question':
       return type === 'svg' ? MessageBoxIconQuestionSVG : MessageBoxIconQuestionDataUri;
+    case 'stopwatch':
+      return type === 'svg' ? StopwatchSVG : StopwatchDataUri;
     default:
       return () => undefined;
   }

@@ -359,7 +359,7 @@ export class GlobalMenuTree extends LitElement {
     }
 
     a.leaf.selected:before {
-      background-image: url('${unsafeCSS(`data:image/svg+xml;base64,${btoa(leafBullet('#b40950'))}`)}');
+      background-image: url('${unsafeCSS(`data:image/svg+xml;base64,${btoa(leafBullet('#1e52a0'))}`)}');
     }
 
     a.closed + ul {

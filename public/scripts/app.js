@@ -35,6 +35,18 @@ window.addEventListener('DOMContentLoaded', async () => {
   // 사용자 정보 설정
   userInfo.name = '변승환 상무';
 
+  /* 세션 타이머 설정 */
+  userInfo.sessiomTime = 60 * 20; // 서버 세션 시간을 기본 세션 시간으로 설정 (20분)
+  userInfo.startSessionTimer(); // 설정된 기본 세션 시간으로 타이머 시작
+  // userInfo.startSessionTimer(60 * 10); // 기본 세션 시간을 이용하지 않고 남은 세션 시간을 임의의 값으로 설정하여 타이머 시작
+  // userInfo.resetSessionTimer(); // 기본 세션 시간으로 세션 타임 리셋
+  // userInfo.resetSessionTimer(60 * 10); // 임의의 시간으로 세션 타임 리셋
+  // 세션 타임 아웃 핸들러 등록
+  userInfo.addEventListener('session-expired', () => {
+    console.log('session expired');
+    location.href = '/login.html';
+  });
+
   /*로그아웃*/
   userInfo.addEventListener('logout', async () => {
     console.log('logout button clicked');

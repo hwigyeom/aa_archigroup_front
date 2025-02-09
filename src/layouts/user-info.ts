@@ -1,15 +1,50 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { LogoutSVG, UserInfoSVG } from '../components/icons.js';
+import { SessionTimer } from './session-timer.js';
+
+import './session-timer.js';
 
 @customElement('user-info')
 export class UserInfo extends LitElement {
   @property({ type: String }) name: string = '';
+  @property({ type: Number }) sessionTime: number = SessionTimer.BASE_SESSION_TIME;
+
+  @state() private sessionTimerStarted: boolean = false;
+
+  @query('session-timer') private sessionTimer!: SessionTimer;
+
+  public startSessionTimer(remain?: number) {
+    if (this.sessionTimerStarted) return;
+
+    this.sessionTimerStarted = true;
+    if (typeof remain === 'number') {
+      this.sessionTimer.remainingTime = remain;
+    } else {
+      this.sessionTimer.remainingTime = this.sessionTime;
+    }
+    this.sessionTimer.startTimer();
+  }
+
+  public resetSessionTimer(remain?: number) {
+    if (!this.sessionTimerStarted) return;
+    this.sessionTimer.resetSession(remain);
+  }
 
   protected render() {
     return html`${this.userIcon()}
       <span>${this.name}</span>
+      <session-timer
+        sessionTime="${this.sessionTime}"
+        ?visible=${this.sessionTimerStarted}
+        @session-expired=${this.sessionExpiredHandler}
+      ></session-timer>
       <button type="button" @click=${this.logoutHandler}>${this.logoutIcon()} 로그아웃</button> `;
+  }
+
+  private sessionExpiredHandler() {
+    this.sessionTimerStarted = false;
+    this.dispatchEvent(new CustomEvent('session-expired', { bubbles: true, composed: true }));
   }
 
   private logoutHandler(e: Event) {
@@ -40,7 +75,7 @@ export class UserInfo extends LitElement {
     }
 
     span {
-      margin: 0 16px 0 8px;
+      margin: 0 12px 0 8px;
       color: var(--font-secondary);
       font-size: 12px;
     }
@@ -56,6 +91,7 @@ export class UserInfo extends LitElement {
       font-size: 12px;
       color: var(--font-secondary);
       cursor: pointer;
+      margin-left: 4px;
     }
 
     button:hover {
