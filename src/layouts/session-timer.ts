@@ -1,5 +1,5 @@
 import { css, html, LitElement, svg } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { getIcon } from '../components/icons.js';
 
 @customElement('session-timer')
@@ -9,6 +9,9 @@ export class SessionTimer extends LitElement {
   @property({ type: Number }) sessionTime: number = SessionTimer.BASE_SESSION_TIME;
   @property({ type: Number }) remainingTime: number = this.sessionTime;
   @property({ type: Boolean }) running: boolean = false;
+
+  @state() private lastFrameTime: number = 0;
+  @state() private animationFrameId: number | null = null;
 
   protected render() {
     const hours = String(Math.floor(this.remainingTime / 3600)).padStart(2, '0');
@@ -26,23 +29,44 @@ export class SessionTimer extends LitElement {
 
   public resetSessionTimer(remain?: number) {
     if (!this.running) return;
-    this.remainingTime = typeof remain === 'undefined' ? this.sessionTime : remain;
+
+    this.remainingTime = typeof remain === 'number' ? remain : this.sessionTime;
+    this.lastFrameTime = performance.now();
+    this.requestUpdate();
   }
 
   public startSessionTimer(remain?: number) {
     if (this.running) return;
 
     this.running = true;
+
     this.remainingTime = typeof remain === 'number' ? remain : this.sessionTime;
-    const interval = setInterval(() => {
-      if (this.remainingTime > 0) {
-        this.remainingTime -= 1;
-      } else {
-        clearInterval(interval);
-        this.dispatchEvent(new CustomEvent('session-expired', { bubbles: true, composed: true }));
+    this.lastFrameTime = performance.now();
+
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    this.tick();
+  }
+
+  private tick() {
+    const now = performance.now();
+    const elapsed = now - this.lastFrameTime;
+
+    if (elapsed >= 1000) {
+      const secondsElapsed = Math.floor(elapsed / 1000);
+      this.remainingTime -= secondsElapsed;
+      this.lastFrameTime = now - (elapsed % 1000);
+
+      if (this.remainingTime <= 0) {
         this.running = false;
+        this.dispatchEvent(new CustomEvent('session-expired', { bubbles: true, composed: true }));
+        cancelAnimationFrame(this.animationFrameId!);
       }
-    }, 1000);
+
+      this.requestUpdate();
+    }
+    if (this.running) this.animationFrameId = requestAnimationFrame(() => this.tick());
   }
 
   private expandSessionHandler() {
