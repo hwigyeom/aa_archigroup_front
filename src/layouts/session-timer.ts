@@ -94,7 +94,7 @@ export class SessionTimer extends LitElement {
 
     span {
       display: inline-block;
-      width: 60px;
+      width: 49px;
       font-size: 12px;
       color: var(--font-secondary);
       margin-left: 2px;
