@@ -1,6 +1,6 @@
 import { css, html, LitElement, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { getIcon } from '../components/icons.ts';
+import { getIcon } from '../components/icons.js';
 
 @customElement('session-timer')
 export class SessionTimer extends LitElement {
@@ -8,38 +8,46 @@ export class SessionTimer extends LitElement {
 
   @property({ type: Number }) sessionTime: number = SessionTimer.BASE_SESSION_TIME;
   @property({ type: Number }) remainingTime: number = this.sessionTime;
-  @property({ type: Boolean }) sessionExpired: boolean = false;
-  @property({ type: Boolean }) visible: boolean = false;
+  @property({ type: Boolean }) running: boolean = false;
 
   protected render() {
     const hours = String(Math.floor(this.remainingTime / 3600)).padStart(2, '0');
     const minutes = String(Math.floor((this.remainingTime % 3600) / 60)).padStart(2, '0');
     const seconds = String(this.remainingTime % 60).padStart(2, '0');
 
-    if (this.visible) {
+    if (this.running) {
       return html`${this.splitterSVG()} ${getIcon('svg', 'stopwatch')()}
         <span>${hours}:${minutes}:${seconds}</span>
-        <aa-button color="primary" @click=${() => this.resetSession()}>시간연장</aa-button>`;
+        <aa-button color="primary" @click=${this.expandSessionHandler}>시간연장</aa-button>`;
     } else {
       return html``;
     }
   }
 
-  public resetSession(remain?: number | undefined) {
+  public resetSessionTimer(remain?: number) {
+    if (!this.running) return;
     this.remainingTime = typeof remain === 'undefined' ? this.sessionTime : remain;
   }
 
-  public startTimer() {
-    this.visible = true;
+  public startSessionTimer(remain?: number) {
+    if (this.running) return;
+
+    this.running = true;
+    this.remainingTime = typeof remain === 'number' ? remain : this.sessionTime;
     const interval = setInterval(() => {
       if (this.remainingTime > 0) {
         this.remainingTime -= 1;
       } else {
         clearInterval(interval);
         this.dispatchEvent(new CustomEvent('session-expired', { bubbles: true, composed: true }));
-        this.visible = false;
+        this.running = false;
       }
     }, 1000);
+  }
+
+  private expandSessionHandler() {
+    this.dispatchEvent(new CustomEvent('expand-session', { bubbles: true, composed: true }));
+    this.resetSessionTimer();
   }
 
   private splitterSVG() {
