@@ -14,6 +14,7 @@ export default defineConfig({
         error: resolve(__dirname, 'error.html'),
         layout01: resolve(__dirname, 'view/pi/layout01.html'),
         layout02: resolve(__dirname, 'view/pi/layout02.html'),
+        layout03: resolve(__dirname, 'view/pi/layout03.html'),
       },
     },
   },

@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AA Archigroup</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="/css/normalize.css"/>
+  <link rel="stylesheet" href="/css/global.css"/>
+  <link rel="stylesheet" href="/IBSheet8/css/gray/main.css">
+  <link rel="stylesheet" href="../../src/main.css"/>
+  <script type="module" src="../../src/components/components.ts"></script>
+  <script type="module" src="../../src/layouts/layouts.ts"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="/IBSheet8/ibsheet.js" type="text/javascript"></script>
+  <script src="/IBSheet8/ibleaders.js"></script>
+  <script src="/IBSheet8/locale/ko.js"></script>
+  <script src="/IBSheet8/plugins/ibsheet-common.js"></script>
+  <script src="/IBSheet8/plugins/ibsheet-excel.js"></script>
+  <script src="/IBSheet8/plugins/ibsheet-dialog.js"></script>
+  <script src="/scripts/lib.js"></script>
+  <script src="/scripts/app.js"></script>
+</head>
+<body>
+<!-- global header -->
+<global-header logo="/images/main-ci.svg" logoAlt="AA Archigroup">
+  <user-info id="userInfo"></user-info>
+</global-header>
+<!-- lnb - module -->
+<global-nav-bar></global-nav-bar>
+<!-- lnb - menu tree -->
+<global-menu-tree></global-menu-tree>
+<!-- page content container:start -->
+<page-container title="조회조건 + 그리드 레이아웃"
+                search="show" add="show" delete="show" excel="show" save="show" print="show">
+  <!-- page content:start -->
+
+  <!-- filter box:start -->
+  <aa-filter-box row="1" column="4">
+    <aa-filter-item label="아이디" row="1" column="1" required>
+      <aa-textbox name="id" style="flex-grow: 2"></aa-textbox>
+    </aa-filter-item>
+    <aa-filter-item label="이름" row="1" column="2">
+      <aa-textbox name="name" style="flex-grow: 2"></aa-textbox>
+    </aa-filter-item>
+    <aa-filter-item label="부서명" row="1" column="3">
+      <aa-textbox name="dept" style="flex-grow: 2"></aa-textbox>
+    </aa-filter-item>
+    <aa-filter-item row="1" column="4">
+      <aa-radio-group name="position" value="1">
+        <aa-radio value="1">퇴사자 미포함</aa-radio>
+        <aa-radio value="2">퇴사자 포함</aa-radio>
+      </aa-radio-group>
+    </aa-filter-item>
+  </aa-filter-box>
+  <!-- filter box:end -->
+
+  <div id="gridDiv" class="grid-container">
+  </div>
+  <script type="text/javascript">
+    const pageContainer = document.querySelector('page-container');
+
+    function initGrid() {
+      const options = {
+        Cfg: {
+          Style: "IBGY",
+          Size: "Small",
+          SearchMode: 2,//0, // FastLoad
+          HeaderMerge: 3, //헤더 영역 머지 모드 선택
+          EnterMode: {
+            mode: 4,
+            option: 0
+          },
+          FitWidth: true,
+          AutoSelectFirstEnum: 1, //행 추가시 Enum 컬럼의 첫번째 리스트 아이템이 자동 선택되도록 설정
+          RequiredPosition: "Right",
+          CanColMove: 0,
+          CanColResize: true,
+          CanSort: false,
+
+          //상단 또는 하단 전체카운터 표시부분 설정
+          InfoRowConfig: {
+            Visible: 0,
+            "Space": "Bottom"
+          },
+          FocusWholeRow: true,
+          CustomScroll: 3
+        },
+        Def: {
+          Row: {
+            Height: 25
+            //    AlternateColor : "FFFF00"
+          },
+          Header: {
+            Height: 30
+          },
+        },
+        LeftCols: [
+          {
+            Header: "NO",
+            Type: "Int",
+            Name: "SEQ",
+            Width: 50,
+            CanFocus: 0,
+          },
+        ],
+        //각 열(Column)에 대한 정의 (이름, 유형(Type), 포맷(Format)등을 설정)
+        //열(Color)의 "Type"과 "Name" 속성은 반드시 설정되어야 합니다.
+        Cols: [
+          {
+            Header: {
+              Value: "",
+              HeaderCheck: 1,        //헤더에 체크박스 생성
+              IconAlign: "Center"    //체크박스 가운데 정렬
+            },
+            Type: "Bool",
+            Name: "CheckData",
+            Width: 30,
+            Align: "Center",
+            CanEdit: 1,
+            CanFocus: 0
+          },
+
+          {Header: "아이디", Name: "userid", Type: "Text", Align: "left", CanEdit: 1, Required: 1, Width: 120},
+          {Header: "이름", Name: "username", Type: "Text", Align: "left", Required: 1, Width: 120},
+          {Header: "비밀번호", Name: "password", Type: "Pass", Align: "left", Required: 1, Width: 120},
+          {Header: "사원번호", Name: "employeeno", Type: "Text", Width: 120, CanEdit: 0, CanFocus: 1},
+          {Header: "부서명", Name: "deptname", Type: "Text", Width: 130, CanEdit: 0, CanFocus:1},
+          {Header: "직급명  ", Name: "positionname", Type: "Text", Width: 130, CanEdit: 0, CanFocus: 1},
+        ],
+
+        Events: {
+          onRenderFirstFinish: function (param) {
+          }
+        }
+      };
+
+      var gridData = [];
+
+      // 그리드 높이 창에 맞게 조정
+      gridUtil.fitSize('grid', 'gridDiv');
+
+      // IBSheet8 객체 생성, 비동기
+      IBSheet.create({
+        id: "grid",             // 시트 객체 ID
+        el: "gridDiv",             // 시트를 생성할 DIV객체 ID
+        options: options,        // 초기화 구문 변수
+        sync: 1              // 동기로 시트 생성
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initGrid();
+    });
+
+    pageContainer.addEventListener('search', () => {
+      console.log('search button clicked:');
+    });
+    pageContainer.addEventListener('add', () => {
+      console.log('add button clicked:');
+    });
+    pageContainer.addEventListener('delete', () => {
+      console.log('delete button clicked:');
+    });
+    pageContainer.addEventListener('excel', () => {
+      console.log('excel button clicked:');
+    });
+    pageContainer.addEventListener('save', () => {
+      console.log('save button clicked:');
+    });
+    pageContainer.addEventListener('print', () => {
+      console.log('print button clicked:');
+    });
+  </script>
+  <!-- page content:end -->
+</page-container>
+<!-- page content container:end -->
+</body>
+</html>

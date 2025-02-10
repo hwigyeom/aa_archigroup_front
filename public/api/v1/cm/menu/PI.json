@@ -19,8 +19,8 @@
         },
         {
           "id": "PI010300",
-          "name": "수주비 프로젝트 등록",
-          "url": "/view/pi/sample03.html"
+          "name": "조회조건 + 그리드 레이아웃",
+          "url": "/view/pi/layout03.html"
         },
         {
           "id": "PI010400",

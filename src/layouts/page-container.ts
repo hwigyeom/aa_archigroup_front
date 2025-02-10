@@ -100,6 +100,7 @@ export class PageContainer extends LitElement {
 
     div.content {
       display: flex;
+      flex-direction: column;
       flex-grow: 1;
       padding: 16px 24px 24px 24px;
     }

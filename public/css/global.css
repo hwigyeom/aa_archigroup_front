@@ -38,6 +38,11 @@
   --checkbox-surface-checked: #546475;
 
   --divider-color: #eaeaea;
+
+  --state-negative: #f0491b;
+  --state-pending: #fcb504;
+  --state-positive: #0eba1d;
+  --state-progress: #366dd6;
 }
 
 /* Reset some default browser style */
