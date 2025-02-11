@@ -14,7 +14,6 @@ export class UserInfo extends LitElement {
   firstUpdated() {
     super.connectedCallback();
     window.SessionTimer = this.sessionTimer;
-    console.log(this.sessionTimer);
   }
 
   protected render() {

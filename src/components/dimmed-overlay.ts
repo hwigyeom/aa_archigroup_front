@@ -29,6 +29,7 @@ export class DimmedOverlay extends LitElement {
       overlay.owner = owner;
     }
     this.modalStack.push(owner);
+    this.updateZIndex(overlay);
     document.body.insertBefore(overlay, owner);
     return overlay;
   }
@@ -49,7 +50,7 @@ export class DimmedOverlay extends LitElement {
     const topModal = this.modalStack[this.modalStack.length - 1];
     if (topModal) {
       const modalZIndex = Number(window.getComputedStyle(topModal).zIndex) || 900;
-      const overlayZIndex = Math.floor(modalZIndex / 100) * 100;
+      const overlayZIndex = modalZIndex - 1;
       overlay.style.zIndex = overlayZIndex.toString();
       document.body.insertBefore(overlay, topModal);
     }

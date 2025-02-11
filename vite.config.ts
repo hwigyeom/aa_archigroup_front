@@ -15,6 +15,8 @@ export default defineConfig({
         layout01: resolve(__dirname, 'view/pi/layout01.html'),
         layout02: resolve(__dirname, 'view/pi/layout02.html'),
         layout03: resolve(__dirname, 'view/pi/layout03.html'),
+        popup01: resolve(__dirname, 'view/pi/popup01.html'),
+        popup02: resolve(__dirname, 'view/pi/popup02.html'),
       },
     },
   },

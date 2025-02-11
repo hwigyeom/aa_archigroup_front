@@ -61,6 +61,7 @@ export const icons = [
   'message-box-icon-info',
   'message-box-icon-question',
   'stopwatch',
+  'close-outlined',
 ] as const;
 export type Icons = (typeof icons)[number];
 
@@ -1060,6 +1061,27 @@ export function StopwatchDataUri(color: string = ICON_DEFAULT_COLOR) {
 }
 //#endregion stopwatch
 
+//#region close-outlined
+const closeOutlined = (
+  color: string
+) => `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#a)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.707 6.293a1 1 0 0 0-1.414 1.414L10.586 12l-4.293 4.293a1 1 0 1 0 1.414 1.414L12 13.414l4.293 4.293a1 1 0 0 0 1.414-1.414L13.414 12l4.293-4.293a1 1 0 0 0-1.414-1.414L12 10.586z" fill="${color}"/>
+  </g>
+  <defs>
+    <clipPath id="a">
+      <path fill="#fff" d="M0 0h24v24H0z"/>
+    </clipPath>
+  </defs>
+</svg>`;
+export function CloseOutlinedSVG(color: string = ICON_DEFAULT_COLOR) {
+  return svg`${unsafeSVG(closeOutlined(color))}`;
+}
+export function CloseOutlinedDataUri(color: string = ICON_DEFAULT_COLOR) {
+  return toDataUri(closeOutlined(color));
+}
+//#endregion close-outlined
+
 //#endregion icons
 
 const toDataUri = (svg: string): string => `data:image/svg+xml;base64,${btoa(svg)}`;
@@ -1166,6 +1188,8 @@ export function getIcon(
       return type === 'svg' ? MessageBoxIconQuestionSVG : MessageBoxIconQuestionDataUri;
     case 'stopwatch':
       return type === 'svg' ? StopwatchSVG : StopwatchDataUri;
+    case 'close-outlined':
+      return type === 'svg' ? CloseOutlinedSVG : CloseOutlinedDataUri;
     default:
       return () => undefined;
   }

@@ -4,5 +4,6 @@ import { DimmedOverlay } from './dimmed-overlay.js';
 import { Loading } from './loading.js';
 import { RadioGroup } from './radio-group.js';
 import { Textbox } from './textbox.js';
+import { PopupDialog } from './popup-dialog.js';
 
-export { Button, MessageBox, DimmedOverlay, Loading, RadioGroup, Textbox };
+export { Button, MessageBox, DimmedOverlay, Loading, RadioGroup, Textbox, PopupDialog };

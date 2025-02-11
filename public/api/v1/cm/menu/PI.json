@@ -36,17 +36,17 @@
     },
     {
       "id": "PI020000",
-      "name": "투입인원관리",
+      "name": "팝업 레이아웃",
       "children": [
         {
           "id": "PI020100",
-          "name": "부문 공통 인원 등록",
-          "url": null
+          "name": "팝업 레이아웃",
+          "url": "/view/pi/popup01.html"
         },
         {
           "id": "PI020200",
-          "name": "인건비 계획 등록",
-          "url": null
+          "name": "팝업 호출 예제",
+          "url": "/view/pi/popup02.html"
         },
         {
           "id": "PI020300",

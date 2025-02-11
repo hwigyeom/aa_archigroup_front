@@ -9,6 +9,7 @@ export class FilterItem extends LitElement {
   @property({ type: Number }) row: number = 1;
   @property({ type: Number, attribute: 'column-end' }) columnEnd: number = 0;
   @property({ type: Number, attribute: 'row-end' }) rowEnd: number = 0;
+  @property({ type: Number, attribute: 'label-min-width' }) labelMinWidth: number = 0;
   protected render() {
     return html`
       <style>
@@ -18,6 +19,7 @@ export class FilterItem extends LitElement {
           grid-row-start: ${this.row};
           ${this.rowEnd > this.row ? `grid-row-end: ${this.rowEnd};` : nothing}
         }
+        ${this.labelMinWidth > 0 ? `label { min-width: ${this.labelMinWidth}px; }` : nothing}
       </style>
       ${this.label ? html`<label class="${this.required ? 'required' : nothing}">${this.label}</label>` : nothing}
       <slot></slot>
@@ -39,7 +41,7 @@ export class FilterItem extends LitElement {
       justify-content: flex-end;
       font-weight: var(--font-weight-semi-bold);
       align-items: center;
-      min-width: 59px;
+      min-width: 40px;
       padding: 0 4px 0 0;
       margin-right: 6px;
     }

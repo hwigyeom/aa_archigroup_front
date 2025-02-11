@@ -6,6 +6,7 @@ import { FilterItem } from './filter-item.ts';
 export class FilterBox extends LitElement {
   @property({ type: Number }) columns: number = 4;
   @property({ type: Number }) rows: number = 1;
+  @property({ type: Number, attribute: 'label-min-width' }) labelMinWidth: number = 0;
 
   /*@queryAssignedElements({ selector: 'aa-filter-item' })
   private items!: FilterItem[];*/
@@ -31,6 +32,11 @@ export class FilterBox extends LitElement {
     nodes.forEach((node) => {
       if (!(node instanceof FilterItem && node.tagName.toLowerCase() === 'aa-filter-item')) {
         node.parentNode?.removeChild(node);
+      } else {
+        if (this.labelMinWidth > 0) {
+          const item = node as FilterItem;
+          item.labelMinWidth = this.labelMinWidth;
+        }
       }
     });
   }
