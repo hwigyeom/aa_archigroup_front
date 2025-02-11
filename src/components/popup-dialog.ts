@@ -151,6 +151,7 @@ export class PopupDialog extends LitElement {
       padding-top: 3px;
       margin-bottom: 16px;
       border-bottom: 1px solid var(--divider-color);
+      flex-shrink: 0;
     }
 
     h4 {
@@ -164,6 +165,7 @@ export class PopupDialog extends LitElement {
       display: flex;
       flex-direction: column;
       flex-grow: 2;
+      overflow-y: auto;
     }
   `;
 }
