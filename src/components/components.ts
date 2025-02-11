@@ -7,5 +7,21 @@ import { Textbox } from './textbox.js';
 import { PopupDialog } from './popup-dialog.js';
 import { Tab } from './tab.js';
 import { TabItem } from './tab-item.js';
+import { Dropdown } from './dropdown.js';
+import { DropdownItem } from './dropdown-item.js';
+import { DropdownPopover } from './dropdown-popover.js';
 
-export { Button, MessageBox, DimmedOverlay, Loading, RadioGroup, Textbox, PopupDialog, Tab, TabItem };
+export {
+  Button,
+  MessageBox,
+  DimmedOverlay,
+  Loading,
+  RadioGroup,
+  Textbox,
+  PopupDialog,
+  Tab,
+  TabItem,
+  Dropdown,
+  DropdownItem,
+  DropdownPopover,
+};

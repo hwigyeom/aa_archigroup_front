@@ -1,0 +1,24 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as DropdownStories from '../components/dropdown.stories.ts';
+
+<Meta of={DropdownStories} />
+
+# Dropdown
+<br />
+<br />
+
+## Usage
+
+```html
+<aa-dropdown name="dropdownName"
+             value="value"
+             disabled
+             readonly>
+  <aa-dropdown-item value="value1">Item 1</aa-dropdown-item>
+  <aa-dropdown-item value="value2">Item 2</aa-dropdown-item>
+</aa-dropdown>
+```
+
+## Default
+
+<Canvas of={DropdownStories.Default} />
