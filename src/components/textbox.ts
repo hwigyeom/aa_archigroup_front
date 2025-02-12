@@ -1,5 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { styleMap } from 'lit/directives/style-map.js';
 
 @customElement('aa-textbox')
 export class Textbox extends LitElement {
@@ -8,8 +9,15 @@ export class Textbox extends LitElement {
   @property({ type: String }) placeholder: string = '';
   @property({ type: Boolean, reflect: true }) disabled: boolean = false;
   @property({ type: Boolean, reflect: true }) readonly: boolean = false;
+  @property({ type: String }) align: 'left' | 'center' | 'right' = 'left';
 
   protected render() {
+    const styles: { [key: string]: string } = {};
+
+    if (this.align !== 'left') {
+      styles.textAlign = this.align;
+    }
+
     return html`<input
       type="text"
       id=${this.name}
@@ -19,6 +27,7 @@ export class Textbox extends LitElement {
       value=${this.value}
       placeholder=${this.placeholder}
       @change=${this.textChangeHandler}
+      style=${styleMap(styles)}
     />`;
   }
 

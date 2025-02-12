@@ -50,6 +50,16 @@ const textboxArgTypes: ArgTypes = {
       },
     },
   },
+  align: {
+    control: { type: 'select' },
+    options: ['left', 'center', 'right'],
+    table: {
+      category: 'Porperties',
+      type: {
+        summary: 'left(기본값) | center | right',
+      },
+    },
+  },
 };
 
 const meta: Meta<Textbox> = {
@@ -108,6 +118,20 @@ export const Placeholder: Story = {
     name: textboxArgTypes.name,
     value: textboxArgTypes.value,
     placeholder: textboxArgTypes.placeholder,
+  },
+};
+
+export const Align: Story = {
+  render: (args) => html`<aa-textbox name=${args.name} value=${args.value} align=${args.align}></aa-textbox>`,
+  args: {
+    name: 'textbox',
+    value: 'Text align',
+    align: 'center',
+  },
+  argTypes: {
+    name: textboxArgTypes.name,
+    value: textboxArgTypes.value,
+    align: textboxArgTypes.align,
   },
 };
 
