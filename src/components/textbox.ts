@@ -18,7 +18,14 @@ export class Textbox extends LitElement {
       ?readonly=${this.readonly}
       value=${this.value}
       placeholder=${this.placeholder}
+      @change=${this.textChangeHandler}
     />`;
+  }
+
+  private textChangeHandler(e: Event) {
+    const input = e.target as HTMLInputElement;
+    this.value = input.value;
+    this.dispatchEvent(new CustomEvent('change', { detail: { value: this.value } }));
   }
 
   static styles = css`
