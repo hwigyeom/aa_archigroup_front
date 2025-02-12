@@ -14,9 +14,9 @@ export class DropdownPopover extends LitElement {
   }
 
   disconnectedCallback() {
-    super.disconnectedCallback();
     document.removeEventListener('click', this.handleOutsideClick.bind(this));
     window.removeEventListener('scroll', this.handleScroll.bind(this));
+    super.disconnectedCallback();
   }
 
   protected updated(changes: PropertyValues) {
