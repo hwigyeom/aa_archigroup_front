@@ -1,5 +1,7 @@
 export const ICON_DEFAULT_COLOR = '#9ca5b1';
 export const ICON_INVERSE_COLOR = '#fff';
+export const ICON_ACTIVE_COLOR = '#546475';
+export const ICON_DISABLED_COLOR = '#dfe0e2';
 export const CHECKBOX_NORMAL_BORDER_COLOR = '#cbd1d7';
 export const CHECKBOX_HOVER_BORDER_COLOR = '#9ca5b1';
 export const CHECKBOX_DISABLED_BORDER_COLOR = '#dfe0e2';
