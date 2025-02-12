@@ -76,7 +76,7 @@ export class GlobalMenuTree extends LitElement {
 
   protected render() {
     const empty = !this.menus || this.menus.length === 0;
-    return html`<menu-search></menu-search>
+    return html`<menu-search .menus=${this.getFlattenMenus()}></menu-search>
       <h2>${this.title}</h2>
       <nav class=${ifDefined(empty ? 'empty' : undefined)}>
         ${!empty ? html`${this.menuTreeRender(this.menus)}` : html`${this.emptyMessageRender()}`}
@@ -210,6 +210,26 @@ export class GlobalMenuTree extends LitElement {
     } else if (target.classList.contains('selected')) {
       e.preventDefault();
     }
+  }
+
+  private getFlattenMenus(): MenuTreeNode[] {
+    if (!this.menus) return [];
+
+    const result: MenuTreeNode[] = [];
+
+    const traverse = (nodes: MenuTreeNode[]) => {
+      for (const node of nodes) {
+        if (!node.children || node.children.length === 0) {
+          result.push({ ...node, children: undefined });
+        } else {
+          traverse(node.children);
+        }
+      }
+    };
+
+    traverse(this.menus);
+
+    return result;
   }
 
   static styles = css`
