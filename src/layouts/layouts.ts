@@ -1,19 +1,8 @@
-import { GlobalHeader } from './global-header.js';
-import { GlobalMenuTree } from './global-menu-tree.js';
-import { GlobalNavigationBar } from './global-nav-bar.js';
-import { MenuSearch } from './menu-search.js';
-import { PageContainer } from './page-container.js';
-import { UserInfo } from './user-info.js';
-import { FilterBox } from './filter-box.js';
-import { FilterItem } from './filter-item.js';
-
-export {
-  GlobalHeader,
-  GlobalMenuTree,
-  GlobalNavigationBar,
-  MenuSearch,
-  PageContainer,
-  UserInfo,
-  FilterBox,
-  FilterItem,
-};
+export * from './global-header.js';
+export * from './global-menu-tree.js';
+export * from './global-nav-bar.js';
+export * from './menu-search.js';
+export * from './page-container.js';
+export * from './user-info.js';
+export * from './filter-box.js';
+export * from './filter-item.js';
