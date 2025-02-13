@@ -59,7 +59,7 @@ export class Textbox extends LitElement {
       font-weight: var(--font-weight-normal);
     }
 
-    input[type='text'] {
+    input {
       font-family: var(--font-family), serif;
       font-weight: var(--font-weight-normal);
       border: 1px solid var(--input-border-normal);
@@ -72,20 +72,20 @@ export class Textbox extends LitElement {
       width: 100%;
     }
 
-    input[type='text']::placeholder {
+    input::placeholder {
       color: var(--font-placeholder);
     }
 
-    input[type='text']:hover {
+    input:hover {
       border-color: var(--input-border-hover);
     }
 
-    input[type='text']:focus {
+    input:focus {
       border-color: var(--input-border-active);
       outline: none;
     }
 
-    input[type='text']:disabled {
+    input:disabled {
       border-color: var(--input-border-disable);
       background-color: var(--input-surface-disabled);
       color: var(--font-disable);
