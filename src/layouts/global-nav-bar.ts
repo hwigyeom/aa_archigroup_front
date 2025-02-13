@@ -108,6 +108,12 @@ export class GlobalNavigationBar extends LitElement {
     super.updated(changes);
     if (changes.has('expanded')) {
       this.manageBodyMenuOpenedClass();
+
+      if (this.expanded) {
+        this.dispatchEvent(new CustomEvent('menu-expanded', { bubbles: false, composed: false }));
+      } else {
+        this.dispatchEvent(new CustomEvent('menu-collapsed', { bubbles: false, composed: false }));
+      }
     }
     if (changes.has('selected')) {
       this.menuSelectTrigger();
