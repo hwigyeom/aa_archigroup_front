@@ -1,6 +1,6 @@
 import { css, html, LitElement, PropertyValues, unsafeCSS } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import { HamburgerCollapsedSVG, HamburgerExtendedSVG, SearchSVG } from '../components/icons.js';
+import { HamburgerCollapsedSVG, HamburgerExpandedSVG, SearchSVG } from '../components/icons.js';
 import { ICON_DEFAULT_COLOR } from '../components/constants.js';
 
 export type RootMenu = {
@@ -11,7 +11,7 @@ export type RootMenu = {
 
 @customElement('global-nav-bar')
 export class GlobalNavigationBar extends LitElement {
-  @property({ type: Boolean }) extended: boolean = true;
+  @property({ type: Boolean }) expanded: boolean = true;
   @property({ type: String, reflect: true }) selected: string = '';
 
   @state()
@@ -26,12 +26,12 @@ export class GlobalNavigationBar extends LitElement {
   }
 
   protected render() {
-    return html`${this.renderExtender()}${this.renderTopMenus()}`;
+    return html`${this.renderExpander()}${this.renderTopMenus()}`;
   }
 
-  protected renderExtender() {
-    const icon = this.extended ? HamburgerExtendedSVG() : HamburgerCollapsedSVG();
-    return html`<a class="extender" href="#" @click=${this.extenderClickHandler}>${icon}</a>`;
+  protected renderExpander() {
+    const icon = this.expanded ? HamburgerExpandedSVG() : HamburgerCollapsedSVG();
+    return html`<a class="expander" href="#" @click=${this.expanderClickHandler}>${icon}</a>`;
   }
 
   protected firstUpdated(_changedProperties: PropertyValues) {
@@ -76,14 +76,14 @@ export class GlobalNavigationBar extends LitElement {
         this.selected = menuId;
       }
     }
-    if (!this.extended) {
-      this.extended = true;
+    if (!this.expanded) {
+      this.expanded = true;
     }
   }
 
-  private extenderClickHandler(e: Event) {
+  private expanderClickHandler(e: Event) {
     e.preventDefault();
-    this.extended = !this.extended;
+    this.expanded = !this.expanded;
   }
 
   private menuSelectTrigger() {
@@ -97,7 +97,7 @@ export class GlobalNavigationBar extends LitElement {
   }
 
   private manageBodyMenuOpenedClass() {
-    if (this.extended) {
+    if (this.expanded) {
       document.body.classList.add('menu-opened');
     } else {
       document.body.classList.remove('menu-opened');
@@ -106,7 +106,7 @@ export class GlobalNavigationBar extends LitElement {
 
   protected updated(changes: PropertyValues) {
     super.updated(changes);
-    if (changes.has('extended')) {
+    if (changes.has('expanded')) {
       this.manageBodyMenuOpenedClass();
     } else if (changes.has('selected')) {
       this.menuSelectTrigger();
@@ -125,7 +125,7 @@ export class GlobalNavigationBar extends LitElement {
       z-index: 302;
     }
 
-    a.extender {
+    a.expander {
       display: flex;
       justify-content: center;
       align-items: center;
