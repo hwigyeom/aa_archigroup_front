@@ -38,7 +38,6 @@ export class Dropdown extends LitElement {
 
   public bindItems(items: { value: string; text: string }[]) {
     if (this.popoverElement) {
-      console.log('a');
       this.popoverElement.shadowRoot?.querySelectorAll('aa-dropdown-item').forEach((item) => {
         item.remove();
       });
