@@ -41,17 +41,24 @@ export class FilterItem extends LitElement {
       justify-content: flex-end;
       font-weight: var(--font-weight-semi-bold);
       align-items: center;
-      min-width: 40px;
-      padding: 0 4px 0 0;
-      margin-right: 6px;
+      min-width: 60px;
+      padding: 0;
+      margin-right: 8px;
+    }
+    label::after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      content: '';
+      width: 8px;
     }
     label.required::after {
-      display: block;
-      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       content: '*';
+      width: 6px;
       color: var(--state-negative);
-      right: -4px;
-      top: 2px;
     }
   `;
 }
