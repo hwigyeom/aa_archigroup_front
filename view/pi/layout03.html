@@ -39,10 +39,10 @@
   <!-- filter box:start -->
   <aa-filter-box row="1" column="4">
     <aa-filter-item label="아이디" row="1" column="1" required>
-      <aa-textbox name="id" style="flex-grow: 2"></aa-textbox>
+      <aa-textbox id="userid" name="id" style="flex-grow: 2"></aa-textbox>
     </aa-filter-item>
     <aa-filter-item label="이름" row="1" column="2">
-      <aa-textbox name="name" style="flex-grow: 2"></aa-textbox>
+      <aa-textbox type="password" id="name" name="name" style="flex-grow: 2"></aa-textbox>
     </aa-filter-item>
     <aa-filter-item label="부서명" row="1" column="3">
       <aa-dropdown name="dept" style="flex-grow: 2">
@@ -156,6 +156,16 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       initGrid();
+
+      /* aa-textbox key event handling */
+      const userid = document.querySelector('#userid');
+      userid.addEventListener('keyup', textBoxKeyEventHandler);
+      userid.addEventListener('keydown', textBoxKeyEventHandler);
+      userid.addEventListener('input', textBoxKeyEventHandler);
+
+      function textBoxKeyEventHandler(event) {
+        console.log('key event:', event.type, event);
+      }
     });
 
     pageContainer.addEventListener('search', () => {

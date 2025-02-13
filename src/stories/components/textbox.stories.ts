@@ -1,4 +1,5 @@
 import type { ArgTypes, Meta, StoryObj } from '@storybook/web-components';
+import { withActions } from '@storybook/addon-actions/decorator';
 import { html } from 'lit';
 import { Textbox } from '../../components/textbox.ts';
 
@@ -81,6 +82,12 @@ export const Default: Story = {
     name: textboxArgTypes.name,
     value: textboxArgTypes.value,
   },
+  parameters: {
+    actions: {
+      handles: ['change'],
+    },
+  },
+  decorators: [withActions],
 };
 
 export const Disabled: Story = {

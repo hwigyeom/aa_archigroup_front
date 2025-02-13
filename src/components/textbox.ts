@@ -5,6 +5,7 @@ import { styleMap } from 'lit/directives/style-map.js';
 @customElement('aa-textbox')
 export class Textbox extends LitElement {
   @property({ type: String }) name: string = '';
+  @property({ type: String }) type: 'text' | 'password' = 'text';
   @property({ type: String, reflect: true }) value: string = '';
   @property({ type: String }) placeholder: string = '';
   @property({ type: Boolean, reflect: true }) disabled: boolean = false;
@@ -19,7 +20,7 @@ export class Textbox extends LitElement {
     }
 
     return html`<input
-      type="text"
+      type=${this.type}
       id=${this.name}
       name=${this.name}
       ?disabled=${this.disabled}
@@ -27,6 +28,9 @@ export class Textbox extends LitElement {
       value=${this.value}
       placeholder=${this.placeholder}
       @change=${this.textChangeHandler}
+      @keydown=${this.propagateEventHandler}
+      @keyup=${this.propagateEventHandler}
+      @input=${this.propagateEventHandler}
       style=${styleMap(styles)}
     />`;
   }
@@ -34,7 +38,15 @@ export class Textbox extends LitElement {
   private textChangeHandler(e: Event) {
     const input = e.target as HTMLInputElement;
     this.value = input.value;
-    this.dispatchEvent(new CustomEvent('change', { detail: { value: this.value } }));
+    this.propagateEventHandler(e);
+  }
+
+  private propagateEventHandler(e: Event) {
+    e.stopPropagation();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const newEvent = new e.constructor(e.type, e);
+    this.dispatchEvent(newEvent);
   }
 
   static styles = css`
