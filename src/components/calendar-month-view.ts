@@ -1,33 +1,19 @@
-import { css, html, LitElement, unsafeCSS } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { css, html, LitElement, PropertyValues, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { getIcon } from './icons.js';
-import { ICON_ACTIVE_COLOR, ICON_DISABLED_COLOR } from './constants.js';
+import { DATE_SPLITTER, ICON_ACTIVE_COLOR, ICON_DISABLED_COLOR } from './constants.js';
 
-const splitter = '-';
-
-@customElement('aa-month-calendar')
-export class MonthCalendar extends LitElement {
+@customElement('aa-calendar-month-view')
+export class CalendarMonthView extends LitElement {
   @property({ type: Date }) date: Date | null = null;
+  @property({ type: String }) value: string | null = null;
+  @property({ type: String }) text: string | null = null;
+  @property({ type: Number }) currentYear: number = new Date().getFullYear();
 
-  @property({ type: Number })
   get year(): number | null {
     return this.date?.getFullYear() ?? null;
   }
-  set year(value: number | null) {
-    if (typeof value === 'number') {
-      let date: Date;
-      if (this.date) {
-        date = new Date(value, this.date.getMonth(), 1);
-      } else {
-        date = new Date(value, 0, 1);
-      }
-      this.setMonth(date);
-    } else {
-      this.setMonth(null);
-    }
-  }
 
-  @property({ type: Number })
   get month(): number | null {
     if (this.date) {
       return this.date.getMonth() + 1;
@@ -35,48 +21,30 @@ export class MonthCalendar extends LitElement {
       return null;
     }
   }
-  set month(value: number | null) {
-    if (typeof value === 'number' && value > 0) {
-      let date: Date;
+
+  attributeChangedCallback(name: string, _old: string | null, value: string | null) {
+    super.attributeChangedCallback(name, _old, value);
+    if (name === 'value') {
+      const date = this.parseDate(value || '');
+      if (value !== '' && value !== null && !date) {
+        console.error(`aa-calendar-month-view[${name}]: Invalid date format: ${value}`);
+      }
+      this.date = date;
+    }
+  }
+
+  protected update(changes: PropertyValues): void {
+    if (changes.has('date')) {
+      this.value = this.date ? `${this.date.getFullYear()}${String(this.date.getMonth() + 1).padStart(2, '0')}` : '';
+      this.text = this.date
+        ? `${this.date.getFullYear()}${DATE_SPLITTER}${String(this.date.getMonth() + 1).padStart(2, '0')}`
+        : '';
       if (this.date) {
-        date = new Date(this.date);
-        date.setMonth(value - 1);
-      } else {
-        date = new Date(new Date().getFullYear(), value - 1, 1);
-      }
-      this.setMonth(date);
-    } else {
-      this.setMonth(null);
-    }
-  }
-
-  @property({ type: String })
-  get value(): string | null {
-    if (this.date) {
-      return `${this.date.getFullYear()}${String(this.date.getMonth() + 1).padStart(2, '0')}`;
-    }
-    return null;
-  }
-  set value(date: string | null) {
-    if (date === null) {
-      this.setMonth(null);
-    } else {
-      const newDate = this.parseDate(date);
-      if (newDate) {
-        this.setMonth(newDate);
+        this.currentYear = this.date.getFullYear();
       }
     }
+    super.update(changes);
   }
-
-  @property({ type: String })
-  get text(): string {
-    if (this.date) {
-      return `${this.date.getFullYear()}${splitter}${String(this.date.getMonth() + 1).padStart(2, '0')}`;
-    }
-    return '';
-  }
-
-  @state() private currentYear: number = new Date().getFullYear();
 
   protected render() {
     return html` <header>
@@ -91,7 +59,7 @@ export class MonthCalendar extends LitElement {
           const date = new Date(this.currentYear, month, 1);
           return html`<div
             @click=${() => {
-              this.setMonth(date);
+              this.setMonth(date, true);
             }}
             class="month-cell${date.getFullYear() === new Date().getFullYear() &&
             date.getMonth() === new Date().getMonth()
@@ -116,12 +84,28 @@ export class MonthCalendar extends LitElement {
     );
   }
 
-  private setMonth(date: Date | null) {
+  private setMonth(date: Date | null, event: boolean = false) {
     this.date = date;
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { date, year: date?.getFullYear() ?? null, month: date ? date.getMonth() + 1 : null },
+        bubbles: true,
+        composed: true,
+      })
+    );
+
     if (date) {
       this.currentYear = date.getFullYear();
+      if (event) {
+        this.dispatchEvent(
+          new CustomEvent('month-selected', {
+            detail: { date, year: date.getFullYear(), month: date.getMonth() + 1 },
+            bubbles: true,
+            composed: true,
+          })
+        );
+      }
     }
-    this.dispatchEvent(new CustomEvent('month-selected', { detail: { date }, bubbles: true, composed: true }));
   }
 
   private prevYear() {
@@ -274,6 +258,6 @@ export class MonthCalendar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'aa-month-calendar': MonthCalendar;
+    'aa-calendar-month-view': CalendarMonthView;
   }
 }

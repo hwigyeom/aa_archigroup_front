@@ -1,106 +1,54 @@
-import { css, html, LitElement, unsafeCSS } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { css, html, LitElement, PropertyValues, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { getIcon } from './icons.js';
-import { ICON_ACTIVE_COLOR, ICON_DISABLED_COLOR } from './constants.js';
+import { DATE_SPLITTER, ICON_ACTIVE_COLOR, ICON_DISABLED_COLOR } from './constants.js';
 
-const splitter = '-';
-
-@customElement('aa-day-calendar')
-export class DayCalendar extends LitElement {
+@customElement('aa-calendar-day-view')
+export class CalendarDayView extends LitElement {
   @property({ type: Date }) date: Date | null = null;
+  @property({ type: String, reflect: true }) value: string | null = null;
+  @property({ type: String, reflect: true }) text: string | null = null;
+  @property({ type: Number }) currentYear: number = new Date().getFullYear();
+  @property({ type: Number }) currentMonth: number = new Date().getMonth();
 
-  @property({ type: Number })
   get year(): number | null {
     return this.date?.getFullYear() ?? null;
   }
-  set year(value: number | null) {
-    if (typeof value === 'number') {
-      let date: Date;
-      if (this.date) {
-        date = new Date(value, this.date.getMonth(), this.date.getDate());
-      } else {
-        date = new Date(value, 0, 1);
-      }
-      this.setDate(date);
-    } else {
-      this.setDate(null);
-    }
-  }
 
-  @property({ type: Number })
   get month(): number | null {
-    if (this.date) {
-      return this.date.getMonth() + 1;
-    } else {
-      return null;
-    }
-  }
-  set month(value: number | null) {
-    if (typeof value === 'number' && value > 0) {
-      let date: Date;
-      if (this.date) {
-        date = new Date(this.date);
-        date.setMonth(value - 1);
-      } else {
-        date = new Date(new Date().getFullYear(), value - 1, 1);
-      }
-      this.setDate(date);
-    } else {
-      this.setDate(null);
-    }
+    return this.date ? this.date.getMonth() + 1 : null;
   }
 
-  @property({ type: Number })
   get day(): number | null {
-    if (this.date) {
-      return this.date.getDate();
-    } else {
-      return null;
-    }
+    return this.date?.getDate() ?? null;
   }
-  set day(value: number | null) {
-    if (typeof value === 'number' && value > 0) {
-      let date: Date;
-      if (this.date) {
-        date = new Date(this.date);
-        date.setDate(value);
-      } else {
-        date = new Date(new Date().getFullYear(), new Date().getMonth(), value);
+
+  attributeChangedCallback(name: string, _old: string | null, value: string | null) {
+    super.attributeChangedCallback(name, _old, value);
+    if (name === 'value') {
+      const date = this.parseDate(value || '');
+      if (value && !date) {
+        console.error(`aa-calendar-day-view[${name}]: Invalid date format: ${value}`);
       }
-      this.setDate(date);
-    } else {
-      this.setDate(null);
+      this.date = date;
     }
   }
 
-  @property({ type: String })
-  get value(): string | null {
-    if (this.date) {
-      return `${this.date.getFullYear()}${String(this.date.getMonth() + 1).padStart(2, '0')}${String(
-        this.date.getDate()
-      ).padStart(2, '0')}`;
+  protected update(changes: PropertyValues) {
+    if (changes.has('date')) {
+      this.value = this.date
+        ? `${this.date.getFullYear()}${String(this.date.getMonth() + 1).padStart(2, '0')}${String(this.date.getDate()).padStart(2, '0')}`
+        : '';
+      this.text = this.date
+        ? `${this.date.getFullYear()}${DATE_SPLITTER}${String(this.date.getMonth() + 1).padStart(2, '0')}${DATE_SPLITTER}${String(this.date.getDate()).padStart(2, '0')}`
+        : '';
+      if (this.date) {
+        this.currentYear = this.date.getFullYear();
+        this.currentMonth = this.date.getMonth();
+      }
     }
-    return null;
+    super.update(changes);
   }
-  set value(value: string | null) {
-    if (value) {
-      const date = this.parseDate(value);
-      this.setDate(date);
-    } else {
-      this.setDate(null);
-    }
-  }
-
-  @property({ type: String })
-  get text(): string {
-    if (this.date) {
-      return `${this.date.getFullYear()}${splitter}${String(this.date.getMonth() + 1).padStart(2, '0')}${splitter}${String(this.date.getDate()).padStart(2, '0')}`;
-    }
-    return '';
-  }
-
-  @state() private currentYear: number = new Date().getFullYear();
-  @state() private currentMonth: number = new Date().getMonth();
 
   protected render() {
     return html`
@@ -124,7 +72,7 @@ export class DayCalendar extends LitElement {
               html`<div
                 data-date=${day.getDate()}
                 @click=${this.dayInCurrentMonth(day)
-                  ? () => this.setDate(day)
+                  ? () => this.setDate(day, true)
                   : () => this.moveMonth(day.getFullYear(), day.getMonth())}
                 class="day-cell${idx === 0 ? ' day-sun' : ''}${idx === 6 ? ' day-sat' : ''}${day.getMonth() !==
                 this.currentMonth
@@ -142,18 +90,31 @@ export class DayCalendar extends LitElement {
     `;
   }
 
-  private setDate(date: Date | null) {
+  private setDate(date: Date | null, event: boolean = false) {
     this.date = date;
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: {
+          date,
+          year: date?.getFullYear() ?? null,
+          month: date ? date.getMonth() + 1 : null,
+          day: date?.getDate() ?? null,
+        },
+        bubbles: true,
+        composed: true,
+      })
+    );
+
     if (date) {
-      this.currentYear = date.getFullYear();
-      this.currentMonth = date.getMonth();
-      this.dispatchEvent(
-        new CustomEvent('date-selected', {
-          detail: { date, year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() },
-          bubbles: true,
-          composed: true,
-        })
-      );
+      if (event) {
+        this.dispatchEvent(
+          new CustomEvent('date-selected', {
+            detail: { date, year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() },
+            bubbles: true,
+            composed: true,
+          })
+        );
+      }
     }
   }
 
@@ -392,6 +353,6 @@ export class DayCalendar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'aa-day-calendar': DayCalendar;
+    'aa-calendar-day-view': CalendarDayView;
   }
 }

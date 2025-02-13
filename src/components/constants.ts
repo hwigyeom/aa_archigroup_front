@@ -20,3 +20,4 @@ export const RADIO_DISABLED_BORDER_COLOR = '#dfe0e2';
 export const RADIO_DISABLED_BG_COLOR = '#fafafa';
 export const RADIO_CHECKED_BORDER_COLOR = '#546475';
 export const RADIO_CHECKED_BG_COLOR = '#fff';
+export const DATE_SPLITTER = '-';

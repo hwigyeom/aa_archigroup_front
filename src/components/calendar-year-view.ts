@@ -1,10 +1,10 @@
-import { css, html, LitElement, PropertyValues, unsafeCSS } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { css, html, LitElement, unsafeCSS } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 import { getIcon } from './icons.js';
 import { ICON_DISABLED_COLOR } from './constants.js';
 
-@customElement('aa-year-calendar')
-export class YearCalendar extends LitElement {
+@customElement('aa-calendar-year-view')
+export class CalendarYearView extends LitElement {
   @property({ type: Number }) year: number | null = null;
 
   @property({ type: String })
@@ -24,23 +24,23 @@ export class YearCalendar extends LitElement {
     return this.year?.toString() ?? '';
   }
 
-  @state() private currentStartYear: number = this.findYearRange(new Date().getFullYear()).start;
+  @property({ type: Number }) currentYear: number = new Date().getFullYear();
 
   protected render() {
-    const { start, end } = this.findYearRange(this.currentStartYear);
+    const { start, end } = this.findYearRange(this.currentYear);
     return html`
       <header>
         <div class="calendar-title">${start}~${end}년</div>
         <div class="buttons">
-          <button type="button" class="prev" @click=${() => this.changeYearRange(start - 1)}>이전</button>
-          <button type="button" class="next" @click=${() => this.changeYearRange(end + 1)}>다음</button>
+          <button type="button" class="prev" @click=${() => (this.currentYear = start - 1)}>이전</button>
+          <button type="button" class="next" @click=${() => (this.currentYear = end + 1)}>다음</button>
         </div>
       </header>
       <section class="calendar">
         ${Array.from({ length: end - start + 1 }, (_, i) => start + i).map((year) => {
           return html`<div
             @click=${() => {
-              this.setYear(year);
+              this.setYear(year, true);
             }}
             class="year-cell${year === new Date().getFullYear() ? ' this-year' : ''}${year === this.year
               ? ' selected'
@@ -53,26 +53,15 @@ export class YearCalendar extends LitElement {
     `;
   }
 
-  protected async updated(_changedProperties: PropertyValues) {
-    super.updated(_changedProperties);
-    if (_changedProperties.has('year')) {
-      if (this.year) {
-        await this.updateComplete;
-        this.changeYearRange(this.year!);
+  private setYear(year: number | null, event: boolean = false) {
+    this.year = year;
+    this.dispatchEvent(new CustomEvent('change', { detail: { year }, bubbles: true, composed: true }));
+
+    if (year !== null) {
+      if (event) {
+        this.dispatchEvent(new CustomEvent('year-selected', { detail: { year }, bubbles: true, composed: true }));
       }
     }
-  }
-
-  private setYear(year: number | null) {
-    this.year = year;
-    if (year !== null) {
-      this.currentStartYear = this.findYearRange(year).start;
-      this.dispatchEvent(new CustomEvent('year-selected', { detail: { year }, bubbles: true, composed: true }));
-    }
-  }
-
-  private changeYearRange(year: number) {
-    this.currentStartYear = this.findYearRange(year).start;
   }
 
   private findYearRange(year: number, groupSize: number = 12): { start: number; end: number } {
@@ -195,6 +184,6 @@ export class YearCalendar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'aa-year-calendar': YearCalendar;
+    'aa-calendar-year-view': CalendarYearView;
   }
 }
