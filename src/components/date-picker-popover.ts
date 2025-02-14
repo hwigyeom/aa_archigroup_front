@@ -109,6 +109,7 @@ export class DatePickerPopover extends LitElement {
       border-radius: 8px;
       height: 298px;
       width: 292px;
+      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
     }
   `;
 }
