@@ -218,7 +218,7 @@ export class CalendarDayView extends LitElement {
       color: var(--secondary-color);
       font-size: var(--btn-font-size-small);
       flex-grow: 1;
-      margin: 16px 8px;
+      margin: 8px 16px;
       padding: 0;
     }
 
@@ -305,6 +305,7 @@ export class CalendarDayView extends LitElement {
       justify-items: center;
       gap: 8px;
       height: 100%;
+      margin-bottom: 8px;
     }
 
     .day-header {

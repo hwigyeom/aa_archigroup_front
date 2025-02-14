@@ -79,7 +79,7 @@ export class CalendarYearView extends LitElement {
       color: var(--secondary-color);
       font-size: var(--btn-font-size-small);
       flex-grow: 1;
-      margin: 16px 8px;
+      margin: 8px 16px;
       padding: 0;
     }
 
@@ -156,6 +156,7 @@ export class CalendarYearView extends LitElement {
       height: 100%;
       margin-top: 4px;
       padding: 0 3px;
+      margin-bottom: 8px;
     }
 
     .year-cell {
