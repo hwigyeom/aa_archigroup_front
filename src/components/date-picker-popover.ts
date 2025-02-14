@@ -1,5 +1,5 @@
-import { css, html, LitElement } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { css, html, LitElement, PropertyValues } from 'lit';
+import { customElement, query, state } from 'lit/decorators.js';
 import { DatePicker } from './date-picker.js';
 import { Calendar } from './calendar.js';
 
@@ -7,51 +7,78 @@ import './calendar.js';
 
 @customElement('aa-date-picker-popover')
 export class DatePickerPopover extends LitElement {
-  @property({ type: HTMLElement }) owner: HTMLElement | null = null;
-  @property({ type: Boolean, reflect: true }) open: boolean = false;
+  @state() type: 'date' | 'month' | 'year' = 'date';
+  @state() value: string = '';
 
-  @query('aa-calenar') private calendar!: Calendar;
+  @query('aa-calendar') private calendar!: Calendar;
 
-  private get picker(): DatePicker | null {
-    return this.owner as DatePicker;
+  owner: HTMLElement | DatePicker | null = null;
+
+  private handleOutsideClick = this.outsideClickHandler.bind(this);
+  private handleOutsideScroll = this.outsideScrollHandler.bind(this);
+
+  protected firstUpdated(_changedProperties: PropertyValues) {
+    super.firstUpdated(_changedProperties);
+
+    this.calendar.addEventListener('selected', this.calendarSelectedHandler.bind(this));
+  }
+
+  public show(value: string) {
+    this.value = value;
+    document.body.appendChild(this);
+  }
+
+  public hide() {
+    this.remove();
+    this.value = '';
+    this.calendar.dispatchEvent(new CustomEvent('closed', { bubbles: true, composed: true }));
   }
 
   connectedCallback() {
     super.connectedCallback();
-    document.addEventListener('click', this.handleOutsideClick.bind(this));
-    window.addEventListener('scroll', this.handleScroll.bind(this));
+    this.updatePopoverPosition();
+    document.addEventListener('click', this.handleOutsideClick);
+    window.addEventListener('scroll', this.handleOutsideScroll);
   }
 
   disconnectedCallback() {
-    document.removeEventListener('click', this.handleOutsideClick.bind(this));
-    window.removeEventListener('scroll', this.handleScroll.bind(this));
+    document.removeEventListener('click', this.handleOutsideClick);
+    window.removeEventListener('scroll', this.handleOutsideScroll);
     super.disconnectedCallback();
   }
 
   protected render() {
-    return this.open ? html`<aa-calendar></aa-calendar>` : html``;
+    return html`<aa-calendar .mode=${this.type} value=${this.value}></aa-calendar>`;
   }
 
-  private handleOutsideClick(e: MouseEvent) {
-    if (!this.contains(e.target as Node) && !this.contains(e.target as Node)) {
-      if (this.owner && !this.owner.contains(e.target as Node)) {
-        // this.open = this.owner.open = false;
-        this.open = false;
-        this.updatePopover();
-      }
+  private calendarSelectedHandler(e: Event) {
+    e.stopPropagation();
+    setTimeout(() => {
+      this.dispatchEvent(
+        new CustomEvent('selected', { detail: { ...(e as CustomEvent).detail }, bubbles: true, composed: true })
+      );
+      this.hide();
+    }, 100);
+  }
+
+  private outsideClickHandler(e: MouseEvent) {
+    if (!this.contains(e.target as Node)) {
+      // if (this.owner && !this.owner.contains(e.target as Node)) {
+      this.hide();
+      this.dispatchEvent(new CustomEvent('closed', { bubbles: true, composed: true }));
+      // }
     }
   }
 
-  private handleScroll(e: Event) {
-    if (this.open && this.owner && !this.contains(e.target as Node)) {
-      // this.open = this.owner.open = false;
-      this.open = false;
-      this.updatePopover();
+  private outsideScrollHandler(e: Event) {
+    if (!this.contains(e.target as Node)) {
+      this.hide();
     }
   }
 
-  private updatePopover() {
+  private updatePopoverPosition() {
     if (!this.owner) return;
+
     const ownerRect = this.owner.getBoundingClientRect();
     const popoverRect = this.getBoundingClientRect();
     const spaceBelow = window.innerHeight - ownerRect.bottom;
@@ -66,14 +93,14 @@ export class DatePickerPopover extends LitElement {
     if (spaceLeft < popoverRect.width) {
       this.style.left = `${ownerRect.left}px`;
     } else {
-      this.style.right = `${ownerRect.right}px`;
+      this.style.left = `${ownerRect.right - popoverRect.width}px`;
     }
   }
 
   static styles = css`
     :host {
       box-sizing: border-box;
-      display: none;
+      display: flex;
       position: absolute;
       z-index: 720;
       border: 1px solid var(--input-border-normal);
@@ -82,10 +109,6 @@ export class DatePickerPopover extends LitElement {
       border-radius: 8px;
       height: 298px;
       width: 292px;
-    }
-
-    :host([open]) {
-      display: flex;
     }
   `;
 }

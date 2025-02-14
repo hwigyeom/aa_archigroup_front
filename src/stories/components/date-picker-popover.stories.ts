@@ -21,7 +21,7 @@ export const PopoverOpenTest: Story = {
       const popover = document.createElement('aa-date-picker-popover') as DatePickerPopover;
       popover.owner = document.querySelector('aa-button');
       document.body.appendChild(popover);
-      popover.open = true;
+      popover.show();
     }}>팝오버 오픈</aa-button>
   `,
   parameters: {
