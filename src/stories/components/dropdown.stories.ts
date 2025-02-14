@@ -17,11 +17,12 @@ export default meta;
 type Story = StoryObj<Dropdown>;
 
 export const Default: Story = {
-  render: (args) =>
-    html`<aa-dropdown name=${args.name} placeholder=${ifDefined(args.placeholder)} value=${args.value || nothing}>
+  render: (args) => html`
+    <aa-dropdown name=${args.name} placeholder=${ifDefined(args.placeholder)} value=${args.value || nothing}>
       <aa-dropdown-item value="1">Value 1</aa-dropdown-item>
       <aa-dropdown-item value="2">Value 2</aa-dropdown-item>
-    </aa-dropdown>`,
+    </aa-dropdown>
+  `,
   args: {
     name: 'dropdown',
     placeholder: 'select code',
@@ -30,16 +31,13 @@ export const Default: Story = {
 };
 
 export const Disabled: Story = {
-  render: (args) =>
-    html`<aa-dropdown
-      name=${args.name}
-      placeholder=${ifDefined(args.placeholder)}
-      value=${args.value || nothing}
-      disabled
-    >
+  render: (args) => html`
+    <aa-dropdown name=${args.name} placeholder=${ifDefined(args.placeholder)} value=${args.value || nothing} disabled>
       <aa-dropdown-item value="1">Value 1</aa-dropdown-item>
       <aa-dropdown-item value="2">Value 2</aa-dropdown-item>
-    </aa-dropdown>`,
+    </aa-dropdown>
+  `,
+
   args: {
     name: 'dropdown',
     placeholder: 'select code',
@@ -48,16 +46,12 @@ export const Disabled: Story = {
 };
 
 export const Readonly: Story = {
-  render: (args) =>
-    html`<aa-dropdown
-      name=${args.name}
-      placeholder=${ifDefined(args.placeholder)}
-      value=${args.value || nothing}
-      readonly
-    >
+  render: (args) => html`
+    <aa-dropdown name=${args.name} placeholder=${ifDefined(args.placeholder)} value=${args.value || nothing} readonly>
       <aa-dropdown-item value="1">Value 1</aa-dropdown-item>
       <aa-dropdown-item value="2">Value 2</aa-dropdown-item>
-    </aa-dropdown>`,
+    </aa-dropdown>
+  `,
   args: {
     name: 'dropdown',
     placeholder: 'select code',
@@ -66,7 +60,9 @@ export const Readonly: Story = {
 };
 
 export const BindItems: Story = {
-  render: () => html` <aa-dropdown name="dropdown" placeholder="select cole"></aa-dropdown> `,
+  render: () => html`
+    <aa-dropdown name="dropdown" placeholder="select cole"></aa-dropdown>
+  `,
   play: async () => {
     const dropdown = document.querySelector('aa-dropdown') as Dropdown;
     console.log(dropdown);
