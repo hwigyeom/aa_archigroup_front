@@ -5,6 +5,10 @@ import { CalendarMonthView } from './calendar-month-view.js';
 import { CalendarYearView } from './calendar-year-view.ts';
 import { DATE_SPLITTER } from './constants.ts';
 
+import './calendar-day-view.js';
+import './calendar-month-view.js';
+import './calendar-year-view.js';
+
 @customElement('aa-calendar')
 export class Calendar extends LitElement {
   @property({ type: String }) mode: 'date' | 'month' | 'year' = 'date';
