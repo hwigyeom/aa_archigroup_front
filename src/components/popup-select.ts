@@ -120,11 +120,13 @@ export class PopupSelect extends LitElement {
       border-color: var(--input-border-disable);
     }
 
+    :host(:hover) input[type='text']:focus,
     input[type='text']:focus {
       border-color: var(--input-border-active);
       outline: none;
     }
 
+    :host(:hover) input[type='text']:focus + button,
     input[type='text']:focus + button {
       border-color: var(--input-border-active);
     }
