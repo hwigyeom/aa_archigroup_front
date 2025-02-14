@@ -23,7 +23,7 @@ export class DatePickerPopover extends LitElement {
     this.calendar.addEventListener('selected', this.calendarSelectedHandler.bind(this));
   }
 
-  public show(value: string) {
+  public show(value: string = '') {
     this.value = value;
     document.body.appendChild(this);
   }
