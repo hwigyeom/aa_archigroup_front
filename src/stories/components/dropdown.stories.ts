@@ -65,7 +65,6 @@ export const BindItems: Story = {
   `,
   play: async () => {
     const dropdown = document.querySelector('aa-dropdown') as Dropdown;
-    console.log(dropdown);
     dropdown.bindItems([
       { value: '1', text: 'Value 1' },
       { value: '2', text: 'Value 2' },
