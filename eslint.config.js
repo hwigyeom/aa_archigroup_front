@@ -13,4 +13,16 @@ export default [
   prettier,
   { plugins: { prettier: prettierPlugin } },
   { rules: { 'prettier/prettier': 'error' } },
+  {
+    files: ['**/*.stories.{ts,js}'],
+    rules: {
+      'prettier/prettier': [
+        'error',
+        {
+          htmlWhitespaceSensitivity: 'ignore',
+          embeddedLanguageFormatting: 'off',
+        },
+      ],
+    },
+  },
 ];
