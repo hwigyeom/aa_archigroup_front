@@ -95,8 +95,11 @@
         window.addEventListener('resize', () => {
           const screenHeight = window.innerHeight;
           const screenWidth = window.innerWidth;
-          const height = screenHeight - initOffsetTop - marginVertical;
-          const width = screenWidth - initOffsetLeft - marginHorizontal;
+          const offsetTop = container.offsetTop !== initOffsetTop ? container.offsetTop : initOffsetTop;
+          const offsetLeft = container.offsetLeft !== initOffsetLeft ? container.offsetLeft : initOffsetLeft;
+          const height = screenHeight - offsetTop - marginVertical;
+          const width = screenWidth - offsetLeft - marginHorizontal;
+
           const grid = window[gridId];
           container.style.height = height;
           if (!heightOnly) container.style.width = width;
