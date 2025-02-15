@@ -54,6 +54,11 @@
     <aa-filter-item label="입사일" row="1" column="4">
       <aa-date-picker type="date" name="hiredate" style="flex-grow: 2"></aa-date-picker>
     </aa-filter-item>
+    <aa-filter-item label="연봉구간" row="2" column="1">
+      <aa-numeric-textbox type="currency" name="salary-from" positive-only min="0" style="flex-grow:1"></aa-numeric-textbox>
+      <span style="padding: 0 8px">~</span>
+      <aa-numeric-textbox type="currency" name="salary-to" positive-only min="0" style="flex-grow:1"></aa-numeric-textbox>
+    </aa-filter-item>
   </aa-filter-box>
   <!-- filter box:end -->
 

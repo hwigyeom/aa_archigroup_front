@@ -12,6 +12,7 @@ export * from './dropdown-item.js';
 export * from './dropdown-popover.js';
 export * from './loading.js';
 export * from './message-box.js';
+export * from './numeric-textbox.js';
 export * from './popup-dialog.js';
 export * from './popup-select.js';
 export * from './radio-group.js';
