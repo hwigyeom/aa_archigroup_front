@@ -42,7 +42,9 @@ export class Textbox extends LitElement {
   }
 
   private propagateEventHandler(e: Event) {
-    e.stopPropagation();
+    if (e.bubbles) {
+      e.stopPropagation();
+    }
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const newEvent = new e.constructor(e.type, e);
