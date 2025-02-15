@@ -34,6 +34,9 @@ export class NumericTextbox extends KeyboardEventMixin(LitElement) {
         if (this.min !== null && this.value < this.min) {
           this.value = this.min;
         }
+        if (this.positiveOnly && this.value < 0) {
+          this.value = 0;
+        }
       }
       this.input.value = this.value ? this.formatNumber(String(this.value)) : '';
       this.dispatchEvent(
