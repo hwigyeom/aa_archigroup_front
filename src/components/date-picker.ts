@@ -2,12 +2,13 @@ import { css, html, LitElement, PropertyValues } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { getIcon } from './icons.js';
 import { DATE_SPLITTER } from './constants.js';
+import { KeyboardEventMixin } from '../mixins/KeyboardEventMixin.js';
 import { DatePickerPopover } from './date-picker-popover.js';
 
 import './date-picker-popover.js';
 
 @customElement('aa-date-picker')
-export class DatePicker extends LitElement {
+export class DatePicker extends KeyboardEventMixin(LitElement) {
   @property({ type: String }) type: 'date' | 'month' | 'year' = 'date';
   @property({ type: String }) name: string | null = null;
   @property({ type: String, reflect: true }) value: string = '';
@@ -57,10 +58,12 @@ export class DatePicker extends LitElement {
         type="text"
         placeholder=${this.placeholder}
         .value=${this.formatDate(this.value)}
-        @keydown=${this.propagateEventHandler}
+        @keydown=${this.keydownHandler}
         @beforeinput=${this.propagateEventHandler}
         @input=${this.inputHandler}
-        @keyup=${this.keyupHandler}
+        @keyup=${this.propagateEventHandler}
+        @select=${this.inputSelectHandler}
+        @focus=${this.inputFocusHandler}
         ?disabled=${this.disabled}
         ?readonly=${this.readonly}
       /><button type="button" ?disabled=${this.readonly || this.disabled} @click=${this.buttonClickHandler}>
@@ -68,16 +71,40 @@ export class DatePicker extends LitElement {
       </button>`;
   }
 
+  private keydownHandler(event: KeyboardEvent) {
+    const input = event.target as HTMLInputElement;
+    if (input.selectionStart !== null && input.selectionEnd !== null) {
+      this.inputCaretToEnd(input, () => {
+        event.preventDefault();
+      });
+    }
+    this.allowNumericOnlyKeydownHandler(event, {
+      additionalDisallowedCodes: ['Period', 'Comma', 'Minus'],
+    });
+    this.propagateEventHandler(event);
+  }
+
   private inputHandler(event: Event) {
     this.processInputText(event as KeyboardEvent);
     this.propagateEventHandler(event);
   }
 
-  private keyupHandler(event: KeyboardEvent) {
-    if (!/[0-9]/.test(event.key)) {
-      event.preventDefault();
+  private inputSelectHandler(event: Event) {
+    const input = event.target as HTMLInputElement;
+
+    if (input.selectionStart !== null && input.selectionEnd !== null) {
+      if (input.selectionEnd !== input.value.length) {
+        event.preventDefault();
+        this.inputCaretToEnd(input);
+      }
     }
     this.propagateEventHandler(event);
+  }
+
+  private inputFocusHandler(event: Event) {
+    const input = event.target as HTMLInputElement;
+    input.selectionStart = 0;
+    input.selectionEnd = input.value.length;
   }
 
   private buttonClickHandler(e: Event) {
@@ -95,16 +122,6 @@ export class DatePicker extends LitElement {
     this.value = event.detail.value;
   }
 
-  private propagateEventHandler(e: Event) {
-    if (e.bubbles) {
-      e.stopPropagation();
-    }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const newEvent = new e.constructor(e.type, e);
-    this.dispatchEvent(newEvent);
-  }
-
   private processInputText(e: KeyboardEvent): void {
     const input = e.target as HTMLInputElement;
 
@@ -116,7 +133,21 @@ export class DatePicker extends LitElement {
       }
       input.value = this.formatDate(rawValue);
     } else {
-      input.value = this.formatDate(rawValue.slice(0, -1));
+      if (input.selectionEnd) {
+        input.value = input.value.slice(0, input.selectionEnd - 1) + input.value.slice(input.selectionEnd);
+      } else {
+        input.value = input.value.slice(0, -1);
+      }
+    }
+  }
+
+  private inputCaretToEnd(input: HTMLInputElement, callback: () => void = () => {}): void {
+    if (input.selectionStart !== null && input.selectionEnd !== null) {
+      if (input.selectionStart !== input.value.length && input.selectionEnd !== input.value.length) {
+        input.selectionStart = input.value.length;
+        input.selectionEnd = input.value.length;
+        callback();
+      }
     }
   }
 
