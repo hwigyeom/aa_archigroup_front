@@ -1,0 +1,35 @@
+:root {
+  --doc-view-width: 998px;
+  --box-shadow: rgba(0, 0, 0, 0.10) 0 1px 3px 0;
+  --grid-table-border-color: #e0e0e0;
+  --grid-table-border-radius: 4px;
+  --grid-table-header-background-color: #f6f9fc;
+}
+
+
+.grid-table-container {;
+  display: grid;
+  font-size: 11px;
+  max-width: var(--doc-view-width);
+  justify-content: stretch;
+  border: 1px solid var(--grid-table-border-color);
+  border-radius: var(--grid-table-border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.grid-header-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--grid-table-header-background-color);
+  padding: 8px;
+  border-bottom: 1px solid var(--grid-table-border-color);
+}
+
+.grid-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-bottom: 1px solid var(--grid-table-border-color);
+}
