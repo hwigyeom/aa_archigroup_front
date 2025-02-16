@@ -140,9 +140,9 @@ export const Appearance: Story = {
           grid-template-rows: 30px repeat(2, auto);
           grid-template-columns: 120px repeat(3, auto);
         }
-        
+
         #appearance > div:nth-child(4n +1) {
-          border-right: 1px solid var(--grid-table-border-color);
+          border-right: 1px solid var(--grid-border-color);
         }
       </style>
       <div id="appearance" class="grid-table-container">

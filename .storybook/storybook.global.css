@@ -1,35 +1,92 @@
+html, body {
+  font-family: Pretendard, Arial, serif;
+}
+
 :root {
   --doc-view-width: 998px;
   --box-shadow: rgba(0, 0, 0, 0.10) 0 1px 3px 0;
-  --grid-table-border-color: #e0e0e0;
+  --grid-border-color: #e0e0e0;
+  --grid-header-background-color: #f6f9fc;
   --grid-table-border-radius: 4px;
-  --grid-table-header-background-color: #f6f9fc;
 }
 
-
-.grid-table-container {;
+.grid-table-container,
+.grid-property-container {
   display: grid;
   font-size: 11px;
   max-width: var(--doc-view-width);
   justify-content: stretch;
-  border: 1px solid var(--grid-table-border-color);
-  border-radius: var(--grid-table-border-radius);
-  box-shadow: var(--box-shadow);
 }
 
 .grid-header-cell {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--grid-table-header-background-color);
-  padding: 8px;
-  border-bottom: 1px solid var(--grid-table-border-color);
+  background-color: var(--grid-header-background-color);
 }
 
 .grid-cell {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.grid-table-container {
+  border: 1px solid var(--grid-border-color);
+  border-radius: var(--grid-table-border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.grid-table-container .grid-header-cell {
   padding: 8px;
-  border-bottom: 1px solid var(--grid-table-border-color);
+  border-bottom: 1px solid var(--grid-border-color);
+  display: flex;
+}
+
+.grid-table-container .grid-cell {
+  padding: 8px;
+  border-bottom: 1px solid var(--grid-border-color);
+}
+
+.grid-table-container {
+  border-top: 2px solid var(--grid-border-color);
+}
+
+.flex-property-container {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--doc-view-width);
+  border-top: 2px solid var(--grid-border-color);
+}
+
+.flex-property-container > .property-item {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--grid-border-color);
+}
+
+.flex-property-container > .property-item > label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  min-width: 80px;
+  padding: 0 8px;
+  background-color: var(--grid-header-background-color);
+}
+
+.flex-property-container > .property-item > span {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 8px;
+}
+
+.calendar-container {
+  display: flex;
+  height: 298px;
+  width: 292px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
 }
