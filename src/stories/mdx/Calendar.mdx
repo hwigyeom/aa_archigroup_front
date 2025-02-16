@@ -1,0 +1,90 @@
+import { Canvas, Meta, Story, Source, Controls } from '@storybook/blocks';
+
+import * as CalendarStories from '../components/calendar.stories.ts';
+
+<Meta of={CalendarStories} />
+
+# Calendar
+
+---
+
+문서 내 블럭 요소로 날짜 및 월, 년도를 선택할 수 있는 **캘린더** (`aa-calendar`) 컴포넌트입니다.<br />
+월, 년도가 표시되는 타이틀 영역을 클릭하면 상위 뷰로 이동할 수 있습니다.
+
+<br />
+
+### 기본 사용법
+
+<Source code={`
+<div class="custom-calendar-container">
+  <aa-calendar mode="date" value="20250228"></aa-calendar>
+</div>
+`} language='html' />
+
+<Canvas of={CalendarStories.Usage} source="none" layout="centered" sourceState="none" />
+
+캘린더 컴포넌트는 부모 컨테이너 요소의 크기에 따라 캘린더의 크기가 조절됩니다.<br />
+필요 시 에 컨테이너 요소의 스타일링을 통해 캘린더의 크기를 조절할 수 있습니다.
+
+<br /><br />
+
+## 지원 속성 및 이벤트
+
+<Controls of={CalendarStories.Usage} />
+
+<br />
+
+---
+
+<br /><br />
+
+### 컴포넌트 형태
+
+<br />
+
+### 캘린더 형식 별 동작 방식
+
+캘린더의 형식은 선택 하고자하는 날짜의 형식에 따라 `mode` 속성을 통해 설정할 수 있습니다.<br />
+선택 한 형식에 따라 이동할 수 있는 뷰가 달라지며, 지정한 캘린더 뷰에서 선택한 날짜가 `value`, `text`로 설정됩니다.
+
+
+<Canvas of={CalendarStories.CalendarModes} source="none" layout="fullscreen" sourceState="none" />
+
+<br />
+
+---
+
+<br /><br />
+
+## 이벤트
+
+<br />
+
+### `change` 이벤트
+
+캘린더에 선택된 날짜가 바뀌면 발생하는 이벤트입니다.<br />
+`change` 이벤트는 컴포넌트에서 클릭으로 선택되는 경우와 코드에서 `value` 설정을 통해 변경하는 경우 모두 발생합니다.
+
+<Source language="javascript" code={`
+const button = document.querySelector('aa-button#set-button');
+const calendar = document.querySelector('aa-calendar#calendar');
+
+calendar.addEventListener('change', (event) => {
+
+});
+`} />
+
+<br />
+
+### `selected` 이벤트
+
+캘린더 뷰에서 날짜를 선택하면 발생하는 이벤트입니다.<br />
+`value` 나 `text`, `date` 속성을 통해 선택한 날짜가 변경된 경우 발생하지 않습니다.
+
+<Source language="javascript" code={`
+const calendar = document.querySelector('calendar');
+
+calendar.addEventListener('selected', (event) => {
+  console.log(event.detail);
+});
+`} />
