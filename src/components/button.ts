@@ -6,14 +6,10 @@ import { ICON_DEFAULT_COLOR, ICON_INVERSE_COLOR } from './constants.ts';
 @customElement('aa-button')
 export class Button extends LitElement {
   @property({ type: String }) type: 'button' | 'submit' | 'reset' = 'button';
-
   @property({ type: String }) size: 'large' | 'medium' | 'small' = 'medium';
-
-  @property({ type: Boolean }) disabled: boolean = false;
-
   @property({ type: String }) color: 'primary' | 'generic' = 'generic';
-
   @property({ type: String }) icon: Icons | 'none' = 'none';
+  @property({ type: Boolean }) disabled: boolean = false;
 
   protected render() {
     return html`<button

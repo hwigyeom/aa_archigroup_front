@@ -1,48 +1,93 @@
-import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, DocsStory, Meta, Story, Source, Description, Controls } from '@storybook/blocks';
 
 import * as ButtonStories from '../components/button.stories.ts';
 
 <Meta of={ButtonStories} />
 
 # Button
-<br />
-<br />
 
-## Usage
+---
 
-```html
-<aa-button type="button(default)|submit|reset"
-           size="medium(default)|large|small"
-           color="generic(default)|primary"
-           icon="none(default)|지원 아이콘 참고" disabled>Button</aa-button>
-```
+**버튼** (`aa-button`) 컴포넌트입니다.
 
 <br />
+
+### 기본 사용법
+
+<Source code={`<aa-button type="button" size="medium" color="generic" icon="none">Button</aa-button>`} language='html' />
+
+<Canvas of={ButtonStories.Usage} withToolbar={false} sourceState={'none'} />
+
+### 지원 속성 및 이벤트
+
+<Controls of={ButtonStories.Usage} />
+
 <br />
 
-## Default
+---
 
-<Canvas of={ButtonStories.Default} />
+<br /><br />
+
+## 컴포넌트 형태
+
+<br />
+
+### 버튼 크기 및 색상
+
+색상은 `color` 속성을 통해 버튼 크기는 `size` 속성으로 설정할 수 있습니다.
 
 
-## Color
+<Source code={`<aa-button size="medium" color="generic">Button</aa-button>`} language='html' />
 
-<Canvas of={ButtonStories.Primary} />
+<Story of={ButtonStories.Appearance} />
 
-## Size
+<br /><br />
 
-<Canvas of={ButtonStories.Large} />
+### 버튼의 상태
 
-<Canvas of={ButtonStories.Small} />
+버튼은 `disabled` 속성을 통해 비활성화 할 수 있습니다.
 
-## Disabled
+<Source code={`<aa-button disabled>Button</aa-button>`} language="html" />
 
-<Canvas of={ButtonStories.Disabled} />
+<Story of={ButtonStories.State} />
 
-## Icon
+<br /><br />
 
-<Canvas of={ButtonStories.WithIcon} />
+### 아이콘 버튼
+
+버튼에 아이콘을 추가할 수 있습니다.
+버튼 태그 내부에 직접 아이콘을 추가할 수 도 있고, `icon` 속성을 통해 아이콘을 설정할 수 있습니다.
+
+<Source code={`<aa-button icon="search">Search</aa-button>`} language="html" />
+
+<Story of={ButtonStories.Icon} />
+
+<br /><br />
 
 ### 지원 아이콘
 
-<Canvas of={ButtonStories.ButtonIcons} />
+아래 아이콘들은 `icon` 속성에 사용할 수 있는 아이콘들입니다.
+
+<Story of={ButtonStories.SupportedIcons} />
+
+<br />
+
+---
+
+<br /><br />
+
+## 이벤트
+
+<br />
+
+### `click` 이벤트
+
+버튼을 클릭하면 `click` 이벤트가 발생합니다.
+
+<Source language="javascript" code={`
+const button = document.querySelector('#button');
+
+button.addEventListener('click', () => {
+  console.log('Button Clicked');
+});
+`} />
