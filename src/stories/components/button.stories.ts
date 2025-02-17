@@ -120,7 +120,15 @@ export const Usage: Story = {
       action('click')(e);
       alert('Button clicked');
     };
-    return html`<aa-button .type=${args.type} .size=${args.size} .color=${args.color} .icon=${args.icon} ?disabled=${args.disabled} @click=${click}>${args.innerHTML}</aa-button>`;
+    return html`<aa-button
+      .type=${args.type}
+      .size=${args.size}
+      .color=${args.color}
+      .icon=${args.icon}
+      ?disabled=${args.disabled}
+      @click=${click}
+      >${args.innerHTML}</aa-button
+    >`;
   },
   args: {
     type: 'button',
@@ -141,7 +149,7 @@ export const Appearance: Story = {
           grid-template-columns: 120px repeat(3, auto);
         }
 
-        #appearance > div:nth-child(4n +1) {
+        #appearance > div:nth-child(4n + 1) {
           border-right: 1px solid var(--grid-border-color);
         }
       </style>
@@ -192,7 +200,7 @@ export const State: Story = {
       <style>
         #state {
           grid-template-columns: auto auto;
-          grid-template-rows: 30px repeat(2, auto);;
+          grid-template-rows: 30px repeat(2, auto);
         }
       </style>
       <div id="state" class="grid-table-container">
@@ -229,7 +237,7 @@ export const Icon: Story = {
           grid-template-rows: 30px repeat(2, auto);
         }
       </style>
-      
+
       <div id="icon" class="grid-table-container">
         <div class="grid-header-cell">
           <pre>search</pre>

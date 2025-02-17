@@ -1,6 +1,9 @@
 import {
   CHECKBOX_CHECKED_BG_COLOR,
   CHECKBOX_CHECKED_CHECK_COLOR,
+  CHECKBOX_INDETERMINATE_BG_COLOR,
+  CHECKBOX_INDETERMINATE_BORDER_COLOR,
+  CHECKBOX_INDETERMINATE_COLOR,
   CHECKBOX_NORMAL_BG_COLOR,
   CHECKBOX_NORMAL_BORDER_COLOR,
   ICON_DEFAULT_COLOR,
@@ -52,6 +55,7 @@ export const icons = [
   'ellipsis-horizontal',
   'checkbox',
   'checkbox-checked',
+  'checkbox-indeterminate',
   'radio',
   'radio-checked',
   'hamburger',
@@ -853,6 +857,32 @@ export function CheckboxCheckedDataUri(
 }
 //#endregion checkbox-checked
 
+//#region checkbox-indeterminate
+const checkboxIndeterminate = (
+  borderColor: string = CHECKBOX_INDETERMINATE_BORDER_COLOR,
+  backgroundColor: string = CHECKBOX_INDETERMINATE_BG_COLOR,
+  indeterminateColor: string = CHECKBOX_INDETERMINATE_COLOR
+) => `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1.5" y="1.5" width="13" height="13" rx="2.5" fill="${backgroundColor}"/>
+  <rect x="1.5" y="1.5" width="13" height="13" rx="2.5" stroke="${borderColor}"/>
+  <rect x="4" y="7" width="8" height="2" rx="1" fill="${indeterminateColor}"/>
+</svg>`;
+export function CheckboxIndeterminateSVG(
+  borderColor: string = CHECKBOX_INDETERMINATE_BORDER_COLOR,
+  backgroundColor: string = CHECKBOX_INDETERMINATE_BG_COLOR,
+  indeterminateColor: string = CHECKBOX_INDETERMINATE_COLOR
+) {
+  return svg`${unsafeSVG(checkboxIndeterminate(borderColor, backgroundColor, indeterminateColor))}`;
+}
+export function CheckboxIndeterminateDataUri(
+  borderColor: string = CHECKBOX_INDETERMINATE_BORDER_COLOR,
+  backgroundColor: string = CHECKBOX_INDETERMINATE_BG_COLOR,
+  indeterminateColor: string = CHECKBOX_INDETERMINATE_COLOR
+) {
+  return toDataUri(checkboxIndeterminate(borderColor, backgroundColor, indeterminateColor));
+}
+//#endregion checkbox-indeterminate
+
 //#region radio
 const radio = (
   borderColor: string = RADIO_NORMAL_BORDER_COLOR,
@@ -1170,6 +1200,8 @@ export function getIcon(
       return type === 'svg' ? CheckboxSVG : CheckboxDataUri;
     case 'checkbox-checked':
       return type === 'svg' ? CheckboxCheckedSVG : CheckboxCheckedDataUri;
+    case 'checkbox-indeterminate':
+      return type === 'svg' ? CheckboxIndeterminateSVG : CheckboxIndeterminateDataUri;
     case 'radio':
       return type === 'svg' ? RadioSVG : RadioDataUri;
     case 'radio-checked':

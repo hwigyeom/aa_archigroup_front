@@ -1,32 +1,98 @@
-import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Controls, Meta, PureArgsTable, Source, Story } from '@storybook/blocks';
 
 import * as CheckboxStories from '../components/checkbox.stories.ts';
 
 <Meta of={CheckboxStories} />
 
 # Checkbox
+
+---
+
+**체크박스** (`aa-checkbox`) 컴포넌트입니다.
+
 <br/>
-<br/>
 
-## Usage
+## 기본 사용법
 
-```html
-<aa-checkbox name="checkboxName"
-             value="value"
-             checked
-             disabled></aa-checkbox>
-```
+<Source language='html' code={`
+<aa-checkbox name="unchecked" value="value1">Checkbox</aa-checkbox>
+<!-- 체크상태 -->
+<aa-checkbox checked name="checked" value="value2">Checked checkbox</aa-checkbox>
+<!-- 미확정 상태 -->
+<aa-checkbox indeterminate name="indeterminate" value="value3">Indeterminate checkbox</aa-checkbox>
+<!-- 비활성화 상태 -->
+<aa-checkbox disabled name="disabled" value="value4">Disabled checkbox</aa-checkbox>
+`} />
 
-## Default
+<Canvas of={CheckboxStories.Usage} layout="centered" sourceState="none" />
 
-<Canvas of={CheckboxStories.Default} />
+<br /><br />
+
+## 지원 속성 및 이벤트
+
+<Controls of={CheckboxStories.Usage} />
+
+<br />
+
+---
+
+<br /><br />
+
+## 컴포넌트 형태
+
+<br />
+
+### 체크박스의 상태
+
+체크박스는 기본적으로 `checked`, `unchecked` 상태가 존재하며,<br />
+특수한 상황에서 `indeterminate` 속성에 `true` 설정하여 미확정 상태로 변경할 수 있습니다.
+
+<Story of={CheckboxStories.States} />
+
+<br /><br />
+
+### 미확정 상태
+
+미확정 상태의 사용자 인터렉션을 통해서 설정하는 것은 불가능하고 `indeterminate` 속성을 통해 코드로 설정할 수 있습니다.<br />
+
+<Source language="javascript" code={`
+const checkbox = document.querySelector('aa-checkbox#indeterminate');
+
+checkbox.indeterminate = true;
+`} />
+
+<Canvas of={CheckboxStories.Indeterminate} layout="centered" sourceState="none" />
+
+<br /><br />
+
+---
+
+## 이벤트
+
+<br />
+
+### `change` 이벤트
+
+체크박스의 상태가 변경되면 발생하는 이벤트입니다.
+
+<Source language="javascript" code={`
+const checkbox = document.querySelector('aa-checkbox#target');
+
+checkbox.addEventListener('change', (event) => {
+  const { state, value, checked, indeterminate } = event.detail;
+
+  console.log(state, value, checked, indeterminate);
+});
+`} />
+
+#### `change`이벤트(`CustomEvent`) 매개변수 전달 값
+
+`aa-checkbox`의 `change` 이벤트는 `CustomEvent`형식이므로 전달되는 값은 `event.detail`에 담겨 있습니다.
 
 
-## Checked
-
-<Canvas of={CheckboxStories.Checked} />
-
-
-## Disabled
-
-<Canvas of={CheckboxStories.Disabled} />
+<PureArgsTable rows={{
+  state: { name: 'state', description: '체크박스의 상태', table: { category: 'Detail', type: { summary: 'unchecked | checked | indeterminate' } } },
+  value: { name: 'value', description: '체크박스의 값', table: { category: 'Detail', type: { summary: 'string' } } },
+  checked: { name: 'checked', description: '체크박스의 체크 여부', table: { category: 'Detail', type: { summary: 'boolean' } } },
+  indeterminate: { name: 'indeterminate', description: '체크박스의 미확정 여부', table: { category: 'Detail', type: { summary: 'boolean' } } },
+}} />

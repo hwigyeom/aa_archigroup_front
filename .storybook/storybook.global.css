@@ -1,7 +1,3 @@
-html, body {
-  font-family: Pretendard, Arial, serif;
-}
-
 :root {
   --doc-view-width: 998px;
   --box-shadow: rgba(0, 0, 0, 0.10) 0 1px 3px 0;
@@ -13,9 +9,9 @@ html, body {
 .grid-table-container,
 .grid-property-container {
   display: grid;
-  font-size: 11px;
   max-width: var(--doc-view-width);
   justify-content: stretch;
+  font-size: 11px;
 }
 
 .grid-header-cell {
@@ -29,6 +25,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 14px;
 }
 
 .grid-table-container {
