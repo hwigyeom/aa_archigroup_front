@@ -138,7 +138,7 @@ export class PopupDialog extends LitElement {
     }
   }
 
-  private drag(e: MouseEvent) {
+  private drag = (e: MouseEvent) => {
     if (this.isDragging) {
       const newLeft = e.clientX - this.offsetX;
       const newTop = e.clientY - this.offsetY;
@@ -158,7 +158,7 @@ export class PopupDialog extends LitElement {
         this.style.transform = 'none'; // Disable transform during drag
       }
     }
-  }
+  };
 
   private stopDrag = () => {
     this.isDragging = false;
