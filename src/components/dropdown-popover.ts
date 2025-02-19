@@ -46,21 +46,25 @@ export class DropdownPopover extends LitElement {
     if (!this.owner) return;
     const rect = this.owner.getBoundingClientRect();
     const popoverHeight = this.getBoundingClientRect().height;
-    const spaceBelow = window.innerHeight - rect.bottom;
-    const spaceAbove = rect.top;
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollLeft = document.documentElement.scrollLeft;
+
+    const spaceBelow = document.documentElement.clientHeight - rect.bottom + scrollTop;
+    const spaceAbove = rect.top + scrollTop;
+
     if (spaceBelow < popoverHeight && spaceAbove > popoverHeight) {
       // Display above
-      this.style.top = `${rect.top - popoverHeight}px`;
+      this.style.top = `${rect.top - popoverHeight + scrollTop}px`;
     } else if (spaceBelow < popoverHeight && spaceAbove < popoverHeight) {
       // Adjust height
       const maxHeight = Math.max(spaceBelow, spaceAbove) - 8;
       this.style.height = `${maxHeight}px}`;
       this.style.top = spaceBelow > spaceAbove ? `${rect.bottom}px` : `${rect.top - maxHeight}px`;
     } else {
-      this.style.top = `${rect.bottom}px`;
+      this.style.top = `${rect.bottom + scrollTop}px`;
     }
 
-    this.style.left = `${rect.left}px`;
+    this.style.left = `${rect.left + scrollLeft}px`;
     this.style.width = `${rect.width}px`;
   }
 
