@@ -1,0 +1,86 @@
+import { Canvas, Meta, Story, Source, Controls, ArgTypes, PureArgsTable } from '@storybook/blocks';
+
+import * as DatePickerStories from '../components/date-picker.stories.ts';
+
+<Meta of={DatePickerStories} />
+
+# DatePicker
+
+---
+
+**날짜 선택** (`aa-date-picker`) 컴포넌트입니다.<br />
+날짜, 월, 년도 형식의 날짜 값을 입력하거나 캘린더 컴포넌트에서 선택할 수 있는 컴포넌트입니다.
+
+<br />
+
+## 기본 사용법
+
+<Source language="javascript" code={`
+<aa-datepicker type="date" value="20250228"></aa-datepicker>
+`} />
+
+<Canvas of={DatePickerStories.Usage} layout="centered" sourceState="none" />
+
+<br /><br />
+
+## 지원 속성 및 이벤트
+
+<ArgTypes of={DatePickerStories.Usage} />
+
+<br />
+
+---
+
+<br /><br />
+
+## 컴포넌트 형태
+
+<br />
+
+### 캘린더 형식 별 동작 방식
+
+입력받을 날짜 형식에 따라서 `type` 속성에 `date`, `month`, `year` 값으로 설정할 수 있습니다.
+
+
+<Story of={DatePickerStories.PickerTypes} layout="fullscreen" sourceState="none" />
+
+<br /><br />
+
+### 입력 상태
+
+`disabled`, `readonly` 속성을 통해 입력 상태를 변경할 수 있습니다.
+
+<Story of={DatePickerStories.PickerStates} layout="fullscreen" sourceState="none" />
+
+<br />
+
+---
+
+<br /><br />
+
+## 이벤트
+
+<br />
+
+### `change` 이벤트
+
+캘린더의 날짜 선택 또는 유효한 날짜 문자열을 입력하여 선택 날짜가 변경되면 발생하는 이벤트입니다.
+
+<Source language="javascript" code={`
+const datePicker = document.querySelector('aa-datepicker#target');
+datePicker.addEventListener('change', (event) => {
+  const { value, text } = event.detail;
+
+  console.log('value', value);
+  console.log('text', text);
+});
+`} />
+
+#### `change` 이벤트(`CustomEvent`) 매개변수 전달 값
+
+`aa-date-picker` 컴포넌트에서 `change` 이벤트가 발생하면 `CustomEvent` 객체의 `detail` 속성을 통해 아래와 같은 값이 전달됩니다.
+
+<PureArgsTable rows={{
+  value: { name: 'value', description: '선택된 날자의 문자열 포맷이 적용되지 않은 문자열', table: { category: 'Detail', type: { summary: 'YYYYMMDD | YYYYMM | YYYY' } } },
+  text: { name: 'text', description: '선택된 날짜의 문자열 포맷이 적용된 문자열', table: { category: 'Detail', type: { summary: 'YYYY-MM-DD | YYYY-MM  | YYYY' } } },
+}} />

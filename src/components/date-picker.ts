@@ -49,7 +49,9 @@ export class DatePicker extends KeyboardEventMixin(LitElement) {
       this.calendarPopover.type = this.type;
     }
     if (changes.has('value')) {
-      this.dispatchEvent(new CustomEvent('change', { detail: { value: this.value }, bubbles: true, composed: true }));
+      this.dispatchEvent(
+        new CustomEvent('change', { detail: { value: this.value, text: this.text }, bubbles: true, composed: true })
+      );
     }
   }
 

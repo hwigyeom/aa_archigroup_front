@@ -15,7 +15,6 @@ export class DatePickerPopover extends LitElement {
   owner: HTMLElement | DatePicker | null = null;
 
   private handleOutsideClick = this.outsideClickHandler.bind(this);
-  private handleOutsideScroll = this.outsideScrollHandler.bind(this);
 
   protected firstUpdated(_changedProperties: PropertyValues) {
     super.firstUpdated(_changedProperties);
@@ -24,6 +23,14 @@ export class DatePickerPopover extends LitElement {
   }
 
   public show(value: string = '') {
+    const alreadyExists = document.querySelectorAll('aa-date-picker-popover');
+    if (alreadyExists.length > 0) {
+      alreadyExists.forEach((popover) => {
+        if (popover !== this) {
+          popover.hide();
+        }
+      });
+    }
     this.value = value;
     document.body.appendChild(this);
   }
@@ -38,12 +45,10 @@ export class DatePickerPopover extends LitElement {
     super.connectedCallback();
     this.updatePopoverPosition();
     document.addEventListener('click', this.handleOutsideClick);
-    window.addEventListener('scroll', this.handleOutsideScroll);
   }
 
   disconnectedCallback() {
     document.removeEventListener('click', this.handleOutsideClick);
-    window.removeEventListener('scroll', this.handleOutsideScroll);
     super.disconnectedCallback();
   }
 
@@ -62,15 +67,6 @@ export class DatePickerPopover extends LitElement {
   }
 
   private outsideClickHandler(e: MouseEvent) {
-    if (!this.contains(e.target as Node)) {
-      // if (this.owner && !this.owner.contains(e.target as Node)) {
-      this.hide();
-      this.dispatchEvent(new CustomEvent('closed', { bubbles: true, composed: true }));
-      // }
-    }
-  }
-
-  private outsideScrollHandler(e: Event) {
     if (!this.contains(e.target as Node)) {
       this.hide();
     }
