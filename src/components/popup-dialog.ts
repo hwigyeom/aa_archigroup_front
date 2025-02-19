@@ -13,6 +13,10 @@ export type PopupDialogOption = {
 
 @customElement('aa-popup-dialog')
 export class PopupDialog extends LitElement {
+  private isDragging = false;
+  private offsetX = 0;
+  private offsetY = 0;
+
   static async open(option: PopupDialogOption): Promise<unknown> {
     const dialog = document.createElement('aa-popup-dialog') as PopupDialog;
     const { id, title, url, width, height } = option;
@@ -77,7 +81,7 @@ export class PopupDialog extends LitElement {
           height: ${this.height}px;
         }
       </style>
-      <header>
+      <header @mousedown=${this.startDrag}>
         <h4>${this.title}</h4>
         <a href="#" @click=${this.closeHandler}>${getIcon('svg', 'close-outlined')()}</a>
       </header>
@@ -122,6 +126,46 @@ export class PopupDialog extends LitElement {
     this.close(undefined);
   }
 
+  private startDrag(e: MouseEvent) {
+    const header = this.shadowRoot?.querySelector('header');
+    if (header) {
+      const dialogRect = this.getBoundingClientRect();
+      this.isDragging = true;
+      this.offsetX = e.clientX - dialogRect.left;
+      this.offsetY = e.clientY - dialogRect.top;
+      document.addEventListener('mousemove', this.drag);
+      document.addEventListener('mouseup', this.stopDrag);
+    }
+  }
+
+  private drag(e: MouseEvent) {
+    if (this.isDragging) {
+      const newLeft = e.clientX - this.offsetX;
+      const newTop = e.clientY - this.offsetY;
+      const dialogRect = this.getBoundingClientRect();
+      const header = this.shadowRoot?.querySelector('header');
+      const headerRect = header?.getBoundingClientRect();
+
+      if (headerRect) {
+        // Ensure the header does not move outside the document area
+        const minLeft = 0;
+        const maxLeft = document.documentElement.clientWidth - dialogRect.width;
+        const minTop = 0;
+        const maxTop = document.documentElement.clientHeight - headerRect.height;
+
+        this.style.left = `${Math.min(Math.max(newLeft, minLeft), maxLeft)}px`;
+        this.style.top = `${Math.min(Math.max(newTop, minTop), maxTop)}px`;
+        this.style.transform = 'none'; // Disable transform during drag
+      }
+    }
+  }
+
+  private stopDrag = () => {
+    this.isDragging = false;
+    document.removeEventListener('mousemove', this.drag);
+    document.removeEventListener('mouseup', this.stopDrag);
+  };
+
   static styles = css`
     :host {
       font-family: var(--font-family), serif;
@@ -141,6 +185,7 @@ export class PopupDialog extends LitElement {
       box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
       overflow: hidden;
       padding: 0 16px 24px 16px;
+      cursor: move;
     }
 
     header {
@@ -152,6 +197,7 @@ export class PopupDialog extends LitElement {
       margin-bottom: 16px;
       border-bottom: 1px solid var(--divider-color);
       flex-shrink: 0;
+      cursor: move;
     }
 
     h4 {
