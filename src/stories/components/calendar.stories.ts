@@ -86,7 +86,14 @@ export const Usage: StoryObj = {
   render: (args) => {
     return html`
       <div class="calendar-container">
-        <aa-calendar .mode=${args.mode} .value=${args.text} .text=${args.text} .date=${args.date} @selected=${args.selected} @change=${args.change}></aa-calendar>
+        <aa-calendar
+          .mode=${args.mode}
+          .value=${args.text}
+          .text=${args.text}
+          .date=${args.date}
+          @selected=${args.selected}
+          @change=${args.change}
+        ></aa-calendar>
       </div>
     `;
   },
@@ -123,7 +130,7 @@ export const CalendarModes: Story = {
         #calendar-mode .calendar {
           padding-top: 30px;
           padding-bottom: 30px;
-          align-items: center;;
+          align-items: center;
         }
         #calendar-mode .grid-cell:nth-last-child(-n + 3) {
           border-bottom: 0;
@@ -137,24 +144,28 @@ export const CalendarModes: Story = {
       </style>
       <div id="calendar-mode" class="grid-table-container">
         ${modes.map(
-          (mode) => html`
-            <div class="grid-header-cell">
+          (mode) =>
+            html` <div class="grid-header-cell">
               <pre>${mode}</pre>
             </div>`
         )}
         ${modes.map(
-          (mode) => html`
-            <div class="grid-cell calendar">
+          (mode) =>
+            html` <div class="grid-cell calendar">
               <div class="calendar-container">
-                <aa-calendar id="${mode}" mode="${mode}" @change=${(e: CustomEvent) => {
-                  changeHandler(e, mode);
-                }}></aa-calendar>
+                <aa-calendar
+                  id="${mode}"
+                  mode="${mode}"
+                  @change=${(e: CustomEvent) => {
+                    changeHandler(e, mode);
+                  }}
+                ></aa-calendar>
               </div>
             </div>`
         )}
         ${modes.map(
-          (mode) => html`
-            <div class="grid-cell">
+          (mode) =>
+            html` <div class="grid-cell">
               <div id="${mode}-property" class="flex-property-container">
                 <div class="property-item">
                   <label><pre>value</pre></label>
