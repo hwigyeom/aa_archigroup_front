@@ -44,28 +44,40 @@ export class DropdownPopover extends LitElement {
 
   private updatePopover() {
     if (!this.owner) return;
-    const rect = this.owner.getBoundingClientRect();
-    const popoverHeight = this.getBoundingClientRect().height;
+
+    const ownerRect = this.owner.getBoundingClientRect();
+    const popoverRect = this.getBoundingClientRect();
+    const popoverStyles = window.getComputedStyle(this);
     const scrollTop = document.documentElement.scrollTop;
     const scrollLeft = document.documentElement.scrollLeft;
+    const popoverMargins = parseFloat(popoverStyles.marginTop) + parseFloat(popoverStyles.marginBottom);
 
-    const spaceBelow = document.documentElement.clientHeight - rect.bottom + scrollTop;
-    const spaceAbove = rect.top + scrollTop;
+    // 뷰포트 기준 가용 공간을 계산 (스크롤 오프셋 미포함)
+    const spaceBelow = document.documentElement.clientHeight - ownerRect.bottom;
+    const spaceAbove = ownerRect.top;
 
-    if (spaceBelow < popoverHeight && spaceAbove > popoverHeight) {
-      // Display above
-      this.style.top = `${rect.top - popoverHeight + scrollTop}px`;
-    } else if (spaceBelow < popoverHeight && spaceAbove < popoverHeight) {
+    let top: number;
+    let height: number | null = null;
+
+    if (spaceBelow < popoverRect.height && spaceAbove > popoverRect.height) {
+      top = ownerRect.top - popoverRect.height - popoverMargins;
+    } else if (spaceBelow < popoverRect.height && spaceAbove < popoverRect.height) {
       // Adjust height
-      const maxHeight = Math.max(spaceBelow, spaceAbove) - 8;
-      this.style.height = `${maxHeight}px}`;
-      this.style.top = spaceBelow > spaceAbove ? `${rect.bottom}px` : `${rect.top - maxHeight}px`;
+      height = Math.max(spaceBelow, spaceAbove) - popoverMargins;
+      top = spaceBelow > spaceAbove ? ownerRect.bottom : ownerRect.top - height;
     } else {
-      this.style.top = `${rect.bottom + scrollTop}px`;
+      top = ownerRect.bottom;
     }
 
-    this.style.left = `${rect.left + scrollLeft}px`;
-    this.style.width = `${rect.width}px`;
+    // 절대 좌표로 변환
+    top += scrollTop;
+
+    this.style.top = `${top}px`;
+    this.style.left = `${ownerRect.left + scrollLeft}px`;
+    this.style.width = `${ownerRect.width}px`;
+    if (height) {
+      this.style.height = `${height}px`;
+    }
   }
 
   static styles = css`

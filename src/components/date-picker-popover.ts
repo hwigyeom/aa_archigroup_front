@@ -80,21 +80,37 @@ export class DatePickerPopover extends LitElement {
     const scrollTop = document.documentElement.scrollTop;
     const scrollLeft = document.documentElement.scrollLeft;
 
-    const spaceBelow = document.documentElement.clientHeight - ownerRect.bottom + scrollTop;
-    const spaceAbove = ownerRect.top + scrollTop;
-    const spaceLeft = ownerRect.right + scrollLeft;
+    // 뷰포트 기준 가용 공간을 계산 (스크롤 오프셋 미포함)
+    const spaceBelow = document.documentElement.clientHeight - ownerRect.bottom;
+    const spaceAbove = ownerRect.top;
+    const spaceLeft = ownerRect.right;
 
+    let top: number;
+    let left: number;
+
+    // 수직 위치: 아래 공간이 부족하면 위쪽으로 출력
     if (spaceBelow < popoverRect.height && spaceAbove > popoverRect.height) {
-      // Display above
-      this.style.top = `${ownerRect.top - popoverRect.height + scrollTop}px`;
+      const popoverStyles = window.getComputedStyle(this);
+      top =
+        ownerRect.top -
+        popoverRect.height -
+        parseFloat(popoverStyles.marginBottom) -
+        parseFloat(popoverStyles.marginTop);
     } else {
-      this.style.top = `${ownerRect.bottom + scrollTop}px`;
+      top = ownerRect.bottom;
     }
+    top += scrollTop; // 절대 좌표로 변환
+
     if (spaceLeft < popoverRect.width) {
-      this.style.left = `${ownerRect.left + scrollLeft}px`;
+      left = ownerRect.left;
     } else {
-      this.style.left = `${ownerRect.right - popoverRect.width + scrollLeft}px`;
+      left = ownerRect.right - popoverRect.width;
     }
+
+    left += scrollLeft; // 절대 좌표로 변환
+
+    this.style.top = `${top}px`;
+    this.style.left = `${left}px`;
   }
 
   static styles = css`
