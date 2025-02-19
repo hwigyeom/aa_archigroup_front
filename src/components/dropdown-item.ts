@@ -6,7 +6,15 @@ export class DropdownItem extends LitElement {
   @property({ type: String }) value: string = '';
   @property({ type: Boolean, reflect: true }) selected: boolean = false;
 
-  public getText(): string {
+  get text(): string {
+    return this.getText();
+  }
+
+  protected render() {
+    return html`<div @click=${this.handleClick}><slot></slot></div>`;
+  }
+
+  private getText(): string {
     let text = '';
     const slot = this.shadowRoot?.querySelector('slot');
     if (slot) {
@@ -18,10 +26,6 @@ export class DropdownItem extends LitElement {
       });
     }
     return text;
-  }
-
-  protected render() {
-    return html`<div @click=${this.handleClick}><slot></slot></div>`;
   }
 
   private handleClick() {
