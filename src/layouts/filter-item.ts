@@ -41,6 +41,7 @@ export class FilterItem extends LitElement {
       justify-content: flex-end;
       font-weight: var(--font-weight-semi-bold);
       align-items: center;
+      font-size: 12px;
       min-width: 60px;
       padding: 0;
       margin-right: 8px;
