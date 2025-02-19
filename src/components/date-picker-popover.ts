@@ -81,19 +81,23 @@ export class DatePickerPopover extends LitElement {
 
     const ownerRect = this.owner.getBoundingClientRect();
     const popoverRect = this.getBoundingClientRect();
-    const spaceBelow = window.innerHeight - ownerRect.bottom;
-    const spaceAbove = ownerRect.top;
-    const spaceLeft = ownerRect.right;
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollLeft = document.documentElement.scrollLeft;
+
+    const spaceBelow = document.documentElement.clientHeight - ownerRect.bottom + scrollTop;
+    const spaceAbove = ownerRect.top + scrollTop;
+    const spaceLeft = ownerRect.right + scrollLeft;
+
     if (spaceBelow < popoverRect.height && spaceAbove > popoverRect.height) {
       // Display above
-      this.style.top = `${ownerRect.top - popoverRect.height}px`;
+      this.style.top = `${ownerRect.top - popoverRect.height + scrollTop}px`;
     } else {
-      this.style.top = `${ownerRect.bottom}px`;
+      this.style.top = `${ownerRect.bottom + scrollTop}px`;
     }
     if (spaceLeft < popoverRect.width) {
-      this.style.left = `${ownerRect.left}px`;
+      this.style.left = `${ownerRect.left + scrollLeft}px`;
     } else {
-      this.style.left = `${ownerRect.right - popoverRect.width}px`;
+      this.style.left = `${ownerRect.right - popoverRect.width + scrollLeft}px`;
     }
   }
 
