@@ -1,0 +1,127 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Build Storybook
+      run: npm run build-storybook
+
+    - name: Deply to server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        SERVER_USER: ${{ secrets.SERVER_USER }}
+        SSH_PORT: ${{ secrets.SSH_PORT }}
+      run: |
+        mkdir -p ~/.ssh/
+        chmod 600 ~/.ssh/id_rsa
+        rsync -avz -e "ssh -p $SSH_PORT" --exclude 'IBSheet8' dist/ $SERVER_USER@$SERVER_HOST:/var/www/aaarch/html
+        rsync -avz -e "ssh -p $SSH_PORT" --exclude 'IBSheet8' storybook-static/ $SERVER_USER@$SERVER_HOST:/var/www/aaarch/html/storybook
+        
+
+name: Create Archive
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+          node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build project
+      run: npm run build
+
+    - name: Build Storybook
+      run: npm run build-storybook
+
+    - name: Restore SEQ cache
+      id: seq-cache
+      uses: actions/cache@v2
+      with:
+        path: seq_cache
+        key: seq_cache
+
+    - name: Initialize SEQ
+      run: |
+        DATE=$(date +'%y%m%d')
+        if [ -f seq_cache/last_date.txt ]; then
+          LAST_DATE=$(cat seq_cache/last_date.txt)
+            echo "0" > seq_cache/seq.txt
+          fi
+        else
+          echo "0" > seq_cache/seq.txt
+        fi
+        echo $DATE > seq_cache/last_date.txt
+      if: steps.seq-cache.outputs.cache-hit != 'true'
+
+    - name: Increment SEQ
+      run: |
+        SEQ=$(cat seq_cache/seq.txt)
+        SEQ=$(printf "%02d" $((SEQ + 1)))
+        echo $SEQ > seq_cache/seq.txt
+        echo "SEQ=$SEQ" >> $GITHUB_ENV
+
+    - name: Create dist Archive
+      run: |
+        DATE=$(date +'%y%m%d')
+        ZIP_NAME="aa_archigroup_front_${DATE}_${SEQ}.zip"
+        zip -r $ZIP_NAME dist
+
+    - name: Create storybook Archive
+      run: |
+        DATE=$(date +'%y%m%d')
+        ZIP_NAME="aa_archigroup_front-storybook_${DATE}_${SEQ}.zip"
+        zip -r $ZIP_NAME storybook-static
+
+    - name: Upload dist Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: aa_archigroup_front
+        path: aa_archigroup_front_*.zip
+
+    - name: Upload storybook Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: aa_archigroup_front_storybook
+        path: aa_archigroup_front-storybook_*.zip
+
+    - name: Save SEQ cache
+      uses: actions/cache@v2
+      with:
+        path: seq_cache
+        key: seq-cache
