@@ -1,0 +1,104 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Restore SEQ cache
+        id: seq-cache
+        uses: actions/cache@v4
+        with:
+          path: seq_cache
+          key: seq_cache
+
+      - name: Initialize SEQ
+        run: |
+          DATE=$(date +'%y%m%d')
+          mkdir -p seq_cache
+          if [ ! -f seq_cache/seq.txt ]; then
+            echo "0" > seq_cache/seq.txt
+          fi
+          echo $DATE > seq_cache/last_date.txt
+        if: steps.seq-cache.outputs.cache-hit != 'true'
+
+      - name: Increment SEQ
+        run: |
+          mkdir -p seq_cache
+          SEQ=$(cat seq_cache/seq.txt)
+          SEQ=$(printf "%02d" $((SEQ + 1)))
+          echo $SEQ > seq_cache/seq.txt
+          echo "SEQ=$SEQ" >> $GITHUB_ENV
+          echo "DATE=$(date +'%y%m%d')" >> $GITHUB_ENV
+
+      - name: Create dist Archive
+        run: |
+          ZIP_NAME="aa_archigroup_front_${{ env.DATE }}_${{ env.SEQ }}.zip"
+          cd dist && zip -r ../$ZIP_NAME . && cd ..
+
+      - name: Create storybook Archive
+        run: |
+          ZIP_NAME="aa_archigroup_front-storybook_${{ env.DATE }}_${{ env.SEQ }}.zip"
+          cd storybook-static && zip -r ../$ZIP_NAME . && cd ..
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: "${{ env.DATE }}_${{ env.SEQ }}"
+          release_name: "Release ${{ env.DATE }}_${{ env.SEQ }}"
+          draft: false
+          prerelease: false
+
+      - name: Upload dist Artifact to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: aa_archigroup_front_${{ env.DATE }}_${{ env.SEQ }}.zip
+          asset_name: aa_archigroup_front_${{ env.DATE }}_${{ env.SEQ }}.zip
+          asset_content_type: application/zip
+
+      - name: Upload storybook Artifact to Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: aa_archigroup_front-storybook_${{ env.DATE }}_${{ env.SEQ }}.zip
+          asset_name: aa_archigroup_front-storybook_${{ env.DATE }}_${{ env.SEQ }}.zip
+          asset_content_type: application/zip
+
+      - name: Save SEQ cache
+        uses: actions/cache@v4
+        with:
+          path: seq_cache
+          key: seq_cache
