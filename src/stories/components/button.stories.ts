@@ -16,6 +16,7 @@ const excludedIcons: Icons[] = [
   'message-box-icon-info',
   'checkbox',
   'checkbox-checked',
+  'checkbox-indeterminate',
   'radio',
   'radio-checked',
 ];
