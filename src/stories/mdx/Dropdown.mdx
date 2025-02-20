@@ -1,24 +1,138 @@
-import { Canvas, Meta } from '@storybook/blocks';
+import { ArgTypes, Canvas, Meta, PureArgsTable, Source, Story } from '@storybook/blocks';
 import * as DropdownStories from '../components/dropdown.stories.ts';
 
 <Meta of={DropdownStories} />
 
 # Dropdown
-<br />
+
+---
+
+**드롭다운** (`aa-dropdown`) 컴포넌트입니다. <br />
+드롭다운 컴포넌트는 컨테이너 요소인 `<aa-dropdown>`과 드롭다운 아이템인 `<aa-dropdown-item>`으로 구성됩니다.
+
 <br />
 
-## Usage
+## 기본 사용법
 
-```html
-<aa-dropdown name="dropdownName"
-             value="value"
-             disabled
-             readonly>
-  <aa-dropdown-item value="value1">Item 1</aa-dropdown-item>
-  <aa-dropdown-item value="value2">Item 2</aa-dropdown-item>
+<Source language="html" code={`
+<aa-dropdown value="1">
+  <aa-dropdown-item value="1">Item 1</aa-dropdown-item>
+  <aa-dropdown-item value="2">Item 2</aa-dropdown-item>
 </aa-dropdown>
-```
+`} />
 
-## Default
+<Canvas of={DropdownStories.Usage} layout="centered" sourceState="none" />
 
-<Canvas of={DropdownStories.Default} />
+<br /><br />
+
+## 지원 속성 및 이벤트
+
+<br /><br />
+
+### `aa-dropdown` 요소의 속성 및 이벤트
+
+<ArgTypes of={DropdownStories.Usage} />
+
+<br />
+
+### `aa-dropdown-item` 요소의 속성
+
+<PureArgsTable rows={{
+  value: { name: 'value', description: '드롭다운 아이템의 값', table: { category: 'Properties', type: { summary: 'string' } } },
+  selected: { name: 'selected', description: '드롭다운 아이템의 선택 여부', table: { category: 'Properties', type: { summary: 'boolean' }, defaultValue: { summary: 'false' } } },
+  text: { name: 'text', description: '드롭다운 아이템의 텍스트 _(읽기 전용 속성)_', table: { category: 'Properties', type: { summary: 'text' } } },
+  innerHTML: { name: 'innerHTML', description: '드롭다운 아이템의 텍스트에 해당하는 HTML', table: { category: 'Slots', type: { summary: 'html' } } },
+}} />
+
+<br />
+
+---
+
+<br /><br />
+
+## 컴포넌트 형태
+
+<br />
+
+### 입력 상태
+
+`readonly`, `disabled` 속성을 통해 드롭다운 컴포넌트의 입력 상태를 변경할 수 있습니다.
+
+<Story of={DropdownStories.States} layout="fullscreen" sourceState="none" />
+
+<br />
+
+---
+
+<br /><br />
+
+## 컴포넌트 제공 함수
+
+<br />
+
+### `toggle` 함수
+
+런타임에 스크립트로 드롭다운 컴포넌트의 팝오버를 열고 닫습니다.
+
+<Source language="javascript" code={`
+const dropdown = document.querySelector('aa-dropdown#target');
+
+dropdown.toggle();
+`} />
+
+<Canvas of={DropdownStories.Toggle} layout="centered" sourceState="none" />
+
+<br /><br />
+
+### `bindItems` 함수
+
+드롭다운 컴포넌트의 `aa-dropdown-item` 요소를 스크립트에서 런타임에 바인딩합니다.
+
+<Source language="javascript" code={`
+document.addEventListener('DOMContentLoaded', () => {
+  const dropdown = document.querySelector('aa-dropdown#target');
+
+  const items = [
+    { value: '1', text: 'Item 1' },
+    { value: '2', text: 'Item 2' },
+  ];
+
+  dropdown.bindItems(items);
+});
+`} />
+
+<Canvas of={DropdownStories.BindItems} layout="centered" sourceState="none" />
+
+<br />
+
+---
+
+<br /><br />
+
+## 이벤트
+
+<br />
+
+### `change` 이벤트
+
+드롭다운 컴포넌트의 선택된 아이템이 변경되면 발생하는 이벤트입니다.
+
+<Source language="javascript" code={`
+const dropdown = document.querySelector('aa-dropdown#target');
+
+dropdown.addEventListener('change', (event) => {
+  const { value, text } = event.detail;
+
+  console.log('value', value);
+  console.log('text', text);
+});
+`} />
+
+#### `change` 이벤트(`CustomEvent`) 매개변수 전달 값
+
+`aa-dropdown` 컴포넌트에서 `change` 이벤트가 발생하면 `CustomEvent` 객체의 `detail` 속성을 통해 아래와 같은 값이 전달됩니다.
+
+<PureArgsTable rows={{
+  value: { name: 'value', description: '선택된 항목의 값', table: { category: 'Detail', type: { summary: 'string' } } },
+  text: { name: 'text', description: '선택된 항목의 텍스트', table: { category: 'Detail', type: { summary: 'string' } } },
+}} />

@@ -30,6 +30,7 @@ export class Dropdown extends LitElement {
   }
 
   private popoverElement: DropdownPopover | null = null;
+
   public toggle() {
     if (this.popoverElement && !this.disabled && !this.readonly) {
       this.open = this.popoverElement.open = !this.popoverElement.open;
@@ -41,12 +42,16 @@ export class Dropdown extends LitElement {
       this.popoverElement.shadowRoot?.querySelectorAll('aa-dropdown-item').forEach((item) => {
         item.remove();
       });
+      const fragment = document.createDocumentFragment();
       items.forEach((item) => {
         const dropdownItem = document.createElement('aa-dropdown-item');
         dropdownItem.value = item.value;
         dropdownItem.textContent = item.text;
-        this.popoverElement!.shadowRoot!.appendChild(dropdownItem);
+        fragment.appendChild(dropdownItem);
       });
+      if (fragment.childElementCount > 0) {
+        this.popoverElement.shadowRoot?.appendChild(fragment);
+      }
     }
   }
 
@@ -128,7 +133,7 @@ export class Dropdown extends LitElement {
 
       if (matched) {
         const oldText = this.text;
-        this._text = matched.getText();
+        this._text = matched.text;
         this.requestUpdate('text', oldText);
       } else {
         const oldValue = this.value;
