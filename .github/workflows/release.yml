@@ -66,6 +66,25 @@ jobs:
           ZIP_NAME="aa_archigroup_front-storybook_${{ env.DATE }}_${{ env.SEQ }}.zip"
           cd storybook-static && zip -r ../$ZIP_NAME . && cd ..
 
+      - name: Get Latest Tag
+        id: latest_tag
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 || echo "")
+          echo "LATEST_TAG=$LATEST_TAG" >> $GITHUB_ENV
+
+      - name: Get Changelog
+        id: changelog
+        run: |
+          if [ -z "$LATEST_TAG" ]; then
+            LOG=$(git log --pretty=format:"%s" --grep="^feat:\|^fix:|^docs:" --no-merges)
+          else
+            LOG=$(git log $LATEST_TAG..HEAD --pretty=format:" %h %s" --grep="^feat:\|^fix:" --no-merges)
+          fi
+
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+          echo "$LOG" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.1.0
@@ -74,6 +93,9 @@ jobs:
         with:
           tag_name: "${{ env.DATE }}_${{ env.SEQ }}"
           release_name: "Release ${{ env.DATE }}_${{ env.SEQ }}"
+          body: |
+            ## 🚀 이번 릴리즈의 변경점
+            ${{ env.CHANGELOG }}
           draft: false
           prerelease: false
 
