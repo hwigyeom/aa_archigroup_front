@@ -1,10 +1,26 @@
-import type { Meta, StoryObj } from '@storybook/web-components';
+import type { ArgTypes, Meta, StoryObj } from '@storybook/web-components';
 import { html } from 'lit';
 import { Loading } from '../../components/loading.ts';
 
 import '../../components/button.ts';
 import '../../components/loading.ts';
 import '../../components/dimmed-overlay.ts';
+
+const argTypes: ArgTypes = {
+  message: {
+    control: 'text',
+    description: '로딩 메시지',
+    table: {
+      category: 'Properties',
+      type: {
+        summary: 'string',
+      },
+      defaultValue: {
+        summary: '로딩중입니다.',
+      },
+    },
+  },
+};
 
 const meta: Meta<Loading> = {
   title: 'Components/Loading',
@@ -13,24 +29,17 @@ const meta: Meta<Loading> = {
 
 export default meta;
 
-type Story = StoryObj<Loading>;
+type Story = StoryObj;
 
-export const Default: Story = {
+export const Layout: Story = {
   render: (args) => html`<aa-loading message=${args.message}></aa-loading>`,
   args: {
     message: '로딩중입니다.',
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false,
-        iframeHeight: 400,
-      },
-    },
-  },
+  argTypes,
 };
 
-export const UseFunction: Story = {
+export const Usage: Story = {
   render: () =>
     html`<aa-button
       id="showLoading"
@@ -42,15 +51,4 @@ export const UseFunction: Story = {
       }}
       >로딩 시작</aa-button
     >`,
-  parameters: {
-    docs: {
-      story: {
-        inline: false,
-        iframeHeight: 400,
-      },
-      canvas: {
-        sourceState: 'none',
-      },
-    },
-  },
 };
