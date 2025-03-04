@@ -64,6 +64,7 @@ export const icons = [
   'message-box-icon-error',
   'message-box-icon-info',
   'message-box-icon-question',
+  'message-box-icon-warning',
   'stopwatch',
   'close-outlined',
 ] as const;
@@ -1218,6 +1219,8 @@ export function getIcon(
       return type === 'svg' ? MessageBoxIconInfoSVG : MessageBoxIconInfoDataUri;
     case 'message-box-icon-question':
       return type === 'svg' ? MessageBoxIconQuestionSVG : MessageBoxIconQuestionDataUri;
+    case 'message-box-icon-warning':
+      return type === 'svg' ? MessageBoxIconWarningSVG : MessageBoxIconWarningDataUri;
     case 'stopwatch':
       return type === 'svg' ? StopwatchSVG : StopwatchDataUri;
     case 'close-outlined':
